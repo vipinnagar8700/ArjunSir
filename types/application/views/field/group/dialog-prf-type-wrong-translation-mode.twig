@@ -1,0 +1,19 @@
+{# trick jquery to prevent having the link "Open WPML translation setting" focused #}
+<input type="text" style="width:0;position:absolute;top:-2000px;" />
+
+<div style="float: left; width: 145px;">
+    <i class="fa fa-warning fa-5x" style="margin: 40px;"></i>
+</div>
+<div style="float: left; width: 404px; padding-left: 16px;">
+    <p>
+        {{ __( 'Your selected post type uses the <b>Translatable - only show translated items</b> WPML translation mode. In order to use it for a Post Reference Field, switch to <b>Translatable - use translation if available or fallback to default language</b> mode.', 'wpcf')|raw }}
+    </p>
+
+    {% set url_translation_links = apply_filters( 'wpml_get_post_translation_settings_link', '' ) %}
+
+    {% if url_translation_links != '' %}
+        <p>
+            <a href="{{ url_translation_links }}" class="toolset-external-link" target="_blank">{{ __( 'Open WPML translation settings.', 'wpcf' ) }}</a>
+        </p>
+    {% endif %}
+</div>

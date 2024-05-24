@@ -1,0 +1,73 @@
+<?php
+/**
+ * Markup Post Reference field
+ * IMPORTANT: all data-wpt-* fields are required to support legacy functions, like field conditons.
+ *
+ * @since m2m
+ */
+
+/** @var Types_Field_Type_Post $field */
+$field_value = $field->get_value();
+$field_description = $field->get_description();
+
+$validation_rules = json_decode( $field->get_formatted_validation_data(), true );
+
+// for select2 we simply use html5 required
+$html_attr_validation_required = isset( $validation_rules['required'] )
+    ? ' required'
+    : '';
+
+// custom message for html5 required field
+$html_attr_validation_required .= $html_attr_validation_required != '' && isset( $validation_rules['required']['message'] )
+    ?  ' oninvalid="this.setCustomValidity(\'' . esc_attr( $validation_rules['required']['message'] ) .'\')" onchange="this.setCustomValidity(\'\')"'
+    : '';
+
+?>
+
+<div class="js-wpt-field wpt-field toolset-post-reference-field <?php echo $additional_css_classes;?>" data-wpt-type="select" data-wpt-id="wpcf-<?php echo $field->get_slug();?>">
+    <div class="js-wpt-field-items">
+        <div class="js-wpt-field-item wpt-field-item">
+    <label class="wpt-form-label wpt-form-textfield-label"><?php echo $field->get_title(); if( ! empty( $html_attr_validation_required ) ) echo '*'; ?>
+        <?php if ( $disabled ) { ?>
+            <i class="fa fa-question-circle icon-question-sign js-show-tooltip" data-header="<?php echo __( 'Post Reference Field disabled', 'wpcf' ); ?>" data-content="<?php echo __( 'This post has to be translated to default language in order to connect a post', 'wpcf' ); ?>" ></i>
+        <?php } ?>
+    </label>
+	<?php if ( ! empty( $field_description ) ) { ?>
+		<div class="description wpt-form-description">
+			<p><?php echo $field_description; ?> </p>
+		</div>
+	<?php } ?>
+    <select data-placeholder="<?php esc_attr_e( sprintf( __( 'Connect with %s', 'wpcf' ), $field->get_post_type()->label ) ); ?>"
+            <?php disabled( $disabled ); ?>
+            data-types-post-reference="<?php esc_attr_e( $field->get_post_type()->name ); ?>"
+            data-types-relationship="<?php esc_attr_e( $field->get_slug() ); ?>"
+            name="wpcf[<?php esc_attr_e( $field->get_slug() ); ?>]"
+            data-wpt-type="select"
+			data-wpt-id="wpcf-<?php esc_attr_e( $field->get_slug() ); ?>"
+            data-wpt-name="wpcf[<?php esc_attr_e( $field->get_slug() ) ; ?>]"
+			<?php
+			// This is necessary for the validation in the classic editor, but doesn't work in the block editor.
+			// For that purpose, we also include the standard data-wpt-validate attribute.
+			echo $html_attr_validation_required;
+			?>
+			data-wpt-validate="<?php echo esc_attr( $field->get_formatted_validation_data() ); ?>"
+    >
+        <option value=""></option>
+		<?php if( $post = $field->get_post() ): ?>
+            <option value="<?php echo $post->ID;?>"
+                <?php selected( $post->ID == $field_value ); ?>
+				data-url="<?php echo get_permalink( $post->ID ); ?>"
+            >
+                <?php
+				echo $post->post_title;
+
+				if( 'trash' === $field->get_post_status() ) {
+					echo ' (' . __( 'trashed', 'wpcf' ) . ')';
+				}
+				?>
+            </option>
+		<?php endif; ?>
+    </select>
+        </div>
+    </div>
+</div>

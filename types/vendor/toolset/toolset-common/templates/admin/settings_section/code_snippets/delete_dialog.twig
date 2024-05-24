@@ -1,0 +1,23 @@
+{#
+	Code snippet listing, dialog to delete an existing code snippet.
+
+	@since 3.0.7
+#}
+
+<div class="toolset-confirmation-dialog">
+	<div class="toolset-confirmation-dialog-icon">
+		<i class="fa fa-5x fa-exclamation-triangle"></i>
+	</div>
+	<div class="toolset-confirmation-dialog-content">
+		<p>{{ sprintf( __( 'You are about to delete a code snippet "%s".', 'wpv-views'), '<span data-bind="text: snippet.slug"></span>' )|raw }}</p>
+		<p>{{ __( 'This will:', 'wpv-views' ) }}</p>
+		<ol>
+			<li>{{ __( 'Permanently delete the snippet file:', 'wpv-views' ) }} <code data-bind="text: snippet.filePath"></code></li>
+			<li>{{ __( 'Remove all stored settings for this snippet.', 'wpv-views') }}</li>
+		</ol>
+		<p>
+			<strong>{{ __( 'This operation cannot be undone!', 'wpv-views') }}</strong>
+			{{ __( 'If you think there is a chance you will need this snippet again in the future, consider deactivating it instead.', 'wpv-views' ) }}
+		</p>
+	</div>
+</div>

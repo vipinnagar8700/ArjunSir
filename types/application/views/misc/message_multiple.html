@@ -1,0 +1,14 @@
+<!--
+    Shared underscore template for displaying a list of messages.
+
+    @since unknown
+    @since m2m Shared between the Field Control and Relationships pages.
+-->
+<%= (typeof(mainMessage) != 'undefined' && 0 < mainMessage.length ? '<p>' + mainMessage + '</p>' : '' ) %>
+<ol>
+    <%
+        _.each(messages, function(message) {
+            print('<li>' + message + '</li>');
+        });
+    %>
+</ol>

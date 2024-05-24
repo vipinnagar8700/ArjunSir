@@ -1,0 +1,77 @@
+{#
+	Fields container
+	Form for fields editing. It contains a list of fields to be rendered, the field has to have a rendered attribute with the HTML needed
+
+	@since m2m
+#}
+
+{# Macros #}
+{% macro input( type, field ) %}
+	<span>
+		<input type="checkbox" name="field-{{ type }}[]" value="{{field.slug}}" id="select-all-{{field.slug}}" data-bind="click: handleAllSelected, checked: isFieldVisible('{{ type }}', '{{field.slug}}')" />
+		<label for="select-all-{{field.slug}}" > {{ field.name }}</label>
+	</span>
+{% endmacro %}
+
+{% import _self as forms %}
+
+{% if ( fields.relationship|length == 0 ) and ( fields.relatedPosts|length == 0 ) and ( fields.post|length == 0 ) %}
+<div class="notice notice-warning inline types-warning">
+	<p>{{ __( 'No fields available for selecting', 'wpcf' ) }}</p>
+</div>
+{% endif %}
+
+{% if (fields.relationship|length > 0) or (fields.relatedPosts|length > 0) or (fields.post|length > 0) %}
+	<form id="{{ id }}" class="types-select-fields-form" data-bind="afterRender: handleAllSelected">
+		<div class="types-container-select-fields-form types-separator-select-fields-form">
+			<span><input type="checkbox" name="" id="select-all-{{slug}}" data-bind="click: handleAllSelected" /> <label for="select-all-{{slug}}"> {{ __( 'Select all', 'wpcf' ) }}</label>
+		</div>
+		{% if fields.relatedPosts|length > 0 %}
+			<h3>{{ __( 'Related Post Types', 'wpcf' ) }}</h3>
+			<div class="types-container-select-fields-form">
+				{% for field in fields.relatedPosts %}
+					{{ forms.input( 'relatedPosts', field ) }}
+				{% endfor %}
+			</div>
+		{% endif %}
+
+		{% if fields.post|length > 0 %}
+			<h3>{{ strings.fieldsFromPostType }}</h3>
+			<div class="types-container-select-fields-form">
+				{% for field in fields.post %}
+					{{ forms.input( 'post', field ) }}
+				{% endfor %}
+			</div>
+		{% endif %}
+
+        {% if intermediary %}
+			<h3>{{ __( 'Intermediary', 'wpcf' ) }}</h3>
+			<div class="types-container-select-fields-form">
+				<span>
+					<input type="checkbox" name="field-relationship[]"
+						   value="intermediary-title" id="select-all-intermediary-title"
+						   data-bind="click: handleAllSelected, checked: isFieldVisible( 'relationship', 'intermediary-title')" />
+					<label for="select-all-intermediary-title" > {{ __('Title', 'wpcf' ) }}</label>
+				</span>
+			</div>
+        {% endif %}
+
+		{% if fields.relationship|length > 0 %}
+			<h3>{{ __( 'Fields from relationship', 'wpcf' ) }}</h3>
+			<div class="types-container-select-fields-form">
+				{% for field in fields.relationship %}
+					{{ forms.input( 'relationship', field ) }}
+				{% endfor %}
+			</div>
+		{% endif %}
+
+		{# Both nonce and wpnonce are needed or I get an error #}
+		<input name="nonce" type="hidden" value="{{ nonce }}" />
+		<input name="wpnonce" type="hidden" value="{{ wpnonce }}" />
+		<input name="relationship_slug" type="hidden" value="{{ slug }}" data-rel="ajax" />
+		<input name="post_type" type="hidden" value="{{ post_type }}" data-rel="ajax" />
+	</form>
+	{# After render all the elements of the form, 'select all' has to be updated #}
+	<!-- ko text: updateSelectAll() -->
+	<!-- /ko -->
+{% endif %}

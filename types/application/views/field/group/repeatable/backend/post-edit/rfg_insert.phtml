@@ -1,0 +1,33 @@
+<?php
+/**
+ * underscore.js template for the dialog for inserting a post reference field: intro.
+ *
+ * @since m2m
+ */
+?>
+<script type="text/html" id="tmpl-toolset-shortcode-attribute-info-RFG">
+<div class="toolset-shortcodes__tabs_single">
+	<h2><?php _e( 'Displaying repeating field groups', 'wpcf' ); ?></h2>
+	<# if ( data.conditions.plugins.toolsetViews ) { #>
+	<p>
+		<?php
+		echo sprintf(
+			__( 'The %s is a <em>repeating fields group</em>, so it holds a number of fields that can be repeated as a group. You can display each instance of this group using a View.', 'wpcf' ),
+			'<strong>{{{data.title}}}</strong>'
+		);
+		?>
+	</p>
+	<# } else { #>
+	<p>
+		<?php echo __( 'You need Toolset Views to display repeating fields groups.', 'wpcf' ); ?>
+	</p>
+	<p>
+		<a href="<?php echo esc_url( admin_url( 'plugin-install.php?tab=commercial' ) ); ?>"
+			class="button button-primary-toolset"
+			title="<?php echo esc_attr( __( 'Install Toolset Views', 'wpcf' ) ); ?>">
+			<?php _e( 'Install Toolset Views', 'wpcf' ); ?>
+		</a>
+	</p>
+	<# } #>
+</div>
+</script>

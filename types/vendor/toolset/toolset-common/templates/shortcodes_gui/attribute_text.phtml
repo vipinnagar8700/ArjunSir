@@ -1,0 +1,12 @@
+<?php
+/**
+ * underscore.js template for the shared shortcodes GUI.
+ * 
+ * Component: text attributes
+ *
+ * @since 3.1
+ */
+?>
+<script type="text/html" id="tmpl-toolset-shortcode-attribute-text">
+    <input id="{{{data.shortcode}}}-{{{data.attribute}}}" data-type="text" class="js-shortcode-gui-field large-text<# if ( data.required ) { #> js-toolset-shortcode-gui-required<# } #>" value="{{{data.defaultForceValue}}}" placeholder="{{{data.placeholder}}}" type="text">
+</script>

@@ -1,0 +1,259 @@
+{#
+    Settings metabox on the Edit Relationship screen.
+
+    Initially, an overlay should be displayed over the main box content.
+
+    @since m2m
+#}
+
+{% import "@toolset/forms.twig" as forms %}
+
+{# Get WPML url to translation settings #}
+{% set url_translation_links = apply_filters( 'wpml_get_post_translation_settings_link', '' ) %}
+
+{% if url_translation_links != '' %}
+    {# WPML url is available - setup open <a> tag and close tag #}
+    {% set a_open_translation_settings = sprintf( '<a href="%s">', url_translation_links ) %}
+    {% set a_close_translation_settings = '</a>' %}
+{% else %}
+    {# No url available = no link #}
+    {% set a_open_translation_settings = '' %}
+    {% set a_close_translation_settings = '' %}
+{% endif %}
+
+{# strings #}
+{% set string_self_join_title = __( 'Self-join relationship', 'wpcf' ) %}
+{% set string_self_join_dialog = __( 'Connecting posts of the same type is not supported yet.', 'wpcf' ) %}
+{% set string_post_type_locked_title = __( 'Translatable Post Type', 'wpcf' ) %}
+{% set string_post_type_locked_dialog = sprintf( __( 'This post type uses the <b>Translatable - only show translated items</b> WPML translation mode. In order to use it in a relationship, %sswitch to%s <b>Translatable - use translation if available or fallback to default language</b> mode.', 'wpcf' ), a_open_translation_settings, a_close_translation_settings ) %}
+
+<div class="main-box-content">
+    <table class="widefat">
+        <tbody>
+        <tr>
+            <td><strong>{{ forms.label( __( 'Relationship type', 'wpcf' ) ) }}</strong></td>
+            <td colspan="2">
+                {% for cardinalityClass in cardinalityClasses %}
+                    <div class="cardinality-class-option" data-bind="css: {enabled: display.isOneToAnyEnabled( '{{ cardinalityClass.value }}' ) }">
+                        <div class="icon">
+                            <i class="icon-{{ cardinalityClass.value }}"></i>
+                        </div>
+                        {{ forms.radio( 'checked: display.cardinalityClassString, enable: display.isOneToAnyEnabled( \'' ~ cardinalityClass.value ~ '\' )', cardinalityClass.value, cardinalityClass.title ) }}
+                    </div>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td><strong>{{ forms.label( __( 'Roles alias', 'wpcf' ) ) }}</strong></td>
+            {% for side in [
+                {
+                    'role': 'parent',
+                    'heading': __( 'Parent (default)', 'wpcf' ),
+                    'labels': [
+                        {
+                            'type': 'slug',
+                            'title': __( 'Slug', 'wpcf'),
+                            'default': __( 'Default: parent', 'wpcf'),
+                            'blockBound': 'visible: display.isEnabledAliases(\'parent\')',
+                            'format': 'formatSlug: [wpcf_slugize, \'parent\'], ',
+                            'inputBound': 'enable: display.isEnabledAliases(\'parent\'), ',
+                            'notice': __( 'Invalid slug', 'wpcf' ),
+                        },
+                        {
+                            'type': 'plural',
+                            'title': __( 'Plural name', 'wpcf'),
+                            'default': __( 'Default: Parents', 'wpcf'),
+                            'blockBound': 'visible: display.isEnabledAliases(\'parent\')',
+                            'format': '',
+                            'inputBound': 'enable: display.isEnabledAliases(\'parent\'), ',
+                            'notice': '',
+                        },
+                        {
+                            'type': 'singular',
+                            'title': __( 'Singular name', 'wpcf'),
+                            'default': __( 'Default: Parent', 'wpcf'),
+                            'blockBound': 'visible: display.isEnabledAliases(\'parent\')',
+                            'format': '',
+                            'inputBound': 'enable: display.isEnabledAliases(\'parent\'), ',
+                            'notice': '',
+                        }
+                    ]
+                },
+                {
+                    'role': 'child',
+                    'heading': __( 'Child (default)', 'wpcf' ),
+                    'labels': [
+                        {
+                            'type': 'slug',
+                            'title': __( 'Slug', 'wpcf'),
+                            'default': __( 'Default: child', 'wpcf'),
+                            'blockBound': 'visible: display.isEnabledAliases(\'child\')',
+                            'format': 'formatSlug: [wpcf_slugize, \'child\'], ',
+                            'inputBound': 'enable: display.isEnabledAliases(\'child\'), ',
+                            'notice': __( 'Invalid slug', 'wpcf' ),
+                        },
+                        {
+                            'type': 'plural',
+                            'title': __( 'Plural name', 'wpcf'),
+                            'default': __( 'Default: Children', 'wpcf'),
+                            'blockBound': 'visible: display.isEnabledAliases(\'child\')',
+                            'format': '',
+                            'inputBound': 'enable: display.isEnabledAliases(\'child\'), ',
+                            'notice': '',
+                        },
+                        {
+                            'type': 'singular',
+                            'title': __( 'Singular name', 'wpcf'),
+                            'default': __( 'Default: Child', 'wpcf'),
+                            'blockBound': 'visible: display.isEnabledAliases(\'child\')',
+                            'format': '',
+                            'inputBound': 'enable: display.isEnabledAliases(\'child\'), ',
+                            'notice': '',
+                        }
+                    ]
+                },
+            ] %}
+                <td>
+                    <p><strong>{{ side.heading }}</strong></p>
+                    <label for="types-alias-displayer-{{ side.role }}"><input type="checkbox" data-bind="checked: display.isAliasSelectorChecked.{{ side.role }}" id="types-alias-displayer-{{ side.role }}"> {{ __( 'Set custom slug and names', 'wpcf' ) }}</label>
+                    {% for label in side.labels %}
+                        {% if label.notice != '' %}
+                            <div class="hidden" data-slug="{{ side.role }}">
+                                <p class="notice notice-error inline types-warning">{{ label.notice }}</p>
+                            </div>
+                        {% endif %}
+                        <div data-bind="{{ label.blockBound }}" class="types-aliases-container">
+                            <p>{{ label.title }}</p>
+                            {{ forms.textInput(
+                                label.format ~ label.inputBound ~ 'valueUpdate: \'keyup\', value: display.roleAlias.' ~ side.role ~ '.' ~ label.type,
+                                '', '', '', false, '', '', label.default
+                            ) }}
+                        </div>
+                    {% endfor %}
+                </td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td><strong>{{ forms.label( __( 'Post types', 'wpcf' ) ) }}</strong></td>
+            {% for side in [
+                {'role': 'parent', 'label': __( 'First post type', 'wpcf') },
+                {'role': 'child', 'label': __( 'Second post type', 'wpcf') }
+            ] %}
+                <td>
+                    <p><strong>{{ side.label }}</strong></p>
+                    <div>
+                        {% for postTypeSlug, postType in postTypes %}
+                            <p>
+                                {{ forms.radio(
+                                    'checked: display.postType.' ~ side.role ~ ', '
+                                        ~ 'enable: display.isPostTypeOptionEnabled(\'' ~ side.role ~ '\', \'' ~ postTypeSlug ~ '\') && !display.postTypeNotIncludedListWithAssociations(\'' ~ side.role ~ '\', \'' ~ postTypeSlug ~ '\')() && ' ~ ( postType.can_be_used_in_relationship.success? 'true' : 'false' ),
+                                    postTypeSlug,
+                                    postType.plural
+                                ) }}
+
+                                <i class="fa fa-question-circle icon-question-sign js-show-tooltip"
+                                   data-header="{{ __( 'Self-join not allowed', 'wpcf' ) }}"
+                                   data-content='{{ __( 'Connecting posts of the same type is not supported yet.', 'wpcf' ) }}'
+                                   data-bind="click: display.showPointer($element),
+                                          visible: ( ! display.isPostTypeOptionEnabled('{{ side.role }}', '{{ postTypeSlug }}') && {{ postType.can_be_used_in_relationship.success? 'true' : 'false' }})">
+                                </i>
+                                <i class="fa fa-question-circle icon-question-sign js-show-tooltip"
+                                   data-header="{{ __( 'Relationship with associations', 'wpcf' ) }}"
+                                   data-content='{{ __( 'Post type cannot be modified because there are associations connected.', 'wpcf' ) }}'
+                                   data-bind="click: display.showPointer($element),
+                                        visible: display.postTypeNotIncludedListWithAssociations('{{ side.role }}', '{{ postTypeSlug }}')() && display.isPostTypeOptionEnabled('{{ side.role }}', '{{ postTypeSlug }}')">
+                                </i>
+                                <span data-bind="visible: ! {{ postType.can_be_used_in_relationship.success? 'true' : 'false' }}"><i class="fa fa-question-circle icon-question-sign js-show-tooltip" data-header="{{ postType.can_be_used_in_relationship.title }}" data-content='{{ postType.can_be_used_in_relationship.message }}' data-bind="click: display.showPointer($element)"></i></span>
+                            </p>
+                        {% endfor %}
+                    </div>
+                </td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td><strong>{{ forms.label( __( 'Limits', 'wpcf' ) ) }}</strong></td>
+            {% for side in [
+                {'role': 'parent', 'oppositeRole': 'child'},
+                {'role': 'child', 'oppositeRole': 'parent'}
+            ] %}
+                <td>
+                    <p>
+                        {{ __( 'Maximum number of %s possible to assign to one %s', 'wpcf')
+                        |format(
+                        '<span class="types-post-type-list" data-bind="text: display.postTypeLists.' ~ side.role ~ '.plural"></span>',
+                        '<span class="types-post-type-list" data-bind="text: display.postTypeLists.' ~ side.oppositeRole ~ '.singular"></span>'
+                        )
+                        |raw }}
+                    </p>
+                    <p>
+                        {{ forms.textInput(
+                        'value: display.maximumLimit.' ~ side.role ~ ', readOnly: ! display.isMaximumLimitEnabled(\'' ~ side.role ~ '\'), valueUpdate: \'change\', attr: {min: display.minimumLimit().' ~ side.role ~ '}',
+                        '', '', '', false, '', '', __( 'Default: No limit', 'wpcf' ), 'number'
+                        ) }}
+                    </p>
+                    <div class="notice notice-warning inline types-warning" data-bind="visible: display.isMinimumLimitWarningVisible('{{ side.role }}')">
+                        <p data-bind="text: display.minimumLimitWarning().{{ side.role }}"></p>
+                    </div>
+                </td>
+            {% endfor %}
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="overlay" data-bind="fadeVisible: ! display.advancedMode.isEnabled()">
+    <div class="overlay-content">
+        <div class="overlay-part">
+            <table>
+                <tr>
+                    <td><span class="post-types-large" data-bind="text: display.postTypeLists.parent.plural"></span></td>
+                    <td><span class="post-types-large" data-bind="text: display.postTypeLists.child.plural"></span></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <img src="" class="cardinality-class-scheme" data-bind="attr: { src: ( '{{ imageUrl }}/' + display.cardinalityClassString() + '-large.svg' ) }" />
+                    </td>
+                </tr>
+                <tr>
+                    {% for side in [
+                        { role: 'parent', oppositeRole: 'child' },
+                        { role: 'child', oppositeRole: 'parent' },
+                    ] %}
+                        <td class="relationship-possibilities-description">
+                            {{
+                                __(
+                                    '%s %s can be assigned to one %s', 'wpcf'
+                                ) | format(
+                                    '<strong><span data-bind="text: display.maximumLimitToString.' ~ side.role ~ '"></span></strong>',
+                                    '<strong><span data-bind="text: (
+                                        ( cardinality.' ~ side.role ~ '.max() === 1 )
+                                            ? display.postTypeLists.' ~ side.role ~ '.singular
+                                            : display.postTypeLists.' ~ side.role ~ '.plural
+                                    )"></span></strong>',
+                                    '<strong><span data-bind="text: display.postTypeLists.' ~ side.oppositeRole ~ '.singular"></span></strong>'
+                                ) | raw
+                            }}
+                        </td>
+                    {% endfor %}
+                </tr>
+                <tr data-bind="visible: display.relationshipSettingsInfo().length">
+                    <td colspan="2"><span data-bind="text: display.relationshipSettingsInfo"></span></td>
+                </tr>
+
+            </table>
+        </div>
+        <div class="overlay-part">
+            {{ forms.checkbox(
+                'checked: display.advancedMode.userUnderstands', '',
+                __( 'I understand that changes to these settings may delete post associations in this Relationship', 'wpcf' )
+            ) }}
+        </div>
+        <div class="overlay-part">
+            {{ forms.button(
+                'disablePrimary: ! display.advancedMode.isAvailable() , click: function() { display.advancedMode.isEnabled(true) }',
+                __( 'Edit settings' ),
+                'danger'
+            ) }}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<?php
+/**
+ * underscore.js template for the shared shortcodes GUI.
+ * 
+ * Component: radio attributes
+ *
+ * @since 3.1
+ */
+?>
+<script type="text/html" id="tmpl-toolset-shortcode-attribute-radio">
+    <ul id="{{{data.shortcode}}}-{{{data.attribute}}}">
+        <# _.each( data.options, function( optionLabel, optionKey ) { #>
+            <li>
+                <label>
+                    <input name="{{{data.shortcode}}}-{{{data.attribute}}}" value="{{{optionKey}}}" class="js-shortcode-gui-field" type="radio"<# if ( optionKey == data.defaultForceValue ) { #> checked="checked"<# } #>>
+                    {{{optionLabel}}}
+                </label>
+            </li>
+        <# }); #>
+    </ul>
+</script>

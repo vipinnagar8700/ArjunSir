@@ -1,0 +1,194 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 17 Jun, 2021, 6:19:51 PM
+    Author     : Vikas Arora
+*/
+
+/*----Modal CSS--*/
+
+.dtwap-modal-view{
+    display: none;
+}
+
+.dtwap-modal-view.is-active {
+    display: block;
+}
+
+
+.dtwap-modal-view {
+    position: fixed;
+    overflow: auto;
+    overflow-y: scroll;
+    width: 100%;
+    z-index: 99999;
+    max-height: 100%;
+    left: 0px;
+    top: 70px;
+    right: 0;
+    bottom: 0;
+}
+
+.dtwap-popup-overlay-fade-in {
+    animation: rm-field-popup-fadeIn 0.3s ease-in forwards;
+}
+
+.dtwap-modal-overlay {
+    z-index: 9999;
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.dtwap-popup-in {
+    animation: rm-bounceIn 0.8s ease-in forwards;
+}
+
+.dtwap-modal-wrap {
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    background: #fff;
+    margin-top: 70px;
+    z-index: 9999;
+    border-radius: 6px;
+    margin: 30px auto;
+}
+
+.dtwap__head_row .dpwap-head-img {
+    width: 440px;
+    float: right;
+    margin-top: 60px;
+}
+
+.dtwap__head_row .dpwap-head-img img {
+    width: 100%;
+
+}
+
+.dtwap__head_body {
+    position: relative;
+    padding: 20px;
+    min-height: 100px
+}
+
+.dtwap__head_body .dtwap_row { display: flex;}
+
+.dtwap-section-col {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+}
+
+.dtwap-section-col {
+-ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 100%;
+}
+
+.dtwap_slide_head {
+    font-size: 22px;
+    color: #000;
+}
+
+.dtwap_modal_footer {
+        text-align: right;
+    margin-top: 20px
+}
+
+.dtwap_modal_footer button{
+        font-weight: 500;
+    line-height: 26px;
+    margin: 0 10px 0 0;
+    padding: 6px 24px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    white-space: nowrap;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #2E96FF;
+    background: #F0F6FC;
+    vertical-align: top;
+    transition: .1s;
+    outline: 0px;
+    border: 0px;
+    text-transform: uppercase;
+}
+
+.dtwap_modal_footer button:hover{
+    background-color: #2E96FF;
+    color: #fff;
+}
+
+.dtwap-modal-close.dtwap-close-btn {   
+    position: absolute;
+    right: 0px;
+    z-index: 999;
+    background: transparent;
+    border: navajowhite;
+    font-size: 24px;
+    top: -33px;
+    color: #ffffff;
+}
+
+
+/* ---- PopUp Animation-----*/
+
+@keyframes rm-bounceIn {
+    0%   { transform: translateY(-200%) scale(1.5); opacity:0; }
+    30%  { opacity:1; }
+    58%  { transform: translateY(0) rotate(1deg) scale(1); opacity: 1 }
+    72%  { transform: translateY(-30px) rotate(-1deg); }
+    80%  { transform: translateY(0) rotate(0.5deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+}
+
+@keyframes rm-bounceOut {
+    0%   { transform: translateY(0); }
+    10%  { transform: translateY(-10px) rotate(-0.5deg); }
+    30%  { transform: translateY(20px) rotate(8deg); }
+    70%  { opacity: 1; }
+    90%  { transform: translateY(300%) translateX(40px) rotate(35deg); opacity: 0; }
+    100% { display: none; }
+}
+
+@keyframes rm-field-popup-fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes rm-field-popup-fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+
+.dtwap__head_row {
+    width: 100%;
+    height: 300px;
+    background-color: #2E96FF;
+    position: relative;
+    overflow: hidden;
+}
+
+.dtwap__head_row.dpwap-head-img {}

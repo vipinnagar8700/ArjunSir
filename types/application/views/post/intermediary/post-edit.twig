@@ -1,0 +1,80 @@
+{# - LOADING SPINNER - #}
+{# we hide it once the select2 for parent/child are fully initialised. #}
+<div data-bind="visible: ! isInitialized">
+    <p style="margin-top: 30px; text-align: center">
+        <i class="fa fa-2x fa-spinner fa-spin"></i>
+    </p>
+</div>
+
+{# - FORM TO ASSIGN POSTS - #}
+<div data-bind="visible: isInitialized" class="toolset-types-intermediary-meta-box" style="display:none;">
+
+    {# - SELECT2 FOR PARENT POST - #}
+    <label class="wpt-form-label wpt-form-textfield-label">{{ parent_post_types_names|join(', ')  }}</label>
+    <select name=""
+            data-placeholder="{{ sprintf( __('Select a %s', 'wpcf' ), parent_post_types_names|join(', ') ) }}"
+            data-types-intermediary-parent-child-select="{{ parent_post_types|join(',') }}">
+        <option value=""></option>
+        {% if( parent_post ) %}
+            <option value="{{ parent_post.ID }}" data-edit-url="{{ parent_post_edit_url|raw }}" selected>
+                {{ parent_post.post_title }}
+            </option>
+        {% endif %}
+    </select>
+    {# "Edit Post" link if parent selected #}
+    <p class="toolset-subtext-right">
+        &nbsp; <a data-bind="visible: parentUrl, attr: { href: parentUrl }">{{ __( 'Edit Post') }}</a>
+    </p>
+
+    {# - SELECT2 FOR CHILD POST - #}
+    <label class="wpt-form-label wpt-form-textfield-label">{{ child_post_types_names|join(', ')  }}</label>
+    <select name=""
+            data-placeholder="{{ sprintf( __('Select a %s', 'wpcf' ), child_post_types_names|join(', ') ) }}"
+            data-types-intermediary-parent-child-select="{{ child_post_types|join(',') }}">
+        <option value=""></option>
+        {% if( child_post ) %}
+            <option value="{{ child_post.ID }}" data-edit-url="{{ child_post_edit_url|raw }}" selected>
+                {{ child_post.post_title }}
+            </option>
+        {% endif %}
+    </select>
+    {# "Edit Post" link if child selected #}
+    <p class="toolset-subtext-right">
+        &nbsp; <a data-bind="visible: childUrl, attr: { href: childUrl }">{{ __( 'Edit Post') }}</a>
+    </p>
+
+    {# - STATUS MESSAGES - #}
+    {# Status: active #}
+    <p class="toolset-alert toolset-alert-success"
+       data-bind="visible: ! isSaving() && childId() && parentId() && ! conflictId()">
+        {{ __('This intermediary post is active.', 'wpcf' ) }}
+    </p>
+
+    {# Status: saving #}
+    <p class="toolset-alert toolset-alert-warning"
+       data-bind="visible: isSaving()">
+        {{ __('Saving...', 'wpcf' ) }}
+    </p>
+
+    {# Status: missing selection #}
+    <p class="toolset-alert toolset-alert-warning"
+       data-bind="visible: ! isSaving() && ( ! childId() || ! parentId() )">
+        <b>{{ __('This intermediary is not active:', 'wpcf' ) }}</b>
+        {# parent not selected #}
+        <span data-bind="visible: ! parentId()">
+        <br />- {{ sprintf( __('Select a %s.', 'wpcf' ), parent_post_types_names|join(', ')  ) }}
+        </span>
+        {# child not selected #}
+        <span data-bind="visible: ! childId()">
+        <br />- {{ sprintf( __('Select a %s.', 'wpcf' ), child_post_types_names|join(', ')  ) }}
+        </span>
+    </p>
+
+    {# Status: conflict with another interemediary, which has the same parent/child combination #}
+    <p class="toolset-alert toolset-alert-error"
+       data-bind="visible: ! isSaving() && conflictUrl() ">
+        <b>{{ __('Error on saving:', 'wpcf' ) }}</b><br />
+        {{ __('There already is an intermediary post for your selected combination.', 'wpcf' ) }}<br />
+        <a data-bind="attr: { href: conflictUrl }">{{ __( 'Edit conflicting intermediary post.') }}</a>
+    </p>
+</div>

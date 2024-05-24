@@ -1,0 +1,23 @@
+#pass-strength-result, .pass-strength-result {
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+#pass-strength-result ul, .pass-strength-result ul {
+  font-weight: normal;
+  text-align: left;
+  list-style: disc outside;
+  font-size: smaller;
+  padding-left: 18px;
+  margin-top: 8px;
+}
+
+#pass-strength-result code, .pass-strength-result code {
+  font-size: smaller;
+  font-style: italic;
+}
+
+.button.mp-hide-pw {
+  display: block;
+  height: 20px;
+}

@@ -1,0 +1,38 @@
+{#
+    Name and Descriptions metabox on the Edit Relationship screen.
+
+    @since m2m
+#}
+
+{% import "@toolset/forms.twig" as forms %}
+
+<table class="widefat toolset-field-table">
+    <tbody>
+    {{
+        forms.twoColumnRow(
+            forms.label(__( 'Name plural', 'wpcf' ), true),
+            forms.textInput('value: displayName, valueUpdate: \'keyup\'')
+        )
+    }}
+    {{
+        forms.twoColumnRow(
+            forms.label(__( 'Name singular', 'wpcf' ), true),
+            forms.textInput('value: displayNameSingular, valueUpdate: \'keyup\'')
+        )
+    }}
+    {{
+        forms.twoColumnRow(
+            forms.label(__( 'Slug', 'wpcf' ), true),
+            forms.textInput('value: slug, valueUpdate: \'keyup\', readOnly: ! display.advancedMode.isEnabled(), event: {keyup: display.onSlugChange}')
+        )
+    }}
+        <tr data-bind="visible: display.showSlugWarning">
+            <td></td>
+            <td>
+                <div class="notice notice-warning inline types-warning">
+                    <p>{{ __( 'Changing the slug will break any shortcode that uses it.', 'wpcf' ) }}</p>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

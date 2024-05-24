@@ -1,0 +1,318 @@
+.clearfix::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+.types-wizard-header {
+	text-align: center;
+	font-size: 28px;
+	font-weight: 400;
+	line-height: 1.2em;
+}
+.types-wizard-subheader {
+	font-size: 20px;
+	font-weight: 400;
+}
+.wp-core-ui .button-wizard {
+	margin-top: 60px;
+	height: 43px;
+	font-size: 15px;
+	padding: 0 15px;
+}
+.wp-core-ui .button-wizard .fa {
+	font-size: 12px;
+}
+.wp-core-ui  .button-wizard-next,
+.wp-core-ui  .button-wizard-finish {
+	float: right;
+}
+.wp-core-ui  .button-wizard-next {
+	padding: 0 15px 0 20px;
+}
+.wp-core-ui  .button-wizard-prev {
+	float: left;
+	padding: 0 20px 0 15px;
+}
+
+.icon-question-sign,
+.icon-warning-sign {
+	color: #ccc;
+	cursor: pointer;
+}
+
+/*************************
+ * Wizard steps
+ *************************/
+.types-wizard-steps {
+	display: flex;
+	padding: 0;
+	margin: 15px 0 10px;
+}
+.types-wizard-steps li {
+	flex-grow: 1;
+	list-style: none;
+	margin: 0;
+	padding: 5px 10px 5px 25px;
+	text-align: center;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	position: relative;
+	font-size: 13px;
+	font-weight: 400;
+	white-space: nowrap;
+	background: #f7f7f7;
+	color: #666;
+}
+.types-wizard-steps li:first-child {
+	border-left: 1px solid #d84326;
+}
+.types-wizard-steps li:last-child {
+	border-right: 1px solid #ccc;
+}
+.types-wizard-steps li.active:last-child {
+	border-right: 1px solid #d84326;
+}
+.types-wizard-steps li:not(:last-child):after {
+	content: "";
+	position: absolute;
+	top: -1px;
+	right: -15px;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 15px 0 15px 15px;
+	border-color: transparent transparent transparent #f7f7f7;
+	z-index: 1;
+}
+.types-wizard-steps li:not(:last-child):before {
+	content: "";
+	position: absolute;
+	top: -1px;
+	right: -16px;
+	width: 0;
+	bottom: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 15px 0 15px 15px;
+	border-color: transparent transparent transparent #ccc;
+	z-index: 1;
+}
+.types-wizard-steps li.active {
+	background: #F15D30;
+	color: #fff;
+	border-top-color: #d84326 ;
+	border-bottom-color: #d84326 ;
+}
+.types-wizard-steps li.active:not(:last-child):after {
+	border-color: transparent transparent transparent #F15D30;
+}
+.types-wizard-steps li.active:not(:last-child):before {
+	border-color: transparent transparent transparent #d84326;
+}
+.types-wizard-steps li.disabled {
+	background: #e8e8e8;
+}
+.types-wizard-steps li.disabled:not(:last-child):after {
+	border-color: transparent transparent transparent #e8e8e8;
+}
+
+/*************************
+ * Wizard tabs
+ *************************/
+.wizard-content {
+	display: none;
+}
+.wizard-content.active {
+	display: block;
+}
+
+
+/*************************
+ * Step 1
+ *************************/
+.wizard-post-types {
+	align-items: stretch;
+	display: grid;
+	grid-column-gap: 20px;
+	grid-template-columns: auto auto auto;
+}
+.wizard-post-types input {
+	position: absolute;
+	left: -100000px;
+}
+.wizard-post-types label {
+	cursor: pointer;
+	display: block;
+	border: 1px solid #ccc;
+	background: #f7f7f7;
+	-webkit-box-shadow: 0 1px 0 #ccc;
+	box-shadow: 0 1px 0 #ccc;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	color: #555;
+	padding: 15px;
+	height: 100%;
+	box-sizing: border-box;
+}
+.wizard-post-types label:hover,
+.wizard-post-types label:focus {
+	background: #fafafa;
+	border-color: #999;
+	color: #23282d;
+}
+.wizard-post-types input:checked + label {
+	background: #FCDED4;
+	border-color: #F15D30;
+	-webkit-box-shadow: 0 1px 0 #F15D30;
+	box-shadow: 0 1px 0 #F15D30;
+}
+.wizard-post-types h3 {
+	font-size: 23px;
+	text-align: center;
+	padding-bottom: 30px;
+}
+.wizard-post-types h4 {
+	font-size: 14px;
+	font-weight: normal;
+}
+.wizard-relationship-type span  {
+	display: inline-block;
+	width: 30%;
+	margin-left: 17%;
+	text-align: left;
+}
+.wizard-relationship-type p:last-child {
+	text-align: right;
+}
+.wizard-relationship-type {
+	padding-bottom: 70px;
+	background-repeat: no-repeat;
+	background-position: 0 15px;
+	background-size: contain;
+	max-width: 300px;
+	margin: auto auto;
+}
+.wizard-relationship-type-one-to-one {
+	background-image: url("../images/one-to-one-large.svg");
+}
+.wizard-relationship-type-one-to-many {
+	background-image: url("../images/one-to-many-large.svg");
+}
+.wizard-relationship-type-many-to-many {
+	background-image: url("../images/many-to-many-large.svg");
+}
+
+
+/*************************
+ * Step 2
+ *************************/
+.wizard-container {
+	max-width: 600px;
+	margin: 0 auto;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+.wizard-container-one-to-one {
+	padding-top: 150px;
+	background-image: url("../images/one-to-one-large.svg");
+}
+.wizard-container-one-to-many {
+	padding-top: 150px;
+	background-image: url("../images/one-to-many-large.svg");
+}
+.wizard-container-many-to-many {
+	padding-top: 150px;
+	background-image: url("../images/many-to-many-large.svg");
+}
+.wizard-column {
+	display: inline-block;
+	width: 40%;
+	margin-left: 3%;
+}
+.wizard-column + .wizard-column {
+	margin-left: 14%;
+}
+
+.wizard-limits {
+	margin-top: 20px;
+}
+.wizard-info {
+	color: #999999;
+	line-height: 1.3;
+}
+
+/*************************
+ * Step 4
+ *************************/
+.toolset-fields-placeholder {
+	border: 1px dashed #ccc;
+	margin-bottom: 20px;
+}
+
+
+/*************************
+ * Step 5
+ *************************/
+@media (max-width: 479px) {
+	#types-wizard-step-5 input[type='text'] {
+		width: 100%;
+	}
+}
+@media (min-width: 480px) {
+	#types-wizard-step-5 label {
+		width: 30%;
+		display: inline-block;
+		text-align: right;
+		padding-right: 15px;
+		vertical-align: middle;
+	}
+	#types-wizard-step-5 input[type='text'] {
+		width: 65%;
+	}
+	#types-wizard-step-5 .wizard-form-checkbox {
+		margin-left: calc(30% + 15px + 5px);
+	}
+	#types-wizard-step-5 .wizard-form-checkbox label {
+		text-align: start;
+		padding-right: 0;
+		width: auto;
+		display: inline
+	}
+}
+.wizard-form-field {
+	margin-bottom: 15px;
+}
+
+
+
+
+/*************************
+ * Step 6
+ *************************/
+.types-wizard-summary-header {
+	margin: 60px 0 30px 0;
+	font-size: 30px;
+	line-height: 1.2;
+	text-align: center;
+	font-weight: 400;
+}
+.types-wizard-summary-header span {
+	font-weight: bold;
+}
+i.types-field-icon {
+	width: 2em;
+	height: 20px;
+	vertical-align: bottom;
+}
+#types-wizard-step-6 .spinner {
+	margin-top: 23px;
+}
+
+/*************************
+ * Others
+ *************************/
+.dashicons-external {
+	font-size: 100%;
+	vertical-align: baseline;
+	width: auto;
+}

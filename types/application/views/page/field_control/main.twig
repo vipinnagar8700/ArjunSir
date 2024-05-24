@@ -1,0 +1,58 @@
+{#
+    Main template for the Field Control page.
+
+    Only extends page-specific blocks of the genetic listing template.
+
+    @since 2.2
+#}
+
+{% extends "@toolset/listing.twig" %}
+
+{# we need its macros #}
+{% import "@toolset/listing.twig" as listing %}
+
+
+{% block columnHeaders %}
+    {{ listing.columnHeader(strings.column.name, true, 'displayName') }}
+    {{ listing.columnHeader(strings.column.groups, false) }}
+    {{ listing.columnHeader(strings.column.slug, true, 'slug') }}
+    {{ listing.columnHeader(strings.column.type, true, 'typeForSorting') }}
+    {{ listing.columnHeader(strings.column.metaKey, true, 'metaKey') }}
+{% endblock %}
+
+
+{# Only the row actions, which will be embedded in the main column. #}
+{% block rowActions %}
+    <span class="edit" data-bind="visible: isUnderTypesControl">
+        <a data-bind="click: onChangeAssignmentAction">{{ strings.rowAction.changeAssignment }}</a> |
+    </span>
+    <span class="edit" data-bind="visible: isUnderTypesControl">
+        <a data-bind="click: onChangeTypeAction">{{ strings.rowAction.changeType }}</a> |
+    </span>
+    <span class="edit">
+        <a data-bind="text: display.changeManagementStatusActionLabel, click: onChangeManagementStatusAction"></a>
+    </span>
+    <span class="delete" data-bind="visible: isUnderTypesControl">
+        | <a data-bind="click: onDeleteAction">{{ strings.rowAction.delete }}</a>
+    </span>
+{% endblock %}
+
+
+{# Other table cells besides the main one (with displayName and row actions) #}
+{% block tdCells %}
+    {# List of groups the field belongs to (if managed by Types) #}
+    <td data-bind="html: display.groupList"></td>
+
+    <td>
+        <span data-bind="text: slug"></span>
+    </td>
+
+    <td>
+        <span data-bind="html: display.type"></span>
+        <span data-bind="visible: isRepetitive" title="{{ strings.misc.thisFieldIsRepeating }}">*</span>
+    </td>
+
+    <td>
+        <code><small data-bind="text: metaKey"></small></code>
+    </td>
+{% endblock %}

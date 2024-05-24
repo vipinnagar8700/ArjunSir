@@ -1,0 +1,69 @@
+/*
+    Stylesheet for the custom fields page.
+
+    @since 2.3
+
+    Requires the Toolset GUI base style.
+*/
+
+/**
+ * Content
+ */
+#toolset-page-content > div {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.field-control-box {
+	margin-top: 3em;
+}
+.field-control-box .button {
+	vertical-align: middle;
+}
+
+
+/**
+ * Notices
+ */
+.wp-core-ui .toolset-notice-wp button {
+	margin: 0.5em 0;
+	float: right;
+}
+
+/**
+ * Add new
+ */
+.add-new-container {
+ display: flex;
+}
+.add-new-block {
+	flex: 1;
+	width: 33.33333%;
+	text-align: center;
+	padding: 5px 30px 15px;
+	box-sizing: border-box;
+	border-right: 1px solid #E0CDCD;
+	vertical-align: top;
+}
+.add-new-block:last-child {
+	border-right: 0;
+}
+.add-new-icon {
+	font-size: 50px;
+	display: block;
+	margin-bottom: 30px;
+}
+.add-new-block h3 {
+	margin-top: 0;
+	border: 1px solid rgba(204, 204, 204, 1);
+	border-radius: 2px;
+}
+.add-new-block a {
+	color: #333333;
+	text-decoration: none;
+	display: inline-block;
+	padding: 15px;
+}
+.add-new-block p {
+	font-size: 11px;
+}

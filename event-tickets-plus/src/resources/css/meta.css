@@ -1,0 +1,334 @@
+/**
+ * This CSS file was auto-generated via PostCSS
+ *
+ * Contributors should avoid editing this file, but instead edit the associated
+ * src/resources/postcss/ file. For more information, check out our engineering
+ * docs on how we handle CSS in our engineering docs.
+ *
+ * @see: http://moderntribe.github.io/products-engineering/css/
+ */
+
+.tribe-tickets-show-attendee-info td {
+		padding: 20px 0;
+	}
+	.tribe-tickets-show-attendee-info label {
+		font-weight: 700;
+	}
+
+.tribe-attendee-fields-box {
+	vertical-align: top;
+}
+
+.tribe-attendee-fields-box .default_explanation {
+		color: #b4b9be;
+		font-style: italic;
+	}
+
+.tribe-attendee-fields-box .tribe-attendee-fields-new {
+		width: 20%;
+	}
+
+.tribe-intro {
+	font-size: 12px;
+}
+
+#saved_ticket_attendee_info_chosen {
+	width: 220px !important;
+}
+
+#tribe-tickets-attendee-sortables {
+	max-width: 850px;
+}
+
+#tribe-tickets-attendee-sortables .tribe-tickets-attendee-info-active-field .handlediv {
+			text-align: center;
+		}
+
+#tribe-tickets-attendee-sortables .tribe-tickets-attendee-info-active-field .handlediv:before {
+				content: '\f142';
+				display: inline-block;
+				font: 400 20px/1 dashicons;
+				margin-top: .5rem;
+			}
+
+#tribe-tickets-attendee-sortables .tribe-tickets-attendee-info-active-field.closed .handlediv:before {
+			content: '\f140';
+		}
+
+.tribe-tickets-attendee-info-active-field {
+	background: #fafafa;
+	border-color: #dfdfdf;
+	margin-bottom: 10px;
+	width: 100%;
+}
+
+.tribe-tickets-attendee-info-options {
+	padding-right: 20px;
+}
+
+.tribe-tickets-attendee-info-options a {
+		text-decoration: none;
+	}
+
+.tribe-tickets-attendee-info-options li {
+		position: relative;
+	}
+
+.tribe-tickets-attendee-info-options li a {
+			border-bottom: 1px solid #dfdfdf;
+			display: block;
+			padding: 5px 0;
+		}
+
+.tribe-tickets-attendee-info-options li span {
+			font-size: inherit;
+			position: absolute;
+			right: 0;
+		}
+
+.tribe-tickets-attendee-info-form td {
+		padding-bottom: 10px;
+	}
+
+.event-tickets-plus-fieldset-table {
+	width: 100%;
+}
+
+.event-tickets-plus-fieldset-table .tribe-tickets-attendee-info-form {
+		display: table-row;
+	}
+
+.event-tickets-plus-fieldset-table .eventtable {
+		width: 100%;
+	}
+
+.tribe-tickets-plus-fieldset-page .tribe-tickets-attendee-info-form {
+		display: block;
+	}
+
+.tribe-tickets-attendee-info-active-field h3 span {
+	font-family: sans-serif;
+	font-size: 80%;
+	font-weight: 700;
+	opacity: .75;
+	text-transform: uppercase;
+}
+
+.tribe-tickets-attendee-saved-fields {
+	border: 4px dashed #b4b9be;
+	display: table;
+	height: 200px;
+	margin: 0;
+	max-width: 850px;
+	position: relative;
+	text-align: center;
+	width: 100%;
+}
+
+.tribe-tickets-attendee-saved-fields p {
+		color: #999;
+		font-size: 14px;
+		font-style: normal;
+		margin: 0 0 10px;
+	}
+
+.tribe-tickets-attendee-saved-fields .chosen-container {
+		margin: 0 auto;
+		text-align: left;
+	}
+
+.tribe-tickets-saved-fields-select {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.meta-postbox {
+	border: 1px solid #e5e5e5;
+	box-shadow: 0 1px 1px rgba( 0, 0, 0, .04 );
+	min-width: 255px;
+}
+
+.fake-saved-fields {
+	display: none;
+}
+
+.tribe-tickets-input {
+	margin: 10px 0;
+}
+
+.tribe-tickets-input label {
+		display: block;
+	}
+
+.tribe-tickets-input input[type=text],
+	.tribe-tickets-input textarea {
+		width: 100%;
+	}
+
+.tribe-tickets-required {
+	font-size: 11px;
+}
+
+.tribe-tickets-delete-field {
+	margin-top: 5px;
+	text-align: right;
+}
+
+.tribe-tickets-delete-field a {
+		color: red;
+	}
+
+.tribe-tickets-attendee-saved-fieldset-name {
+	display: none;
+	max-width: 300px;
+}
+
+#tribe-events-pg-template .cmb-form {
+	padding: 3%;
+}
+
+.event-tickets-meta-row {
+	display: none;
+}
+
+.event-tickets-meta-row td {
+		border-bottom: 1px solid #eee;
+		padding: 0 10px;
+	}
+
+.event-tickets-meta-row dl {
+		margin: 0;
+		padding: 0;
+	}
+
+.event-tickets-meta-row dt {
+		clear: both;
+		float: left;
+		font-weight: bold;
+		margin-right: 1em;
+		padding: 8px 0 0;
+	}
+
+.event-tickets-meta-row dd {
+		margin-bottom: 0;
+		margin-left: 0;
+		max-width: 500px;
+		padding: 8px 0;
+	}
+
+.attendees.striped > tbody > :nth-child(4n),
+		.attendees.striped > tbody > :nth-child(4n-1) {
+			background-color: #f9f9f9;
+		}
+
+.attendees.striped > tbody > .event-tickets-meta-row:nth-child(4n) {
+			background-color: #fdfdfd;
+		}
+
+.attendees.striped > tbody > :nth-child(4n+2),
+		.attendees.striped > tbody > :nth-child(4n-3) {
+			background-color: #fff;
+		}
+
+.attendees.striped > tbody > .event-tickets-meta-row:nth-child(4n+2) {
+			background-color: #fdfdfd;
+		}
+
+.event-tickets-ticket-purchaser {
+	color: #999;
+	font-size: .9em;
+}
+
+.event-tickets-meta-toggle-hide {
+	display: none;
+}
+
+.event-tickets-meta-toggle-open .event-tickets-meta-toggle-view {
+		display: none;
+	}
+
+.event-tickets-meta-toggle-open .event-tickets-meta-toggle-hide {
+		display: inline;
+	}
+
+tr.event-tickets-meta-toggle-open {
+	display: table-row;
+}
+
+#ticket-meta-fieldset-metabox .tribe-tickets-add-new-fields,
+	#ticket-meta-fieldset-metabox #saved_ticket-attendee-info {
+		display: none;
+	}
+
+.eventForm .ticket_name .dashicons {
+	color: #ccc;
+	margin-right: 5px;
+}
+
+.ticket_form .detailed.ticket_form_right {
+	display: block;
+}
+
+#tribe_show_attendees {
+	margin-left: .4em;
+}
+
+/* Tribe Events Modal Styles */
+
+.tribe_events_modal {
+	height: calc(100% + 46px);
+}
+
+.tribe_events_modal #wpadminbar,
+	.tribe_events_modal #adminmenuback,
+	.tribe_events_modal #adminmenuwrap,
+	.tribe_events_modal #wpfooter {
+		display: none;
+	}
+
+.tribe_events_modal #wpwrap {
+		margin-top: -46px;
+	}
+
+.tribe_events_modal.auto-fold #wpcontent {
+		margin: 0;
+		padding: 0 10px;
+	}
+
+.tribe_events_modal #wpbody-content > div:not(#poststuff),
+	.tribe_events_modal #poststuff .inside > a,
+	.tribe_events_modal .accordion-label {
+		display: none;
+	}
+
+@media screen and ( max-width: 782px ) {
+
+.tribe-attendee-fields-box .tribe-attendee-fields-new {
+			width: 100%;
+			display: block
+	}
+
+			.tribe-attendee-fields-box .tribe-attendee-fields-new .tribe-tickets-attendee-info-options {
+				padding-right: 0;
+			}
+
+.tribe-attendee-fields-box .tribe-attendee-fields-existing {
+			width: 100%;
+			display: block
+	}
+		}
+
+@media (min-width: 783px) {
+
+.tribe_events_modal {
+		height: calc(100% + 32px)
+}
+
+.tribe_events_modal #wpwrap {
+			margin-top: -32px
+	}
+
+.tribe_events_modal.auto-fold #wpcontent {
+			padding: 0 20px
+	}
+	}

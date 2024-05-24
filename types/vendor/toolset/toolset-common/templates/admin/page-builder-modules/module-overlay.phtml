@@ -1,0 +1,21 @@
+<?php
+/**
+ * Template for the overlay of the Toolset Page Builder modules.
+ *
+ * @since 3.0.4
+ */
+?>
+<div class="toolset-page-builder-modules-overlay block-overlay">
+	<div class="toolset-page-builder-modules-overlay-content block-overlay-content">
+		<div class="logo <?php echo array_key_exists( 'icon', $context ) ? esc_attr( $context['icon'] ) : 'icon-views-logo'?>"></div>
+		<p><?php echo sprintf( __( 'This is the preview of the %1s %2s.', 'wpv-views' ), '<span>"' . $context['module_title'] . '"</span>', $context['module_type'] ); ?></p>
+		<?php
+			if (
+				isset( $context['edit_link'] ) &&
+				! empty( $context['edit_link'] )
+			) {
+				echo '<a href="' . esc_attr( $context['edit_link'] ) . '" target="_blank" class="button"><span class="dashicons dashicons-admin-generic"></span> ' . esc_html( sprintf( __( 'Edit %1s', 'wpv-views' ), $context['module_type'] ) ) . '</a>';
+			}
+		?>
+	</div>
+</div>

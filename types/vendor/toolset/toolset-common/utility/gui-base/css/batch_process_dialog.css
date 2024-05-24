@@ -1,0 +1,63 @@
+
+/* todo according to BEM, remove tags and leave only class selectors */
+
+
+.toolset-batch-process-dialog {
+	max-width: 100%;
+}
+.toolset-batch-process-dialog__process-status {
+	margin-left: 1em;
+}
+.rtl .toolset-batch-process-dialog__process-status {
+	margin-right: 1em;
+	margin-left: 0;
+}
+.toolset-batch-process-dialog__process-status > li {
+	position: relative;
+	padding-right: 30px;
+}
+
+.toolset-batch-process-dialog__phase-status-icon {
+	width: 30px;
+	text-align: right;
+	position: absolute;
+	top: -3px;
+	right: 0;
+}
+
+.toolset-m2m-activation-please-wait {
+	font-size: 1.3em;
+	font-weight: bold;
+	margin-bottom: 16px;
+	clear: both;
+}
+
+.toolset-batch-process-dialog__log-output textarea {
+	font-family: monospace;
+	font-size: x-small;
+	width: 100%;
+}
+
+
+.toolset-batch-process-dialog__log-output-dropdown {
+	cursor: pointer;
+}
+
+.toolset-batch-process-dialog__log-output table td,
+.toolset-batch-process-dialog__log-output table td code
+{
+	font-size: x-small;
+}
+
+.toolset-batch-process-dialog__log-output table thead td {
+	font-weight: bold;
+}
+
+.toolset-batch-process-dialog__log-output button {
+	font-size: x-small !important;
+}
+
+
+.toolset-batch-process-dialog--space-top {
+    margin-top: 25px;
+}

@@ -1,0 +1,47 @@
+{#
+	Fields container
+
+	@since m2m
+#}
+
+	{# Form is needed for validation.js #}
+	<form id="{{ id }}" class="types-new-relationship-form">
+
+		{% for field in fields %}
+
+				<div class="types-new-relationship-block" rel="{{ field.type }}">
+					{% if field.title %}
+						<h3 class="types-new-relationship-header">{{ field.title }}</h3>
+					{% endif %}
+					{% if field.type == 'post' %}
+						<div class="js-wpt-field-item wpt-field{% if fields|length > 1 %} types-new-relationship-connect-field{% endif %}">
+							<label class="wpt-form-label wpt-form-textfield-label" for="types-new-post-type-title">{{ field.post_type_label }}</label>
+							<input name="wpcf[post][post-id]" data-rel="select2" />
+						</div>
+					{% endif %}
+					{% if field.type == 'post-select' %}
+						<div class="js-wpt-field-item wpt-field{% if fields|length > 1 %} types-new-relationship-connect-field{% endif %}">
+							<label class="wpt-form-label wpt-form-textfield-label" for="types-new-post-type-title">{{ field.post_type_label }}</label>
+							<select name="wpcf[post][post-id]" data-rel="select2">
+								<option value="">{{ field.empty_label }}</option>
+								{% for option in field.options %}
+									<option value="{{ option.value }}">
+										{{ option.label }}
+									</option>
+								{% endfor %}
+							</select>
+						</div>
+					{% endif %}
+					{% if field.rendered %}
+						{{ field.rendered | raw }}
+					{% endif %}
+				</div>
+
+		{% endfor %}
+
+		{# We have two nonces because of the legacy code we're using for rendering field inputs. #}
+		<input name="nonce" type="hidden" value="{{ nonce }}" />
+		<input name="wpnonce" type="hidden" value="{{ wpnonce }}" />
+		<input name="relationship_slug" type="hidden" data-bind="value: relationshipSlug()" />
+		<input name="post_id" type="hidden" value="{{ post_id }}" />
+	</form>

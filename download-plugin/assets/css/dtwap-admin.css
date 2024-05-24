@@ -1,0 +1,19 @@
+.wp-core-ui .dtwap_download_link{
+	background:#009933 none repeat scroll 0 0 !important;
+    border-color:#009933 !important;
+    box-shadow:0 1px 0 #009933 !important;
+    text-shadow:0 -1px 1px #009933, 1px 0 1px #009933, 0 1px 1px #009933, -1px 0 1px #009933 !important;
+}
+.wp-core-ui .dtwap_download_link:hover{
+    background:#00B22D none repeat scroll 0 0 !important;
+    border-color:#00B22D !important;
+    box-shadow:0 1px 0 #00B22D !important;
+    text-shadow:0 -1px 1px #00B22D, 1px 0 1px #00B22D, 0 1px 1px #00B22D, -1px 0 1px #00B22D !important;
+}
+
+
+
+  
+
+
+

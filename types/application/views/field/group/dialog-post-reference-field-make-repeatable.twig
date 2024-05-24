@@ -1,0 +1,56 @@
+{# trick jquery to prevent having the link "Learn more" focused #}
+<input type="text" style="width:0;position:absolute;top:-2000px;"/>
+
+{# Step 1 - Introduction #}
+<div class="js-prf-dialog-step-1" style="float: left; width: 145px;">
+    <i class="fa fa-warning fa-5x" style="margin: 40px;"></i>
+</div>
+<div class="js-prf-dialog-step-1" style="float: left; width: 404px; padding-left: 16px;">
+    <p>
+        {{ sprintf( __( 'If you want to list several %s items, make a many to many relationship between %s and %s. Then, you will be able to connect as many %s to any %s.', 'wpcf' ),
+        '<b><# print( childSingular ) #></b>',
+        '<b><# print( childPlural ) #></b>',
+        '<b><# print( parentPlural ) #></b>',
+        '<b><# print( childPlural ) #></b>',
+        '<b><# print( parentSingular ) #></b>' )|raw }}
+    </p>
+
+    <div class="js-prf-dialog-toggle">
+        <a target="_blank" class="toolset-external-link" href="https://toolset.com/course-lesson/using-post-reference-field-to-set-up-one-to-many-relationships/?utm_source=plugin&utm_medium=gui&utm_campaign=types">{{ __( 'Learn more', 'wpcf' ) }}</a> &nbsp;
+        <a href="#" class="button button-primary prf-dialog-button js-prf-dialog-show-step-2">{{ __( 'Preview change', 'wpcf' ) }}</a>
+    </div>
+</div>
+
+{# Step 2 - Preview of changes #}
+<div class="prf-dialog-content js-prf-dialog-step-2" style="display: none;">
+    <h3>{{ __('This is what you have:', 'wpcf') }}</h3>
+    <div class="prf-dialog-relationship-type prf-dialog-relationship-type-one-to-many">
+        <span><# print( childSingular ) #></span><span><# print( parentPlural ) #></span>
+    </div>
+
+    <h3>{{ __('This is what you will get:', 'wpcf') }}</h3>
+    <div class="prf-dialog-relationship-type prf-dialog-relationship-type-many-to-many">
+        <span><# print( childPlural ) #></span><span><# print( parentPlural ) #></span>
+    </div>
+
+    <p>
+        {{ sprintf( __( 'After this change is complete, the Post Reference Field will no longer be part of this group and you will need to update the templates for %s and %s, so that they display using the correct relationship.', 'wpcf' ),
+        '<b><# print( parentPlural ) #></b>',
+        '<b><# print( childPlural ) #></b>'
+        )|raw }}
+    </p>
+</div>
+
+{# Step 3 - Success message #}
+<div class=" js-prf-dialog-step-3" style="display: none;">
+    <div style="float: left; width: 145px;">
+        <i class="fa fa-check fa-5x" style="margin: 40px;"></i>
+    </div>
+    <div class="prf-dialog-vertical-container" style="float: left; width: 404px; padding-left: 16px;">
+        <p>
+            {{ __( 'The Post Reference Field was successfully converted.', 'wpcf' ) }}
+        </p>
+    </div>
+
+    <a href="#" class="button button-primary prf-dialog-button js-prf-dialog-close">{{ __( 'Close', 'wpcf' ) }}</a>
+</div>

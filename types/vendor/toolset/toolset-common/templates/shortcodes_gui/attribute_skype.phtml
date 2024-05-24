@@ -1,0 +1,70 @@
+<?php
+/**
+ * underscore.js template for the shared shortcodes GUI.
+ * 
+ * Component: radio attributes
+ *
+ * @since 3.1
+ */
+?>
+<script type="text/html" id="tmpl-toolset-shortcode-attribute-skype">
+
+    <div id="toolset-attribute-skype-preview">
+        <div id="toolset-attribute-skype-preview-loading">
+            <# print( Toolset.shortcodeGUI.shortcodeDialogSpinnerContent[0].outerHTML ); #>
+        </div>
+
+        <div id="toolset-attribute-skype-preview-loaded">
+
+            <table>
+                <tr>
+                    <td>{{{data.i18n.button}}}</td>
+                    <td>
+                        <?php /* This preview HTML is copied from the skype api generated HTML on the front-end */ ?>
+                        <span id="toolset-skype-preview-button" class="skype-button bubble" data-text="">
+                            <a id="toolset-skype-preview-button-link" class="lwc-chat-button">
+                                <span class="unreadMessageIndicator"><h3 class="heading"></h3></span>
+                                <span class="lwc-button-icon"><svg style="width:inherit" viewBox="0 0 38 35">
+                                    <path fill="#FFF" fill-rule="evenodd" d="M36.9 10.05c-1-4.27-4.45-7.6-8.8-8.4-2.95-.5-6-.78-9.1-.78-3.1 0-6.15.27-9.1.8-4.35.8-7.8 4.1-8.8 8.38-.4 1.5-.6 3.07-.6 4.7 0 1.62.2 3.2.6 4.7 1 4.26 4.45 7.58 8.8 8.37 2.95.53 6 .45 9.1.45v5.2c0 .77.62 1.4 1.4 1.4.3 0 .6-.12.82-.3l11.06-8.46c2.3-1.53 3.97-3.9 4.62-6.66.4-1.5.6-3.07.6-4.7 0-1.62-.2-3.2-.6-4.7zm-14.2 9.1H10.68c-.77 0-1.4-.63-1.4-1.4 0-.77.63-1.4 1.4-1.4H22.7c.76 0 1.4.63 1.4 1.4 0 .77-.63 1.4-1.4 1.4zm4.62-6.03H10.68c-.77 0-1.4-.62-1.4-1.38 0-.77.63-1.4 1.4-1.4h16.64c.77 0 1.4.63 1.4 1.4 0 .76-.63 1.38-1.4 1.38z"></path></svg>
+                                </span>
+                                <span id="toolset-skype-preview-button-text" class="lwc-button-text">Contact us</span>
+                            </a>
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>{{{data.i18n.chat}}}</td>
+                    <td>
+	                    <?php /* This preview HTML is copied from the skype api generated HTML on the front-end */ ?>
+                        <div id="toolset-skype-preview-chat" class="chatWindowMain">
+                            <div id="chatHeader" class="header">
+                                <div class="botName"></div>
+                                <div class="closeButton"></div>
+                            </div>
+                            <div class="chat">
+                                <div class="message me myMessageFirst"></div>
+                                <div class="message me myMessageSecond"></div>
+                                <div class="message their botMessageFirst"></div>
+                                <div class="message their botMessageSecond"></div>
+                                <div class="message me myMessageThird"></div>
+                                <div class="message me myMessageForth"></div>
+                            </div>
+                            <div class="input">
+                                <div class="textInput"></div>
+                                <div class="sendButton"></div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div id="toolset-attribute-skype-preview-offline" class="toolset-alert toolset-alert-error">
+            {{{data.i18n.cdn_not_reachable}}}
+        </div>
+    </div>
+
+    <# Toolset.Types.shortcodeGUI.attributeSkypeOnDialogReady(); #>
+</script>

@@ -1,0 +1,76 @@
+{#
+    Main template for the Relationships page.
+
+    It only extends page-specific blocks of the genetic listing template.
+
+    @since m2m
+#}
+
+{% extends "@toolset/listing.twig" %}
+
+{# we need its macros #}
+{% import "@toolset/listing.twig" as listing %}
+
+{# Needs to add a button #}
+{% block title %}
+	<span>{{ strings.misc.pageTitle }}{{ getScreen }}</span>
+	<a data-bind="click: onAddNew" class="add-new-h2 add_new_button">{{ __('Add New', 'wpcf' ) }}</a>
+	<a data-bind="click: onExitWizard" class="button button-secondary button-small types-exit-wizard-button">{{ __( 'Exit wizard', 'wpcf' ) }}</a>
+{% endblock %}
+
+{% block columnHeaders %}
+    {{ listing.columnHeader(strings.column.name, true, 'displayName', 'column-title column-primary') }}
+    {{ listing.columnHeader(strings.column.is_active, true, 'isActiveDisplay') }}
+    {{ listing.columnHeader(strings.column.description, false, 'display.description') }}
+{% endblock %}
+
+{# Only the row actions, which will be embedded in the main column. #}
+{% block rowActions %}
+    <span class="edit">
+        <a data-bind="click: onEdit">{{ strings.rowAction.edit }}</a>
+    </span>
+    |
+    <span class="delete">
+        <a data-bind="click: onDelete">{{ strings.rowAction.delete }}</a>
+    </span>
+{% endblock %}
+
+{% block afterDisplayName %}
+    <span data-bind="visible: hasChanged" class="has-unsaved-changes" title="{{ __( 'This relationship has unsaved changes.', 'wpcf ') }}">({{ __( 'unsaved', 'wpcf' ) }})</span>
+    <span data-bind="visible: needsLegacySupport" class="wpcf-needs-legacy-support" title="{{ __( 'This relationship was migrated.', 'wpcf ') }}">&mdash; <span class='post-state'>{{ __( 'Migrated', 'wpcf' ) }}</span></span>
+{% endblock %}
+
+{# Other table cells besides the main one (with displayName and row actions) #}
+{% block tdCells %}
+    <td data-colname="{{ strings.column.is_active }}" data-bind="htmlWithBinding: isActiveDisplay()">    </td>
+
+    <td data-colname="{{ strings.column.description }}"  data-bind="text: display.description"></td>
+{% endblock %}
+
+{#
+    Screens that will be hidden when the page is loaded, but it's possible to
+    switch to them without a reload.
+#}
+{% block otherScreens %}
+
+    <div id="types-current-relationship-screen"
+         data-bind="with: currentRelationshipDefinition"
+         style="display: none;"
+    >
+        {% include '@relationships/edit_relationship.twig' %}
+    </div>
+
+    <div id="post-body-content">
+        <div data-bind="template: { name: 'types-current-relationship-template', data: wizardModel, afterRender: initWizard }" id="types-wizard-relationship-screen"
+         style="display: none;"
+  >
+        </div>
+    </div>
+    <script type="text/html" id="types-current-relationship-template">
+        {% include '@relationships/wizard_new_relationship.twig' %}
+    </script>
+
+    {# wordpress postboxes nonces #}
+    {{ wordpress.postboxescollapsenonce|raw }}
+    {{ wordpress.postboxesordernonce|raw }}
+{% endblock %}

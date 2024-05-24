@@ -1,0 +1,49 @@
+#pass-strength-result{
+  font-weight:bold;
+}
+#pass-strength-result ul{
+  font-weight: normal;
+  text-align: left;
+  list-style: disc outside;
+  font-size: smaller;
+  padding-right: 5px;
+  padding-left: 21px;
+  margin-top: 0;
+}
+#pass-strength-result code {
+  font-size: smaller;
+  font-style: italic;
+}
+#pass-strength-result.bad,
+#pass-strength-result.good,
+#pass-strength-result.strong,
+#pass-strength-result.short {
+  background-color: #fff !important;
+  border-color: #7e8993 !important;
+  padding: 0;
+}
+#pass-strength-result .hint-msg {
+  text-align: left;
+  padding-left: 20px;
+  font-size: smaller !important;
+}
+li.policy-pass {
+  color: #21760c;
+}
+li.policy-fail {
+  color: #f00;
+}
+.policy-strength-string {
+  display: block;
+  padding: 5px;
+}
+.short .policy-strength-string,
+.bad .policy-strength-string {
+  background-color: #fbc5a9;
+  border-bottom: 1px solid #f78b53;
+}
+.good .policy-strength-string,
+.strong .policy-strength-string {
+  background-color: #c1e1b9;
+  border-bottom: 1px solid #83c373;
+}

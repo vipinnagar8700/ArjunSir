@@ -1,0 +1,61 @@
+<?php
+/**
+ * Template used to create the overlay displayed above the Template editor on the Content Template edit page.
+ *
+ * @since 3.2.1
+ */
+?>
+
+<div id="anchor-usage-section" class="toolset-user-editors-backend js-toolset-user-editors-backend">
+	<?php
+	if ( count( $context['frontend-templates'] ) === 1 ) {
+		$template = array_pop( $context['frontend-templates'] );
+	?>
+		<p>
+			<?php
+			echo sprintf(
+			__( 'This Content Template is used in %1$s, and its template is designed with %2$s.', 'wpv-views' ),
+			'<strong>' . $template['form-option-label'] . '</strong>',
+				'<strong>' . esc_html( $context['editor-name'] ) . '<strong>'
+			);
+			?>
+		</p>
+	<?php
+	} else {
+	?>
+		<p>
+			<?php
+			/* translators: Informative text about the editor used to create the Content Template */
+			echo sprintf(
+					esc_html( __( 'This template is designed with %1$s.', 'wpv-views' ) ),
+					'<strong>' . esc_html( $context['editor-name'] ) . '<strong>'
+			);
+			?>
+		</p>
+	<?php
+	}
+	?>
+	<p>
+		<a href="<?php esc_attr_e( $context['editor-url'] ); ?>" class="button button-primary button-large">
+			<?php
+			esc_html_e(
+					sprintf(
+							/* translators: Text for the button that redirects users to Content Template editing using the editor of choice. */
+							__( 'Edit with %1$s', 'wpv-views' ),
+							$context['editor-name']
+					)
+			); ?>
+		</a>
+	</p>
+	<p>
+		<?php
+		echo sprintf(
+		/* translators: Text for the link that reverts the editing of a Content Template back to the Toolset Views native editor. */
+			esc_html__( '%1$sStop using %2$s for this template%3$s', 'wpv-views' ),
+			'<a href="' . esc_url( $context['admin-url'] ) . '&ct_editor_choice=basic">',
+			esc_html( $context['editor-name'] ),
+			'</a>'
+		)
+		?>
+	</p>
+</div>

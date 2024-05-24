@@ -1,0 +1,440 @@
+{#
+
+	The Wizard screen helps the user to create a new relationship following several steps.
+
+	@since m2m
+#}
+
+{% import "@toolset/forms.twig" as forms %}
+
+{# Next button #}
+{% macro nextButton(screen) %}
+	<button type="button" data-bind="click: goNextWizardStep, enable: isNextButtonEnabled({{ screen }})" class="button-wizard button button-primary-toolset button-wizard-next">{{ __( 'Continue', 'wpcf' ) }} <i class="fa fa-chevron-right"></i></button>
+{% endmacro %}
+
+
+{# Previous button #}
+{% macro prevButton() %}
+	<button type="button" data-bind="click: goPrevWizardStep" class="button-wizard button button-secondary button-wizard-prev"><i class="fa fa-chevron-left"></i> {{ __( 'Back', 'wpcf' ) }}</button>
+{% endmacro %}
+
+{% import _self as navigation %}
+
+
+<div id="types-wizard-relationship-wrap">
+	<ol class="types-wizard-steps">
+		<li data-content="types-wizard-step-1" data-bind="css: {active: isRelationshipTypeStepActive, current: isRelationshipTypeStepCurrent}">{{ __( 'Relationship type', 'wpcf' ) }}</li>
+		<li data-content="types-wizard-step-2" data-bind="css: {active: isPostTypesStepActive, current: isPostTypesStepCurrent}">{{ __( 'Post types', 'wpcf' ) }}</li>
+		<li data-content="types-wizard-step-3" data-bind="css: {active: isCustomLimitsStepActive, current: isCustomLimitsStepCurrent, disabled: isCustomLimitsStepDisabled()}">{{ __( 'Custom limits', 'wpcf' ) }}</li>
+		<li data-content="types-wizard-step-4" data-bind="css: {active: isRelationshipFieldsStepActive, current: isRelationshipFieldsStepCurrent, disabled: isRelationshipFieldsStepDisabled}">{{ __( 'Relationship fields', 'wpcf' ) }}</li>
+		<li data-content="types-wizard-step-5" data-bind="css: {active: isNamesStepActive, current: isNamesStepCurrent}">{{ __( 'Names', 'wpcf' ) }}</li>
+		<li data-content="types-wizard-step-6" data-bind="css: {active: isSummaryStepActive, current: isSummaryStepCurrent}">{{ __( 'Summary', 'wpcf' ) }}</li>
+	</ol>
+</div>
+
+<form action="" id="types-wizard-form">
+	{#
+
+	 Relationship type step
+
+	#}
+	<div id="types-wizard-step-1" class="wizard-content" data-bind="css: {active: isRelationshipTypeStepActive, current: isRelationshipTypeStepCurrent}">
+		<h2 class="types-wizard-header">{{ __( 'Select Relationship Type', 'wpcf' ) }}</h2>
+		<div class="toolset-help toolset-help-sm">
+			<div class="toolset-help-content">
+				<p>{{ strings.misc.helpTexts.chooseHowToConnectPosts | raw }}</p>
+			</div>
+			<div class="toolset-help-sidebar"></div>
+		</div>
+		<ul class="wizard-post-types">
+			<li>
+				<input type="radio" autocomplete="off" id="relationship-type-one-to-one" name="relationship_type" value="one-to-one" data-bind="checked: relationshipType" />
+				<label for="relationship-type-one-to-one">
+					<h3>{{ __( 'One-to-one', 'wpcf' ) }}</h3>
+					<h4>{{ __( 'Example', 'wpcf' ) }}</h4>
+					<div class="wizard-relationship-type wizard-relationship-type-one-to-one">
+						<span>{{ __( 'Car', 'wpcf' ) }}</span>
+						<span>{{ __( 'License Plate', 'wpcf' ) }}</span>
+				</div>
+				</label>
+			</li>
+			<li>
+				<input type="radio" autocomplete="off" id="relationship-type-one-to-many" name="relationship_type" value="one-to-many" data-bind="checked: relationshipType" />
+				<label for="relationship-type-one-to-many">
+					<h3>{{ __( 'One-to-many', 'wpcf' ) }}</h3>
+					<h4>{{ __( 'Example', 'wpcf' ) }}</h4>
+					<div class="wizard-relationship-type wizard-relationship-type-one-to-many">
+						<span>{{ __( 'Country', 'wpcf' ) }}</span>
+						<span>{{ __( 'Cities', 'wpcf' ) }}</span>
+				</div>
+				</label>
+			</li>
+			<li>
+				<input type="radio" autocomplete="off" id="relationship-type-many-to-many" name="relationship_type" value="many-to-many" data-bind="checked: relationshipType" />
+				<label for="relationship-type-many-to-many">
+					<h3>{{ __( 'Many-to-many', 'wpcf' ) }}</h3>
+					<h4>{{ __( 'Example', 'wpcf' ) }}</h4>
+					<div class="wizard-relationship-type wizard-relationship-type-many-to-many">
+						<span>{{ __( 'Lecture', 'wpcf' ) }}</span>
+						<span>{{ __( 'Student', 'wpcf' ) }}</span>
+				</div>
+				</label>
+			</li>
+		</ul>
+		{{ navigation.nextButton(1) }}
+	</div>
+
+
+
+
+	{#
+
+	 Post Types step
+
+	#}
+	<div id="types-wizard-step-2" class="wizard-content" data-bind="css: {active: isPostTypesStepActive, current: isPostTypesStepCurrent}">
+		<h2 class="types-wizard-header">{{ __( 'Select Post Types for Relationship', 'wpcf' ) }}</h2>
+		<div class="toolset-help toolset-help-sm">
+			<div class="toolset-help-content">
+				<p>{{ strings.misc.helpTexts.whichPostTypes | raw }}</p>
+				{#
+				<p data-bind="visible: ( relationshipType() != 'one-to-many' )">{{ __( 'Since you\'ve chosen an one-to-one or many-to-many relationship, you can select the same post type on both sides.', 'wpcf' ) }}</p>
+				#}
+			</div>
+			<div class="toolset-help-sidebar"></div>
+		</div>
+		<div data-bind="attr: {class: getSelectedRelationship().className}">
+			{# Get WPML url to translation settings #}
+			{% set url_translation_links = apply_filters( 'wpml_get_post_translation_settings_link', '' ) %}
+
+			{% if url_translation_links != '' %}
+                {# WPML url is available - setup open <a> tag and close tag #}
+                {% set a_open_translation_settings = sprintf( '<a href="%s">', url_translation_links ) %}
+                {% set a_close_translation_settings = '</a>' %}
+			{% else %}
+				{# No url available = no link #}
+                {% set a_open_translation_settings = '' %}
+                {% set a_close_translation_settings = '' %}
+			{% endif %}
+
+			{# strings #}
+			{% set string_self_join_title = __( 'Self-join relationship', 'wpcf' ) %}
+			{% set string_self_join_dialog = __( 'Connecting posts of the same type is not supported yet.', 'wpcf' ) %}
+			{% set string_post_type_locked_title = __( 'Translatable Post Type', 'wpcf' ) %}
+			{% set string_post_type_locked_dialog = sprintf( __( 'This post type uses the <b>Translatable - only show translated items</b> WPML translation mode. In order to use it in a relationship, %sswitch to%s <b>Translatable - use translation if available or fallback to default language</b> mode.', 'wpcf' ), a_open_translation_settings, a_close_translation_settings ) %}
+
+			<div class="wizard-column">
+				<h3 class="types-wizard-subheader">{{ __( 'First Post Type', 'wpcf' ) }}</h3>
+				<ul data-bind="foreach: postTypes">
+					<li>
+						<input type="radio" data-bind="attr: {value: slug, id: 'parent_'+slug}, checked: $parent.setParentPostType, enable: ($parent.isParentPostTypeEnabled(slug) && can_be_used_in_relationship.success)" name="parent_post_type" />
+					<label data-bind="text: plural, attr: {for: 'parent_'+slug}"></label>
+						<span data-bind="visible: ! $parent.isParentPostTypeEnabled(slug)"><i class="fa fa-question-circle icon-question-sign js-show-tooltip" data-header="{{ string_self_join_title }}" data-content='{{ string_self_join_dialog }}' data-bind="click: $parent.showPointer($element)"></i></span>
+						<span data-bind="visible: ! can_be_used_in_relationship.success">
+							<i class="fa fa-question-circle icon-question-sign js-show-tooltip" data-bind="attr: {'data-content': can_be_used_in_relationship.message, 'data-header': can_be_used_in_relationship.title}, click: $parent.showPointer($element)"></i>
+						</span>
+					</li>
+				</ul>
+			</div>
+			<div class="wizard-column">
+				<h3 class="types-wizard-subheader">{{ __( 'Second Post Type', 'wpcf' ) }}</h3>
+				<ul data-bind="foreach: postTypes">
+					<li>
+						<input type="radio" data-bind="attr: {value: slug, id: 'child_'+slug}, checked: $parent.setChildPostType, enable: ($parent.isChildPostTypeEnabled(slug) && can_be_used_in_relationship.success)" name="child_post_type" />
+					<label data-bind="text: plural, attr: {for: 'child_'+slug}"></label>
+						<span data-bind="visible: ! $parent.isChildPostTypeEnabled(slug)"><i class="fa fa-question-circle icon-question-sign js-show-tooltip" data-header="{{ string_self_join_title }}" data-content='{{ string_self_join_dialog }}' data-bind="click: $parent.showPointer($element)"></i></span>
+						<span data-bind="visible: ! can_be_used_in_relationship.success"><i class="fa fa-question-circle icon-question-sign js-show-tooltip" data-bind="attr: {'data-content': can_be_used_in_relationship.message, 'data-header': can_be_used_in_relationship.title}, click: $parent.showPointer($element)"></i></span>
+					</li>
+				</ul>
+			</div>
+		</div>
+		{{ navigation.prevButton() }}
+		{{ navigation.nextButton(2) }}
+	</div>
+
+
+
+
+	{#
+
+	 Custom Limits step
+
+	 #}
+	<div id="types-wizard-step-3" class="wizard-content" data-bind="css: {active: isCustomLimitsStepActive, current: isCustomLimitsStepCurrent, disabled: isCustomLimitsStepDisabled()}">
+		<h2 class="types-wizard-header">{{ __( 'Set custom limits', 'wpcf' ) }}</h2>
+		<div class="toolset-help toolset-help-sm">
+			<div class="toolset-help-content">
+				<p>{{ strings.misc.helpTexts.limitTheNumberOfPosts | raw }}</p>
+			</div>
+			<div class="toolset-help-sidebar"></div>
+		</div>
+		<div class="wizard-container">
+			<div class="wizard-column">
+				<h3 class="types-wizard-subheader" data-bind="text: getSelectedParentPostType().singular"> </h3>
+			</div>
+			<div class="wizard-column">
+				<h3 class="types-wizard-subheader" data-bind="text: getSelectedChildPostType().singular"> </h3>
+			</div>
+		</div>
+		<div data-bind="attr: {class: getSelectedRelationship().className}">
+			<div class="wizard-column">
+				<div class="wizard-limits" data-bind="visible: isWizardLimitVisible">
+					<p class="wizard-info" data-bind="text: getLimitsExplanationText('parent')"></p>
+					<p>{{ __( 'Limit:', 'wpcf' ) }} <input id="types-wizard-parent-limit" name="parent_limit" data-bind="event: { change: function() {onLimitChange($element);} }"/></p>
+					<div class="wizard-limit-slider" data-related="types-wizard-parent-limit"></div>
+
+				</div>
+			</div>
+			<div class="wizard-column">
+				<div class="wizard-limits">
+					<p class="wizard-info" data-bind="text: getLimitsExplanationText('child')"></p>
+					<p>{{ __( 'Limit:', 'wpcf' ) }} <input id="types-wizard-child-limit" name="child_limit" data-bind="event: { change: function() {onLimitChange($element);} }"/></p>
+					<div class="wizard-limit-slider" data-related="types-wizard-child-limit"></div>
+				</div>
+			</div>
+		</div>
+		{{ navigation.prevButton() }}
+		{{ navigation.nextButton(3) }}
+	</div>
+
+
+
+	{#
+
+	 Relationship fields step
+
+	#}
+	<div id="types-wizard-step-4" class="wizard-content" data-bind="css: {active: isRelationshipFieldsStepActive, current: isRelationshipFieldsStepCurrent, disabled: isRelationshipFieldsStepDisabled}">
+		<h2 class="types-wizard-header">{{ __( 'Relationship fields', 'wpcf' ) }}</h2>
+		<div class="toolset-help toolset-help-sm">
+			<div class="toolset-help-content">
+				<p>{{ strings.misc.helpTexts.addFields | raw }}</p>
+			</div>
+			<div class="toolset-help-sidebar"></div>
+		</div>
+		<h3 class="types-wizard-subheader">{{ __( 'You can add extra fields for this relationship:', 'wpcf' ) }}</h3>
+		<div id="poststuff">
+			{# structure necessary for legacy js #}
+			<div>
+				<div class="js-wpcf-fields wpcf-fields meta-box-sortables ui-sortable hide" data-bind="typesFieldsSortable: true">
+					<button type="button" id="types-wizard-add-field2" name="fields-button-add" class="js-wpcf-fields-add-new-last wpcf-fields-add-new wpcf-fields-btn js-wpcf-fields-add-new wpcf-form-button form-button button" data-wpcf-dialog-title="{{ __('Add New Field', 'wpcf') }}" data-wpcf-id="0" data-wpcf-message-loading="{{ __('Please Wait, Loading…', 'wpcf') }}" data-wpcf-nonce="{{ strings.misc.wizardFieldsNonce }}" data-wpcf-type="wpcf-fields" data-wpcf-page="wpcf-edit">
+						<span class="dashicons dashicons-plus"></span> {{ __('Add New Field', 'wpcf') }}
+					</button>
+				</div>
+			</div>
+		</div>
+		{{ navigation.prevButton() }}
+		{{ navigation.nextButton(4) }}
+	</div>
+
+
+
+	{#
+
+	 Names step
+
+	#}
+	<div id="types-wizard-step-5" class="wizard-content" data-bind="css: {active: isNamesStepActive, current: isNamesStepCurrent}">
+		<h2 class="types-wizard-header">{{ __( 'Names', 'wpcf' ) }}</h2>
+		<div class="toolset-help toolset-help-sm">
+			<div class="toolset-help-content">
+				<p>{{ strings.misc.helpTexts.relationshipNames | raw }}</p>
+			</div>
+			<div class="toolset-help-sidebar"></div>
+		</div>
+		<div class="wizard-container clearfix">
+			<div class="wizard-form-field">
+				<label for="types-wizard-name-plural">{{ __( 'Relationship name plural', 'wpcf' ) }}</label>
+				<input name="name_plural" id="types-wizard-name-plural" type="text" data-bind="textInput: relationshipNamePlural"/>
+			</div>
+			<div class="wizard-form-field">
+				<label for="types-wizard-name-singular">{{ __( 'Relationship name singular', 'wpcf' ) }}</label>
+				<input name="name_singular" id="types-wizard-name-singular" type="text" data-bind="textInput: relationshipNameSingular"/>
+			</div>
+			<div class="wizard-form-field">
+				<div id="slug_message" data-bind="visible: thereIsSlugConflict" class="notice notice-warning">
+					<p><span data-bind="html: slugConflictMessage"></span></p>
+				</div>
+				<label for="types-wizard-name-slug">{{ __( 'Slug', 'wpcf' ) }}</label>
+				<input name="name_slug" id="types-wizard-name-slug" type="text" data-bind="value: relationshipNameSlug"/>
+				<input type="hidden" name="types_check_slug_conflicts_nonce" value="{{ strings.misc.slugConflictNonce }}" />
+			</div>
+			<div data-bind="visible: isIntermediarySectionVisible">
+				<div class="wizard-form-field wizard-form-checkbox">
+					<label for="types-wizard-create-intermediary">
+						<input id="types-wizard-create-intermediary" name="intermediary" type="checkbox" data-bind="checked: createIntermediaryPostType, disable: isCreateIntermediaryPostDisabled"/>
+	                    {{ __( 'Create an intermediary post type', 'wpcf' ) }}
+					</label>
+
+						<i class="fa fa-question-circle icon-question-sign js-show-tooltip"
+						   data-header="{{ __( 'Intermediary post type', 'wpcf' ) }}"
+						   data-content="{{ __( 'Intermediary post type is mandatory when custom fields are added', 'wpcf' ) }}"
+						   data-bind="click: showPointer($element), visible: isCreateIntermediaryPostDisabled"></i>
+
+				</div>
+				<div class="wizard-form-field wizard-form-checkbox" data-bind="visible: createIntermediaryPostType">
+					<label for="types-wizard-create-visible">
+						<input id="types-wizard-create-visible" name="visible" type="checkbox" data-bind="disable: ! isIntermediarySectionVisible" />
+						{{ __( 'Intermediary Post Type visible in WordPress admin menu', 'wpcf' ) }}
+					</label>
+				</div>
+                <div class="wizard-form-field wizard-form-checkbox" data-bind="visible: createIntermediaryPostType">
+                    <label>
+                        <input type="checkbox"
+                               data-bind="checked: isAutodeletingIntermediaryPosts"
+                        />
+                        {# translators: Setting of a Toolset relationship. Label of a checkbox. #}
+                        {{ __( 'Automatically delete intermediary posts together with connections they belong to', 'wpcf' ) }}
+                    </label>
+                    <i class="fa fa-question-circle icon-question-sign js-show-tooltip names-checks"
+                       {# translators: Header of a tooltip about a setting of a Toolset relationship. #}
+                       data-header="{{ __( 'Automatic intermediary post cleanup', 'wpcf' ) }}"
+                       {# translators: Body of a tooltip about a setting of a Toolset relationship. #}
+                       data-content='{{ __( 'By default, an intermediary post is deleted together with the connection between parent and child posts. If you, for any reason, don\'t desire this behavior, you can disable it here. However, we don\'t recommend disabling it unless there is a very good reason. Especially not if your intermediary post type is not publicly visible.', 'wpcf' ) }}'
+                       data-bind="click: showPointer($element)">
+                    </i>
+                </div>
+            </div>
+			{# Role aliases #}
+			<a href="#" class="types-wizard-roles-opener closed">{{ __( 'Change role aliases', 'wpcf' ) }} <i class="fas fa-caret-right"></i></a>
+			<div class="types-wizard-roles">
+				{% for side in [
+					{
+						'role': 'parent',
+						'labels': [
+							{
+								'type': 'slug',
+								'title': __( 'Slug', 'wpcf'),
+								'default': __( 'parent', 'wpcf'),
+								'blockBound': '',
+								'inputBound': 'enable: isEnabledAliases, formatSlug: [wpcf_slugize, \'parent\'], ',
+								'name': 'roleNames[parent]',
+								'id': 'labels-parent-slug',
+								'notice': __( 'Invalid slug', 'wpcf' )
+							},
+							{
+								'type': 'plural',
+								'title': __( 'Plural name', 'wpcf'),
+								'default': __( 'Parents', 'wpcf'),
+								'blockBound': '',
+								'inputBound': 'enable: isEnabledAliases, ',
+								'name': 'roleLabelsPlural[parent]',
+								'id': 'labels-parent-plural',
+								'notice': ''
+							},
+							{
+								'type': 'singular',
+								'title': __( 'Singular name', 'wpcf'),
+								'default': __( 'Parent', 'wpcf'),
+								'blockBound': '',
+								'inputBound': 'enable: isEnabledAliases, ',
+								'name': 'roleLabelsSingular[parent]',
+								'id': 'labels-parent-singular',
+								'notice': ''
+							}
+						]
+					},
+					{
+						'role': 'child',
+						'labels': [
+							{
+								'type': 'slug',
+								'title': __( 'Slug', 'wpcf'),
+								'default': __( 'child', 'wpcf'),
+								'blockBound': '',
+								'inputBound': 'enable: isEnabledAliases, formatSlug: [wpcf_slugize, \'child\'], ',
+								'name': 'roleNames[child]',
+								'id': 'labels-child-slug',
+								'notice': __( 'Invalid slug', 'wpcf' )
+							},
+							{
+								'type': 'plural',
+								'title': __( 'Plural name', 'wpcf'),
+								'default': __( 'Children', 'wpcf'),
+								'blockBound': '',
+								'inputBound': 'enable: isEnabledAliases, ',
+								'name': 'roleLabelsPlural[child]',
+								'id': 'labels-child-plural',
+								'notice': ''
+							},
+							{
+								'type': 'singular',
+								'title': __( 'Singular name', 'wpcf'),
+								'default': __( 'Child', 'wpcf'),
+								'blockBound': '',
+								'inputBound': 'enable: isEnabledAliases, ',
+								'name': 'roleLabelsSingular[child]',
+								'id': 'labels-child-singular',
+								'notice': ''
+							}
+						]
+					},
+				] %}
+					<div class="types-wizard-roles-container">
+						<h3 data-bind="text: roleLabelTitle( '{{ __( 'Role alias for %s', 'wpcf' ) }}', '{{ side.role }}' )"></h3>
+
+						{% for label in side.labels %}
+							{% if label.notice != '' %}
+									<div class="hidden" data-slug="{{ side.role }}">
+											<p class="notice notice-error inline types-warning">{{ label.notice }}</p>
+									</div>
+							{% endif %}
+							<div data-bind="{{ label.blockBound }}">
+								<label for="{{ label.id }}">{{ label.title }}</label>
+								{{ forms.textInput(
+								label.inputBound ~ 'valueUpdate: \'keyup\' ', '', label.default, '', false, label.name, label.id, ''
+								) }}
+							</div>
+						{% endfor %}
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+		{{ navigation.prevButton() }}
+		{{ navigation.nextButton(5) }}
+	</div>
+
+
+
+	{#
+
+	 Summary step
+
+	#}
+	<div id="types-wizard-step-6" class="wizard-content" data-bind="css: {active: isSummaryStepActive, current: isSummaryStepCurrent}">
+		<h2 class="types-wizard-header">{{ __( 'Summary', 'wpcf' ) }}</h2>
+		<h3 class="types-wizard-summary-header">{{ __( 'Relationship:', 'wpcf' ) }} <span data-bind="text: relationshipNamePlural"></span></h3>
+		<div class="wizard-container">
+			<div class="wizard-column">
+				<h3 class="types-wizard-subheader" data-bind="text: getSelectedParentPostType().plural"> </h3>
+			</div>
+			<div class="wizard-column">
+				<h3 class="types-wizard-subheader" data-bind="text: getSelectedChildPostType().plural"> </h3>
+			</div>
+		</div>
+		<div data-bind="attr: {class: getSelectedRelationship().className}">
+			<div class="wizard-column">
+				<p data-bind="html: summaryRelationshipDescription('parent'), visible: isWizardRelationshipSummaryVisible"></p>
+			</div>
+			<div class="wizard-column">
+				<p data-bind="html: summaryRelationshipDescription('child')"></p>
+			</div>
+			<div data-bind="visible: thereAreFields() && relationshipSupportsFields()">
+				<p>{{ __( 'Additional custom fields:', 'wpcf' ) }}</p>
+				<ul data-bind="foreach: selectedFields">
+					<li data-bind="html: text"></li>
+				</ul>
+			</div>
+		</div>
+		<div class="wizard-container">
+			<div id="slug_message" data-bind="visible: hasTranslatablePostType()" class="notice notice-warning">
+				<p><span data-bind="html: translatableWarningText"></span></p>
+			</div>
+		</div>
+		{{ navigation.prevButton() }}
+		<button type="button" data-bind="click: onCreate" class="button-wizard button button-primary-toolset button-wizard-finish">
+			{{ __( 'Finish', 'wpcf' ) }}
+		</button>
+		{{ forms.spinner('isSaving()') }}
+	</div>
+</form>

@@ -1,0 +1,29 @@
+<?php
+/**
+ * Template for user editors action button on the inline editor.
+ *
+ * @since 3.2.1
+ */
+
+$button_classes = array(
+	'button',
+	'button-secondary',
+	'js-wpv-ct-apply-user-editor',
+	'js-wpv-ct-apply-user-editor-' . esc_attr( $context['editor-id'] ),
+);
+?>
+
+<a
+	class="<?php echo esc_attr( implode( ' ', $button_classes ) ); ?>"
+	data-editor="<?php echo esc_attr( $context['editor-id'] ); ?>"
+	title="
+	<?php
+	/* translators: Text for the button that redirects users to Content Template editing using the editor of choice. */
+	echo esc_attr( __( 'Edit with', 'wpv-views' ) . ' ' . $context['editor-name'] );
+	?>
+			"
+	<?php esc_attr( disabled( $context['content-template-has-layouts'] ) );?>
+>
+	<i class="<?php echo esc_attr( $context['editor-logo-class'] ); ?> ont-icon-18"></i>
+	<span class="button-label"><?php echo esc_html( $context['editor-name'] ); ?></span>
+</a>

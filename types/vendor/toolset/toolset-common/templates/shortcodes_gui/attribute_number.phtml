@@ -1,0 +1,12 @@
+<?php
+/**
+ * underscore.js template for the shared shortcodes GUI.
+ *
+ * Component: number attributes
+ *
+ * @since 3.2.2
+ */
+?>
+<script type="text/html" id="tmpl-toolset-shortcode-attribute-number">
+    <input id="{{{data.shortcode}}}-{{{data.attribute}}}" data-type="number" class="js-shortcode-gui-field large-text<# if ( data.required ) { #> js-toolset-shortcode-gui-required<# } #>" value="{{{data.defaultForceValue}}}" placeholder="{{{data.placeholder}}}" type="number" max="{{{data.max}}}" min="{{{data.min}}}">
+</script>

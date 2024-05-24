@@ -1,0 +1,30 @@
+{#
+	Disconnect a related content from the current post removing the association.
+
+	@since m2m
+#}
+<div class="toolset-confirmation-dialog">
+	<div class="toolset-confirmation-dialog-icon">
+		<i class="fa fa-5x fa-exclamation-triangle"></i>
+	</div>
+	<div class="toolset-confirmation-dialog-content">
+
+		<p>{{ '{{{' }} message }}}</p>
+
+		<div class="toolset-translatable-posts-wrapper">
+			<# _.each(translatablePosts, function(posts, postType) { #>
+				<div class="toolset-translatable-posts">
+					<h4>{{ '{{' }} postType }}</h4>
+					<ul class="toolset-translatable-posts">
+						<# _.each(posts, function(post) { #>
+							<li>
+									{{ '{{{' }} post.flag }}} {{ '{{' }} post.title }}
+							</li>
+							<# }) #>
+					</ul>
+				</div>
+
+			<# }) #>
+		</div>
+	</div>
+</div>

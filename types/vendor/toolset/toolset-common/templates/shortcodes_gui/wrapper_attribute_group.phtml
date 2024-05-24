@@ -1,0 +1,36 @@
+<?php
+/**
+ * underscore.js template for the shared shortcodes GUI.
+ *
+ * Component: wrapper for groups of attributes
+ *
+ * @since 3.1
+ */
+?>
+<script type="text/html" id="tmpl-toolset-shortcode-attribute-group-wrapper">
+    <div class="toolset-shortcode-gui-attribute-group js-toolset-shortcode-gui-attribute-group js-toolset-shortcode-gui-attribute-group-for-{{{data.attribute}}}" data-type="group" data-group="{{{data.attribute}}}"<# if ( data.hidden ) { #> style="display:none"<# } #>>
+        <# if ( _.has( data, 'label' ) ) { #>
+            <h3>{{{data.label}}}</h3>
+        <# } #>
+        <#
+        var columns = _.size( data.fields ),
+            columnsWidth = parseInt( 100 / columns );
+        #>
+        <ul class="toolset-shortcode-gui-dialog-item-group js-toolset-shortcode-gui-dialog-item-group">
+            <# _.each( data.fields, function( fieldData, fieldAttribute ) { #>
+                <li>
+                    <#
+                    fieldData = _.defaults( fieldData, { shortcode: data.shortcode, templates: data.templates } );
+                    fieldData = _.defaults( fieldData, { defaultValue: '', required: false, hidden: false, placeholder: '' } );
+                    fieldData = _.defaults( fieldData, { defaultForceValue: fieldData.defaultValue } );
+                    fieldData.attribute = fieldAttribute;
+                    print( data.templates.attributeWrapper( fieldData ) );
+                    #>
+                </li>
+            <# }); #>
+        </ul>
+        <# if ( _.has( data, 'description' ) ) { #>
+            <p class="description">{{{data.description}}}</p>
+        <# } #>
+    </div>
+</script>

@@ -1,0 +1,9 @@
+.ppcp-button-googlepay {
+	min-height: 40px;
+}
+
+.wp-block-woocommerce-checkout, .wp-block-woocommerce-cart {
+	.gpay-button {
+		min-width: 0 !important;
+	}
+}

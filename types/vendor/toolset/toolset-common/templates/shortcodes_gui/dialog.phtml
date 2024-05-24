@@ -1,0 +1,58 @@
+<?php
+/**
+ * underscore.js template for the shared shortcodes GUI.
+ * 
+ * Component: dialog
+ *
+ * @since 3.1
+ */
+?>
+<script type="text/html" id="tmpl-toolset-shortcode-gui">
+    <input value="{{{data.shortcode}}}" class="toolset-shortcode-gui-shortcode-handle js-toolset-shortcode-gui-shortcode-handle" type="hidden" />
+    <# if ( _.has( data, 'parameters' ) ) {
+        _.each( data.parameters, function( parameterValue, parameterKey ) {
+            #>
+            <span class="toolset-shortcode-gui-attribute-wrapper js-toolset-shortcode-gui-attribute-wrapper js-toolset-shortcode-gui-attribute-wrapper-for-{{{parameterKey}}}" data-attribute="{{{parameterKey}}}" data-type="parameter">
+                <input type="hidden" name="{{{parameterKey}}}" value="{{{parameterValue}}}" disabled="disabled" />
+            </span>
+            <#
+        });
+    } #>
+    <div id="js-toolset-shortcode-gui-dialog-tabs" class="toolset-shortcodes__tabs js-toolset-shortcode-gui-tabs">
+    <# if ( _.size( data.attributes ) > 1 ) { #>
+        <ul class="js-toolset-shortcode-gui-tabs-list">
+            <# _.each( data.attributes, function( attributesGroup, groupKey ) { #>
+                <# if (
+                    _.has( attributesGroup, 'fields' )
+                    && _.size( attributesGroup.fields ) > 0
+                ) { #>
+                <li>
+                    <a href="#{{{data.shortcode}}}-{{{groupKey}}}">{{{attributesGroup.header}}}</a>
+                </li>
+                <# } #>
+            <# }); #>
+        </ul>
+    <# } #>
+        <# _.each( data.attributes, function( attributesGroup, groupKey ) { #>
+            <# if (
+                _.has( attributesGroup, 'fields' )
+                && _.size( attributesGroup.fields ) > 0
+            ) { #>
+            <div id="{{{data.shortcode}}}-{{{groupKey}}}">
+                <h2>{{{attributesGroup.header}}}</h2>
+                <# _.each( attributesGroup.fields, function( attributeData, attributeKey ) {
+                    if ( _.has( data.templates, 'attributeWrapper' ) ) {
+                        attributeData = _.extend( { shortcode: data.shortcode, attribute: attributeKey, templates: data.templates }, attributeData );
+                        if ( 'group' == attributeData.type ) {
+                            print( data.templates.attributeGroupWrapper( attributeData ) );
+                        } else {
+                            print( data.templates.attributeWrapper( attributeData ) );
+                        }
+                    }
+                }); #>
+            </div>
+            <# } #>
+        <# }); #>
+    </div>
+    <div class="toolset-shortcode-gui-messages js-toolset-shortcode-gui-messages"></div>
+</script>

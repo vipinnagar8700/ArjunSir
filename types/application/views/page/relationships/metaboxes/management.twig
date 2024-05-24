@@ -1,0 +1,57 @@
+{#
+    Metabox on the Edit Relationship screen that is responsible for saving, deleting
+    and deactivating of the relationship definition.
+
+    Copies the styling of a similar metabox on the Edit Post page, reusing all those WordPress core styling.
+
+    @since m2m
+#}
+
+{% import "@toolset/forms.twig" as forms %}
+
+<div class="submitbox" id="submitpost">
+
+    <div id="misc-publishing-actions">
+        <div class="misc-pub-section misc-pub-post-status">
+            {{ __( 'Status', 'wpcf' ) }}:
+            <span id="post-status-display" class="relationship-status" data-bind="text: isActive() ? '{{ __( 'Published', 'wpcf' ) }}' : '{{ __( 'Draft', 'wpcf' ) }}'"></span>
+            <a data-bind="click: function() { display.isActive.isStatusMenuExpanded(true) }, visible: ! display.isActive.isStatusMenuExpanded()"
+               class="edit-post-status"
+            >
+                {{ __( 'Edit', 'wpcf' ) }}
+            </a>
+            <div id="post-status-select" data-bind="visible: display.isActive.isStatusMenuExpanded">
+                <select data-bind="options: [
+                        { label: '{{ __( 'Published', 'wpcf' ) }}', value: true },
+                        { label: '{{ __( 'Draft', 'wpcf' ) }}', value: false }
+                    ],
+                    optionsText: 'label',
+                    optionsValue: 'value',
+                    value: display.isActive.lastInput
+                ">
+                </select>
+                <a class="save-post-status button"
+                   data-bind="click: display.isActive.applyLastInput"
+                >
+                    {{ __( 'OK', 'wpcf' ) }}
+                </a>
+                <a class="cancel-post-status button-cancel"
+                   data-bind="click: display.isActive.cancelLastInput"
+                >
+                    {{ __( 'Cancel', 'wpcf' ) }}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="major-publishing-actions" class="clearfix">
+        <div id="delete-action">
+            <a class="submitdelete deletion" data-bind="click: onDelete">{{ __( 'Delete', 'wpcf' ) }}</a>
+        </div>
+        <div id="publishing-action">
+            {{ forms.spinner('display.isSaving()') }}
+            {{ forms.button('click: onSave, disablePrimary: ! hasChanged() || display.isSaving() || ! isValidToSave()', __( 'Save Relationship', 'wpcf' ), 'primary', true ) }}
+        </div>
+    </div>
+
+</div>

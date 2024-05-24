@@ -1,0 +1,36 @@
+{#
+	Fields container
+	Form for fields editing. It contains a list of fields to be rendered, the field has to have a rendered attribute with the HTML needed
+
+	@since m2m
+#}
+
+{# Form is needed for validation.js #}
+<div>
+	<form id="{{ id }}" class="types-new-relationship-form">
+		<div class="notice notice-warning inline types-warning" data-bind="visible: isMissingDefaultLanguage">
+			<p>{{ __( '<strong>WARNING</strong> New content will be created in default language, you can translate it afterwards.', 'wpcf' ) | raw }}</p>
+		</div>
+		{% for field in fields %}
+				<div class="types-new-relationship-block" rel="{{ field.type }}">
+					{% if field.title %}
+						<h3 class="types-new-relationship-header">{{ field.title }}</h3>
+					{% endif %}
+					{% if field.type == 'post' %}
+						<div class="js-wpt-field-item wpt-field">
+							<label class="wpt-form-label wpt-form-textfield-label" for="types-new-post-type-title">{{ __( 'Title', 'wpcf' ) }}</label>
+							<input class="wpt-form-textfield" id="types-new-post-type-title" name="wpcf[post][post-title]" value="" type="text" data-bind="value: newAssociationTitle, valueUpdate: 'keyup'">
+						</div>
+					{% endif %}
+					{{ field.rendered | raw }}
+				</div>
+
+		{% endfor %}
+
+		{# Both nonce and wpnonce are needed or I get an error #}
+		<input name="nonce" type="hidden" value="{{ nonce }}" />
+		<input name="wpnonce" type="hidden" value="{{ wpnonce }}" />
+		<input name="relationship_slug" type="hidden" data-bind="value: relationshipSlug()" />
+		<input name="post_id" type="hidden" value="{{ post_id }}" />
+	</form>
+</div>

@@ -1,0 +1,236 @@
+{#
+Main template for the Related Content metaboxes.
+
+@since m2m
+#}
+
+{% extends "@toolset/listing.twig" %}
+
+{# we need its macros #}
+{% import "@toolset/listing.twig" as listing %}
+
+
+{% import _self as related %}
+
+
+{% block columnHeaders %}
+	{{ listing.columnHeader( __( 'Title', 'wpcf' ), true, 'displayName', 'column-post-field column-title column-primary') }}
+	{% for column in columns.relatedPosts %}
+		{{ listing.columnHeader(column['displayName'], false, column['slug'], 'column-post-field toolset-field-' ~ column['fieldType'], column['fieldType'] == 'numeric' ? 'numeric' : 'alpha', "visible: isFieldVisible('relatedPosts', '" ~ column['slug'] ~ "')" ) }}
+	{% endfor %}
+	{% for column in columns.post %}
+		{{ listing.columnHeader(column['displayName'], true, column['slug'], 'column-post-field toolset-field-' ~ column['fieldType'], column['fieldType'] == 'numeric' ? 'numeric' : 'alpha', "visible: isFieldVisible('post', '" ~ column['slug'] ~ "')" ) }}
+	{% endfor %}
+	<!-- ko if: (itemCount() > 0 && hasLangInfo() && isIPTTranslatable()) -->
+	<th class="column-relationship-field"><i class="fa fa-question-circle icon-question-sign js-show-tooltip"
+				data-header="{{ __( 'Intermediary post', 'wpcf' ) }}"
+				data-content='{{ __( 'Intermediary post might be translated in a different language.', 'wpcf' ) }}'
+				data-bind="click: showPointer($element)"></i></th>
+	<!-- /ko -->
+	{% for column in columns.relationship %}
+		{{ listing.columnHeader(column['displayName'], true, column['slug'], ' toolset-field-' ~ column['fieldType'], column['fieldType'] == 'numeric' ? 'numeric' : 'alpha', "visible: isFieldVisible('relationship', '" ~ column['slug'] ~ "'), css: { 'column-relationship-field': isFieldVisible('relationship', '" ~ column['slug'] ~ "') }" ) }}
+	{% endfor %}
+{% endblock %}
+
+
+{% block content %}
+	{{ do_action( 'types_rendering_related_content_metabox' ) }}
+	{{ parent() }}
+{% endblock %}
+
+{% block actualContentWrapper %}
+	<div data-bind="afterBinding: content, template: {afterRender: wpcfVanillaFormValidation }"
+			class="types-related-content clearfix">
+		<div class="types-related-content-actions alignright">
+			<span class="spinner" data-bind="style: { visibility: (isMainSpinnerVisible() ? 'visible' : 'hidden') }"
+					style="visibility: hidden;"></span>
+			<!-- ko if: advancedUserCaps.publish -->
+			<input type="button" class="button" value="{{ strings.misc.addNew }}"
+					data-bind="click: onAddNewRelatedContent, enable: canConnectAnotherElement" />
+			<!-- /ko -->
+			<input type="button" class="button" value="{{ strings.misc.connectExisting }}"
+					data-bind="click: onConnectExistingRelatedContent, enable: canConnectAnotherElement" />
+			<button class="button" data-bind="click: onSelectFieldsDisplayed"><i class="fa fa-cog"></i></button>
+			<i class="fa fa-question-circle icon-question-sign js-show-tooltip"
+					data-header="{{ __( 'Related content', 'wpcf' ) }}"
+					data-content='{{ __( 'No more associations are allowed', 'wpcf' ) }}'
+					data-bind="click: function() {showPointer($element)}, visible: !canConnectAnotherElement() && !isOnlyOneRelatedConection()"></i>
+		</div>
+		<div data-bind="visible: isMainTableVisible, css: mainTableStyle()">
+			{{ parent() }}
+		</div>
+	</div>
+{% endblock %}
+
+
+{# Overwrites/Delete #}
+{% block tablenavTop %}
+<div class="types-related-content-table-wrapper">
+	{% endblock %}
+
+	{% block tablenavBottom %}
+</div>
+{{ parent() }}
+{% endblock %}
+
+{% block bottomPagination %}
+	{{ parent() }}
+	<span class="spinner" data-bind="style: { visibility: (isMainSpinnerVisible() ? 'visible' : 'hidden') }"
+			style="visibility: hidden;"></span>
+{% endblock %}
+
+{% block bulkActions %}
+{% endblock %}
+
+{% block searchBox %}
+{% endblock %}
+
+{% block checkboxColumnHeader %}
+{% endblock %}
+
+{% block checkboxCell %}
+{% endblock %}
+
+{% block tbodyNoItems %}
+	<tbody>
+	<tr>
+		<td colspan="100">{{ strings.misc.noItemsFound|e }}</td>
+	</tr>
+	</tbody>
+{% endblock %}
+
+{# Needs to be overriden because edit link must be able to open in another window #}
+{% block mainCell %}
+	<td class="column-post-field">
+		<span class="spinner" data-bind="style: { visibility: (isSpinnerVisible() ? 'visible' : 'hidden') }"></span>
+
+		<!-- ko ifnot: isPostTrashed -->
+		<a data-bind="html: flag() + displayName(), attr: {href: editPostLink()}"></a>
+		<!-- /ko -->
+		<!-- ko if: isPostTrashed -->
+		<strong data-bind="html: flag() + displayName()"></strong> &#8212; {{ __( 'In trash', 'wpcf' ) }}
+		<!-- /ko -->
+
+		{% block afterDisplayName %}{% endblock %}
+
+		<div class="row-actions">
+			<!-- ko if: canUserEditPost -->
+			<!-- ko ifnot: isPostTrashed -->
+			<span class="edit">
+					<a data-bind="attr: {href: editPostLink()}">{{ __( 'Edit', 'wpcf' ) }}</a> |
+				</span>
+			<span class="edit">
+					<a data-bind="click: showQuickEdit">{{ __( 'Quick Edit', 'wpcf' ) }}</a> |
+				</span>
+			<!-- /ko -->
+			<span class="edit">
+					<a data-bind="click: onDisconnectAction">{{ __( 'Disconnect', 'wpcf' ) }}</a> |
+				</span>
+			<!-- /ko -->
+			<!-- ko if: canUserDeletePost() -->
+			<!-- ko ifnot: isPostTrashed -->
+			<span class="delete">
+					<a data-bind="click: onDeleteAction">{{ __( 'Trash', 'wpcf' ) }}</a>
+				</span>
+			<!-- /ko -->
+			<!-- ko if: isPostTrashed -->
+			<span class="edit">
+					<a data-bind="click: onRestoreAction">{{ __( 'Restore', 'wpcf' ) }}</a>
+				</span>
+			<!-- /ko -->
+			<!-- /ko -->
+		</div>
+	</td>
+{% endblock %}
+
+{% block colgroup %}
+	<colgroup>
+		<col span="{{ columns.post|length }}"
+				class="types-column-split types-ipt-fields-{{ columns.relationship|length }}" />
+		<col span="{{ columns.relationship|length }}" />
+	</colgroup>
+{% endblock %}
+
+{# Other table cells besides the main one (with displayName and row actions) #}
+{% block tdCells %}
+	{% for column in columns.relatedPosts %}
+		<td class="column-related-post-field" data-colname="{{ column['displayName'] }}"
+				data-bind="html: displayFieldValue('relatedPosts', '{{ column['slug'] | raw }}'), visible: isFieldVisible('relatedPosts', '{{ column['slug'] | raw }}')"
+				class="types-relationship-type-post"></td>
+	{% endfor %}
+	{% for column in columns.post %}
+		<td class="column-post-field" data-colname="{{ column['displayName'] }}"
+				data-bind="html: displayFieldValue('post', '{{ column['slug'] | raw }}'), visible: isFieldVisible('post', '{{ column['slug'] | raw }}')"
+				class="types-relationship-type-post"></td>
+	{% endfor %}
+	<!-- ko if: ($parent.itemCount() > 0 && $parent.hasLangInfo() && $parent.isIPTTranslatable()) -->
+	<td class="column-relationship-field" data-bind="html: fieldsFlag"></td>
+	<!-- /ko -->
+	{% for column in columns.relationship %}
+		<td class="types-relationship-type-relationship" data-colname="{{ column['displayName'] }}"
+				data-bind="html: displayFieldValue('relationship', '{{ column['slug'] | raw }}'), visible: isFieldVisible('relationship', '{{ column['slug'] | raw }}'), css: {'column-relationship-field': isFieldVisible('relationship', '{{ column['slug'] | raw }}')}"></td>
+	{% endfor %}
+	<tr class="hidden">
+		<td colspan="{{ columns.post|length + columns.relatedPosts|length + columns.relationship|length + 2 }}">
+			<div id="message"
+					data-bind="threeModeVisibility: messageVisibilityMode, attr: { class: 'notice is-dismissible ' + messageNagClass() }">
+				<p data-bind="html: displayedMessage().text"></p>
+				<button class="notice-dismiss" data-bind="click: removeDisplayedMessage"></button>
+			</div>
+			<div data-bind="attr: {id: relatedContentFormID()}">
+				<div class="types-quick-edit-fields">
+					<input type="hidden" name="association_uid" data-bind="value: relatedContentAssociationUID()" />
+					<input type="hidden" name="post_id" data-bind="value: relatedContentPostId()" />
+					<input type="hidden" name="role" data-bind="value: relatedContentRole()" />
+					<div class="types-quick-edit-fields-block" rel="post">
+						<h3 class="types-quick-edit-header"
+								data-bind="text: postFieldsTitle(), visible: displayEditFields('relationship')"
+						></h3>
+						<div class="notice notice-warning inline types-warning">
+							<p>
+								{{ __( '<strong>Warning!</strong> These fields belong to the related post!', 'wpcf' ) | raw }}
+								<input type="button" class="button types-quick-edit-enable-editing-button" value="{{ __( 'Enable editing', 'wpcf' ) }}"
+										data-bind="click: enablePostFields">
+							</p>
+							<p>
+								<input type="checkbox" data-bind="attr: {id: warningLabelId() }" />
+								<label data-bind="attr: {for: warningLabelId() }">{{ __( 'Do not block these fields in the future', 'wpcf' ) }}</label>
+							</p>
+						</div>
+						<p data-bind="visible: isPostFieldEditingEnabled() && ! displayEditFields('relationship')">
+							<small class="howto">{{ __( 'These fields belong to the related post.', 'wpcf' ) }}</small>
+						</p>
+						{# Related post title #}
+						<div class="js-wpt-field-items" data-bind="disableInputs: isPostFieldEditingEnabled">
+							<div class="js-wpt-field-item wpt-field-item">
+								<div class="form-item form-item-textfield wpt-form-item wpt-form-item-textfield">
+									<label class="wpt-form-label wpt-form-textfield-label"
+											data-bind="attr: {for: postTitleId()}, text: postTitleLabel()"></label>
+									<input name="wpcf[post][post-title]" class="wpt-form-textfield" type="text"
+											data-bind="attr: {id: postTitleId(), value: postTitleValue()}">
+								</div>
+							</div>
+						</div>
+						<div class="types-quick-edit-fields-post"
+								data-bind="html: displayEditFields('post'), disableInputs: isPostFieldEditingEnabled, updateRadioNames: relatedContentAssociationUID()"
+								data-related="post"></div>
+					</div>
+					<div class="types-quick-edit-fields-block" data-bind="visible: hasRelationshipFields()"
+							rel="relationship">
+						<h3 class="types-quick-edit-header">{{ __( 'Relationship fields', 'wpcf' ) }}</h3>
+						<div class="types-quick-edit-fields-relationship"
+								data-bind="html: displayEditFields('relationship'), updateRadioNames: relatedContentAssociationUID()"
+								data-related="relatoinship"></div>
+					</div>
+					<footer class="types-quick-edit-fields-actions">
+						<input type="button" class="button" value="{{ __( 'Cancel', 'wpcf' ) }}"
+								data-bind="click: onCancelQuickEdit" />
+						<input type="button" class="button button-primary alignright"
+								value="{{ __( 'Update', 'wpcf' ) }}" data-bind="click: onUpdateQuickEdit" />
+						<span class="spinner"></span>
+					</footer>
+				</div>
+			</div>
+		</td>
+	</tr>
+{% endblock %}

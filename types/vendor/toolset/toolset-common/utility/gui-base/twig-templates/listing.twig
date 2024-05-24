@@ -1,0 +1,208 @@
+{#
+    Generic listing page template for Toolset.
+
+    To be used with conjunction with the ListingPageController and ListingViewModel.
+
+    For rendering column headers, there is a macro at the bottom of the template.
+
+    @since 2.2
+#}
+
+{% extends "@toolset/base.twig" %}
+
+{% block title %}{{ strings.misc.pageTitle }}{% endblock %}
+
+{% block content %}
+
+    {% block adminNotice %}
+        <div id="message" data-bind="threeModeVisibility: messageVisibilityMode, attr: { class: 'notice is-dismissible js-toolset-fadable ' + messageNagClass() }">
+            <p data-bind="html: displayedMessage().text"></p>
+            <button class="notice-dismiss" data-bind="click: removeDisplayedMessage"></button>
+        </div>
+    {% endblock %}
+
+    {% block loaderSpinner %}
+        <div class="toolset-page-spinner">
+            <img src="{{ assets.loaderOverlay }}" />
+        </div>
+    {% endblock %}
+
+    {% block actualContentWrapper %}
+
+        <div class="toolset-actual-content-wrapper" style="display: none;">
+
+            {% block listingWrapper %}
+
+                <div class="toolset-listing-wrapper">
+                    {% block tablenavTop %}
+                        <div class="tablenav top">
+
+                            {% block bulkActions %}
+                                <div class="alignleft actions bulkactions" data-bind="visible: bulkActions().length > 0">
+                                    <!--suppress HtmlFormInputWithoutLabel -->
+									<select data-bind="options: bulkActions, optionsText: 'displayName', optionsValue: 'value', value: selectedBulkAction"></select>
+                                    <input id="doaction" class="button action" type="submit"
+                                           value="{{ strings.misc.applyBulkAction }}"
+                                           data-bind="click: onBulkAction, enable: isBulkActionAllowed"/>
+                                    <span class="spinner" data-bind="style: { visibility: (isSpinnerVisible() ? 'visible' : 'hidden') }"></span>
+                                </div>
+                            {% endblock %}
+
+							{% block topPagination %}
+								{% block pagination %}
+									{% include "@toolset/listing_pagination.twig" %}
+								{% endblock %}
+							{% endblock %}
+
+                            {% block searchBox %}
+                                <div class="alignright">
+                                    <p class="search-box">
+                                        <input type="search" class="toolset-field-search" placeholder="{{ strings.misc.searchPlaceholder }}"
+                                               data-bind="textInput: searchString" />
+                                    </p>
+                                </div>
+                            {% endblock %}
+
+                        </div>
+                    {% endblock %}
+
+
+                    <table class="wp-list-table widefat posts striped" cellspacing="0">
+                        {% block colgroup %}
+                        {% endblock %}
+                        <thead>
+                            {% block th %}
+                                <tr>
+                                    {% block checkboxColumnHeader %}
+                                        <td scope="col" class="manage-column column-bulk-actions check-column" data-bind="visible: bulkActions().length > 0">
+                                            <!--suppress HtmlFormInputWithoutLabel -->
+											<input type="checkbox" name="bulk_select" data-bind="
+                                                checked: allVisibleItemsSelection,
+                                                enable: allowSelectAllVisibleItems" />
+                                        </td>
+                                    {% endblock %}
+
+                                    {% block columnHeaders %}
+
+                                    {% endblock %}
+
+                            {% endblock %}
+                        </thead>
+
+                        <!-- ko if: (itemsToShow().length > 0) -->
+                            {% block tbodyNormal %}
+
+                                <tbody data-bind="foreach: itemsToShow">
+
+                                    {% block trNormal %}
+                                        <tr data-bind="attr: { class: trClass }">
+
+                                            {% block checkboxCell %}
+                                                <td data-bind="visible: $parent.bulkActions().length > 0">
+                                                    <!--suppress HtmlFormInputWithoutLabel -->
+													<input type="checkbox" data-bind="checked: isCheckedForBulkAction, enable: isBulkActionAllowed" />
+                                                </td>
+                                            {% endblock %}
+
+                                            {# Definition name and row actions. #}
+                                            {% block mainCell %}
+                                                <td>
+                                                    <span class="spinner" data-bind="style: { visibility: (isSpinnerVisible() ? 'visible' : 'hidden') }"></span>
+
+                                                    <!-- ko if: ! $data.editLink -->
+                                                        {# Relationship Overview Page #}
+                                                        <span data-bind="text: displayName, click: onDisplayNameClick"></span>
+                                                    <!-- /ko -->
+                                                    <!-- ko if: $data.editLink -->
+                                                        {# Field Group Overview Page #}
+                                                        <a data-bind="text: displayName, attr: {href: editLink}"></a>
+                                                    <!-- /ko -->
+
+                                                    {% block afterDisplayName %}{% endblock %}
+
+                                                    <div class="row-actions" data-bind="visible: ! $data.isRequired || $data.isRequired() !== true ">
+                                                        {% block rowActions %}
+                                                        {% endblock %}
+                                                    </div>
+                                                </td>
+                                            {% endblock %}
+
+                                            {% block tdCells %}
+                                            {% endblock %}
+
+                                        </tr>
+										{% block afterNormalRow %}
+										{% endblock %}
+                                    {% endblock %}
+                                </tbody>
+                            {% endblock %}
+                        <!-- /ko -->
+
+                        <!-- ko if: (itemsToShow().length == 0) -->
+                            {% block tbodyNoItems %}
+                                <tbody>
+                                    <tr>
+                                        <td data-bind="visible: bulkActions().length > 0">
+                                            <!--suppress HtmlFormInputWithoutLabel -->
+											<input type="checkbox" disabled />
+                                        </td>
+
+                                        <td colspan="5">{{ strings.misc.noItemsFound|e }}</td>
+                                    </tr>
+                                </tbody>
+                            {% endblock %}
+                        <!-- /ko -->
+
+                        <tfoot>
+                            {{ block('th') }}
+                        </tfoot>
+                    </table>
+
+                    {% block tablenavBottom %}
+                        <div class="tablenav bottom">
+                            {{ block('bulkActions') }}
+							{% block bottomPagination %}
+                            	{{ block('pagination') }}
+							{% endblock %}
+                        </div>
+                    {% endblock %}
+
+                    {% if fieldsWithoutSanitizedSlug %}
+                        <div class="toolset-alert toolset-alert-warning">
+                            <div style="float: left; width: 50px;">
+                                <i class="fa fa-warning fa-3x"></i>
+                            </div>
+                            <div style="float:left; width:70%; width:calc(100% - 55px);">
+                                <p style="margin:0">
+                                    <b>{{ strings.misc.fieldsNotSupportedBecauseOfNotSanitizedSlug }}</b><br />
+                                    {{ fieldsWithoutSanitizedSlug|join(', ') }}
+                                </p>
+                            </div>
+                            <div style="clear:both"></div>
+                        </div>
+                    {% endif %}
+                </div>
+
+            {% endblock %} {# listingWrapper #}
+
+            {% block otherScreens %}{% endblock %}
+
+        </div>
+    {% endblock %}
+
+{% endblock %}
+
+{% macro columnHeader(displayName, isSortable, slug, classNames, sortType = 'alpha', tdDataBind = '') %}
+    {% if isSortable == true %}
+        <td scope="col" class="manage-column {{ classNames }}" data-bind="{{ tdDataBind }}">
+            <a class="sort-column" data-bind="click: function() {onSort('{{ slug }}')}">
+                {{ displayName }}
+                <i data-bind="attr: { class: sortIconClass('{{ slug }}', '{{ sortType }}') }" ></i>
+            </a>
+        </td>
+    {% else %}
+        <td scope="col" class="manage-column {{ classNames }}" data-bind="{{ tdDataBind }}">
+            {{ displayName }}
+        </td>
+    {% endif %}
+{% endmacro %}

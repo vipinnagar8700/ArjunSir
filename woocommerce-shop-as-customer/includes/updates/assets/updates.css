@@ -1,0 +1,13 @@
+
+/* PLUGINS PAGE */
+.cx-plugin-update-enter-code {padding: 3px 12px 18px;border: 4px solid #51575D;}
+.cx-plugin-update-enter-code code {white-space: nowrap;}
+.cx-plugin-update-enter-code p {}
+.cx-plugin-update-enter-code .ec-plugin-update-row {/* margin-top: 11px; *//* border-top: 1px solid rgb(239, 239, 239); */padding-top: 6px;}
+.cx-plugin-update-enter-code label { font-weight: bold; font-size: 14px; margin: 0; vertical-align: baseline; width: 130px; display: block; float: left; line-height: 29px; }
+.cx-plugin-update-enter-code input {vertical-align: baseline;margin: 0;width: calc( 65% - 130px );max-width: 400px;box-sizing: border-box;background: rgb(249, 249, 249);/* padding-top: 4px; */padding-bottom: 4px;}
+.cx-plugin-update-enter-code .button {width: auto;border-bottom-width: 1px;}
+.cx-plugin-update-notification {border: 1px solid #FCC;background: #FFE3E3;border-radius: 2px;color: #B11D1D;padding: 7px 9px;margin: 9px 0;text-shadow: 0 1px 0 rgba(255,255,255,0.3);box-shadow: 0 1px 1px rgba(0, 0, 0, 0.03);font-weight: bold;}
+.cx-plugin-update-notification.cx-plugin-update-notification-success {background: rgb(211, 250, 214);border: 1px solid #7CD484;color: #008600;}
+.cx-plugin-update-notification code {background: none;padding: 0 3px;margin: 0;}
+.cx-plugin-update-notification a { color: inherit; }

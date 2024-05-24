@@ -1,0 +1,10 @@
+{# Post needs to be saved before a parent and child can be selected. #}
+<div class="toolset-types-intermediary-meta-box">
+    <p class="toolset-alert toolset-alert-warning">
+        {{ sprintf(
+            __( 'Save the post to select a <b>%s</b> and a <b>%s</b> for this intermediary post.'),
+            parent_post_types_names|join(', '),
+            child_post_types_names|join(', ')
+        )|raw }}
+    </p>
+</div>

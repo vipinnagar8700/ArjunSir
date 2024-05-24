@@ -1,0 +1,326 @@
+<script type="text/html" id="tplLoadingSpinner">
+    <i data-bind="visible: loadingAssociation" class="fa fa-refresh fa-spin"></i>
+</script>
+
+<script type="text/html" id="tplAssociationRowPagination">
+    <!-- ko if: countPages() > 1 -->
+    <tr class="row-column-description row-pagination">
+        <td colspan="4">
+            <i class="fa fa-2x fa-angle-double-left" data-bind="click: firstPage()"></i>
+            &nbsp; <i class="fa fa-2x fa-angle-left" data-bind="click: previousPage()"></i>
+            <span class="page-count">
+                            <span data-bind="text: currentPage()"></span>
+                            / <span data-bind="text: countPages()"></span>
+                        </span>
+            <i class="fa fa-2x fa-angle-right" data-bind="click: function(){ nextPage() }"></i>
+            &nbsp; <i class="fa fa-2x fa-angle-double-right" data-bind="click: function(){ lastPage() }"></i>
+        </td>
+    </tr>
+    <!-- /ko -->
+</script>
+<script type="text/html" id="tplAssociationRow">
+    <td>
+        <span class="toolset-association-error js-wpcf-tooltip wpcf-tooltip"
+              data-bind='visible: ! $data.relationship.isAvailable, attr: { "data-tooltip": "{{ __("Can't find a relationship with slug: ", 'wpcf' ) }} " + $data.relationship.slug  }'>
+            {{ __('Missing', 'wpcf') }}
+            <i class="fa fa-question-circle"></i>
+        </span>
+        <span data-bind="text: $data.relationship.pluralName"></span>
+    </td>
+
+    <td>
+        <!-- ko if: $data.parent.guid.indexOf('http') !== -1 -->
+        <span class="toolset-association-error js-wpcf-tooltip wpcf-tooltip"
+              data-bind='visible: ! $data.parent.isAvailable, attr: { "data-tooltip": "{{ __("Can't find a parent post with GUID: ", 'wpcf' ) }} " + $data.parent.guid  }'>
+            {{ __('Missing', 'wpcf') }}
+            <i class="fa fa-question-circle"></i>
+        </span>
+        <!-- /ko -->
+
+        <!-- ko if: $data.parent.guid.indexOf('http') === -1 -->
+        <span class="toolset-association-error js-wpcf-tooltip wpcf-tooltip"
+              data-bind='visible: ! $data.parent.isAvailable, attr: { "data-tooltip": "{{ __("Can't find a parent post with title: ", 'wpcf' ) }} " + $data.parent.guid  }'>
+            {{ __('Missing', 'wpcf') }}
+            <i class="fa fa-question-circle"></i>
+        </span>
+        <!-- /ko -->
+        <span data-bind="text: $data.parent.postTitle"></span>
+    </td>
+
+    <td>
+        <span class="toolset-association-error js-wpcf-tooltip wpcf-tooltip "
+              data-bind='visible: ! $data.child.isAvailable, attr: { "data-tooltip": "{{ __( 'There is no child post.', 'wpcf' ) }}" }'>
+            {{ __('Missing', 'wpcf') }}
+            <i class="fa fa-question-circle"></i>
+        </span>
+        <span data-bind="text: $data.child.postTitle"></span>
+    </td>
+
+    <td>
+        <!-- ko if: $data.intermediary.guid.indexOf('http') !== -1 -->
+        <span class="toolset-association-error js-wpcf-tooltip wpcf-tooltip "
+              data-bind='visible: $data.intermediary.isRequired && ! $data.intermediary.isAvailable, attr: { "data-tooltip": "{{ __("Can't find an intermediary post with GUID: ", 'wpcf' ) }} " + $data.intermediary.guid }'>
+        {{ __('Missing', 'wpcf') }}
+            <i class="fa fa-question-circle"></i>
+        </span>
+        <!-- /ko -->
+
+        <!-- ko if: $data.parent.guid.indexOf('http') === -1 -->
+        <span class="toolset-association-error js-wpcf-tooltip wpcf-tooltip "
+              data-bind='visible: $data.intermediary.isRequired && ! $data.intermediary.isAvailable, attr: { "data-tooltip": "{{ __("Can't find an intermediary post with title: ", 'wpcf' ) }} " + $data.intermediary.guid }'>
+        {{ __('Missing', 'wpcf') }}
+            <i class="fa fa-question-circle"></i>
+        </span>
+        <!-- /ko -->
+
+        <span data-bind="text: $data.intermediary.postTitle"></span>
+    </td>
+
+</script>
+
+<div id="toolset-associations-import" style="display: none">
+
+    {# Import Started #}
+    <div data-bind="visible: importStarted() && associations.import().length > 0">
+        <h3 data-bind="visible: importingAssociations()">
+            {{ __( 'Importing associations, please wait...', 'wpcf' ) }}
+            <i class="fa fa-refresh fa-spin"></i>
+        </h3>
+
+        <h3 data-bind="visible: ! importingAssociations()">
+            {{ __( 'Import completed:', 'wpcf' ) }}
+        </h3>
+
+        <p class="toolset-alert toolset-alert-success">
+            <b>
+                <span data-bind="text: associations.imported"></span> /
+                <span data-bind="text: associations.import().length"></span>
+
+                {{ __( 'Associations imported', 'wpcf' ) }}
+            </b>
+        </p>
+
+        <p class="toolset-alert toolset-alert-error" data-bind="visible: ( associations.importedError() > 0 && ! importingAssociations() ) ">
+            <b>
+                <span data-bind="text: associations.importedError"></span>
+
+                <!-- ko if: associations.importedError() == 1 -->
+                {{ __( "Association couldn't be imported", 'wpcf' ) }}
+                <!-- /ko -->
+                <!-- ko if: associations.importedError() != 1 -->
+                {{ __( "Associations couldn't be imported", 'wpcf' ) }}
+                <!-- /ko -->
+            </b>
+
+            <br />
+            <br />
+            <a href="{{ url_self }}">{{ __('List broken associations.') }}</a>
+        </p>
+    </div>
+
+    {# Remove broken associations from import list #}
+    <div data-bind="visible: importStarted() && associations.import().length == 0">
+        <h3>
+            {{ __( 'Broken associations deleted from the import list.', 'wpcf' ) }}
+        </h3>
+    </div>
+
+    {# Loading Associations Import List #}
+    <h3 data-bind="visible: loadingAssociation">
+        {{ __( 'Finding associations in your recent CSV import...', 'wpcf' ) }}
+        <!-- ko template: { name: 'tplLoadingSpinner' } --><!-- /ko -->
+    </h3>
+
+    <div data-bind="visible: ! importStarted()">
+        <h3 data-bind="visible: ( ! loadingAssociation() && associations.count() > 0 )">
+            {{ __( 'Associations loaded:', 'wpcf' ) }}
+        </h3>
+
+        <div data-bind="visible: ( ! loadingAssociation() && associations.count() == 0 )">
+            <h3>
+                {{ __( 'No association to import.', 'wpcf' ) }}
+            </h3>
+
+            <p>
+                {{ sprintf( __( 'You can use the %sdefault WordPress Export%s to export associations.
+            Once you import the data using WordPress Importer you will see
+            the available associations here in the Import section.', 'wpcf'), '<a href="' ~ url_wp_export ~ '">', '</a>' )|raw }}
+            </p>
+
+            <p>
+                <a class="toolset-external-link" href="https://toolset.com/course-lesson/importing-content-from-csv-with-post-relationships/?utm_source=plugin&utm_medium=gui&utm_campaign=types">
+                    {{ __( 'Documentation for CSV Export / Import', 'wpcf' ) }}
+                </a>
+            </p>
+        </div>
+
+        <!-- ko if: ( associations.readyToImport().length || loadingAssociation() ) -->
+        <div>
+            <table>
+                <thead>
+                <tr data-bind="click: function() { toggle( associations.readyToImportExpanded ) }">
+                    <th colspan="4" class="toolset-alert toolset-alert-success">
+                        <span data-bind="text: associations.readyToImport().length"></span>
+
+                        <!-- ko if: associations.readyToImport().length == 1 -->
+                        {{ __( 'Association ready to be imported', 'wpcf' ) }}
+                        <!-- /ko -->
+                        <!-- ko if: associations.readyToImport().length != 1 -->
+                        {{ __( 'Associations ready to be imported', 'wpcf' ) }}
+                        <!-- /ko -->
+
+                        <i class="fa fa-2x fa-caret-up" data-bind="visible: ! associations.readyToImportExpanded()"></i>
+                        <i class="fa fa-2x fa-caret-down" data-bind="visible: associations.readyToImportExpanded()"></i>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr data-bind="visible: associations.readyToImportExpanded()" class="row-column-description">
+                    <td>{{ __( 'Relationship', 'wpcf' ) }}</td>
+                    <td>{{ __( 'Parent', 'wpcf' ) }}</td>
+                    <td>{{ __( 'Child', 'wpcf' ) }}</td>
+                    <td>{{ __( 'Intermediary', 'wpcf' ) }}</td>
+                </tr>
+
+
+
+                <!-- ko foreach: associations.readyToImportPagination.visibleAssociations() -->
+                <tr data-bind="visible: $parent.associations.readyToImportExpanded()">
+                    <!-- ko template: { name: 'tplAssociationRow' } --><!-- /ko -->
+                </tr>
+                <!-- /ko -->
+                </tbody>
+
+                <tfoot  data-bind="visible: associations.readyToImportExpanded()">
+                    <!-- ko template: { name: 'tplAssociationRowPagination', data: associations.readyToImportPagination } --><!-- /ko -->
+                </tfoot>
+            </table>
+        </div>
+        <!-- /ko -->
+
+        <!-- ko if: associations.haveMissingData().length -->
+        <div style="">
+            <table data-bind="visible: associations.count() > 0">
+                <thead>
+                <tr data-bind="click: function() { toggle( associations.haveMissingDataExpanded ) }">
+                    <th colspan="4" class="toolset-alert toolset-alert-error">
+                        <span data-bind="text: associations.haveMissingData().length"></span>
+
+                        <!-- ko if: associations.haveMissingData().length == 1 -->
+                        {{ __( "Association can't be imported", 'wpcf' ) }}
+                        <p class="table-headline-description">
+                            {{ __('After fixing the problem (see the red error messages) reload this page.', 'wpcf' ) }}
+                            {{ __('Broken associations will be removed from the import list when you start the import process.', 'wpcf' ) }}
+                        </p>
+                        <!-- /ko -->
+                        <!-- ko if: associations.haveMissingData().length > 1 -->
+                        {{ __( "Associations can't be imported", 'wpcf' ) }}
+                        <p class="table-headline-description">
+                            {{ __('After fixing the problem (see the red error messages) reload this page.', 'wpcf' ) }}
+                            {{ __('Broken associations will be removed from the import list when you start the import process.', 'wpcf' ) }}
+                        </p>
+                        <!-- /ko -->
+
+                        <i class="fa fa-2x fa-caret-up" data-bind="visible: ! associations.haveMissingDataExpanded()"></i>
+                        <i class="fa fa-2x fa-caret-down" data-bind="visible: associations.haveMissingDataExpanded()"></i>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr data-bind="visible: associations.haveMissingDataExpanded()" class="row-column-description">
+                    <td>{{ __( 'Relationship', 'wpcf' ) }}</td>
+                    <td>{{ __( 'Parent', 'wpcf' ) }}</td>
+                    <td>{{ __( 'Child', 'wpcf' ) }}</td>
+                    <td>{{ __( 'Intermediary', 'wpcf' ) }}</td>
+                </tr>
+
+                <!-- ko foreach: associations.haveMissingDataPagination.visibleAssociations() -->
+                <tr data-bind="visible: $parent.associations.haveMissingDataExpanded()">
+                    <!-- ko template: { name: 'tplAssociationRow' } --><!-- /ko -->
+                </tr>
+                <!-- /ko -->
+
+                </tbody>
+
+                <tfoot  data-bind="visible: associations.haveMissingDataExpanded()">
+                <!-- ko template: { name: 'tplAssociationRowPagination', data: associations.haveMissingDataPagination } --><!-- /ko -->
+                </tfoot>
+            </table>
+        </div>
+        <!-- /ko -->
+
+        <!-- ko if: associations.areAlreadyImported().length -->
+        <div>
+            <table>
+                <thead>
+                <tr data-bind="click: function() { toggle( associations.areAlreadyImportedExpanded ) }">
+                    <th colspan="4" class="toolset-alert toolset-alert-info">
+                        <span data-bind="text: associations.areAlreadyImported().length"></span>
+
+                        <!-- ko if: associations.areAlreadyImported().length == 1 -->
+                        {{ __( 'Association already exists', 'wpcf' ) }}
+
+                        <p class="table-headline-description">
+                            {{ __('This association will not be listed again.', 'wpcf' ) }}
+                        </p>
+                        <!-- /ko -->
+
+                        <!-- ko if: associations.areAlreadyImported().length > 1 -->
+                        {{ __( 'Associations already exist', 'wpcf' ) }}
+
+                        <p class="table-headline-description">
+                            {{ __('These associations will not be listed again.', 'wpcf' ) }}
+                        </p>
+                        <!-- /ko -->
+
+                        <i class="fa fa-2x fa-caret-up" data-bind="visible: ! associations.areAlreadyImportedExpanded()"></i>
+                        <i class="fa fa-2x fa-caret-down" data-bind="visible: associations.areAlreadyImportedExpanded()"></i>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr data-bind="visible: associations.areAlreadyImportedExpanded()" class="row-column-description">
+                    <td>{{ __( 'Relationship', 'wpcf' ) }}</td>
+                    <td>{{ __( 'Parent', 'wpcf' ) }}</td>
+                    <td>{{ __( 'Child', 'wpcf' ) }}</td>
+                    <td>{{ __( 'Intermediary', 'wpcf' ) }}</td>
+                </tr>
+
+                <!-- ko foreach: associations.areAlreadyImportedPagination.visibleAssociations() -->
+                <tr data-bind="visible: $parent.associations.areAlreadyImportedExpanded()">
+                    <!-- ko template: { name: 'tplAssociationRow' } --><!-- /ko -->
+                </tr>
+                <!-- /ko -->
+                </tbody>
+
+                <tfoot  data-bind="visible: associations.areAlreadyImportedExpanded()">
+                <!-- ko template: { name: 'tplAssociationRowPagination', data: associations.areAlreadyImportedPagination } --><!-- /ko -->
+                </tfoot>
+            </table>
+        </div>
+        <!-- /ko -->
+
+        <div data-bind="visible: ( ! loadingAssociation() && associations.import().length > 0 )">
+            <button class="button-primary wpcf-form-submit form-submit submit"
+                    data-bind="click: function() { importStart() }">
+                {{ __( 'Start Import', 'wpcf' ) }}
+            </button>
+        </div>
+
+        <div data-bind="visible: ( ! loadingAssociation() && associations.import().length == 0 && associations.haveMissingData().length > 0 )">
+            <button class="button-primary wpcf-form-submit form-submit submit"
+                    data-bind="click: function() { importStart() }">
+                {{ __( 'Remove broken associations from import list', 'wpcf' ) }}
+            </button>
+        </div>
+
+        <div data-bind="visible: ( ! loadingAssociation() && associations.import().length == 0 && associations.haveMissingData().length == 0 && associations.areAlreadyImported().length > 0 )">
+            <p>
+                {{ __('Nothing to import as all associations of the import list already exist.') }}
+            </p>
+        </div>
+    </div>
+</div>

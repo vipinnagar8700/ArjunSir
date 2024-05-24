@@ -1,0 +1,269 @@
+/*
+    Types Relationships page.
+
+    @since m2m
+
+    NOTE: Always use BEM for new rules.
+ */
+
+
+.toolset-listing-wrapper .has-unsaved-changes {
+    font-size: small;
+    font-style: italic;
+    color: #a00;
+}
+
+.toolset-listing-wrapper p.search-box {
+    margin-bottom: 6px;
+}
+@media screen and (max-width: 782px) {
+    .toolset-listing-wrapper p.search-box {
+        /* Neutralize WP original styling */
+        float: right;
+        width: auto;
+        height: auto;
+        position: static;
+    }
+}
+
+
+#types-edit-relationship-wrap .postbox table {
+    border: none;
+}
+
+#types-edit-relationship-wrap span.types-post-type-list {
+    font-style: italic;
+}
+
+/* Three divs with cardinality class radio button, side by side */
+#types-edit-relationship-wrap div.cardinality-class-option {
+    float: left;
+    width: 33%;
+    text-align: center;
+}
+#types-edit-relationship-wrap div.cardinality-class-option:not(.enabled) {
+    color: #ccc;
+}
+
+
+/*
+ * Adjust the Settings metabox:
+ * The first rule removes the margin from its main content div
+ * so that an overlay can cover it properly. The second rule re-adds
+ * the same space but in a way that doesn't conflict with the overlay.
+ */
+#types_relationship_settings .inside {
+    margin-top: 0;
+}
+
+#types_relationship_settings .inside .main-box-content table.widefat {
+    padding-top: 6px;
+}
+
+
+/*
+ * Settings metabox overlay.
+ */
+#types-edit-relationship-wrap div.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: auto;
+    width: 100%;
+
+    background: lightyellow;
+    text-align: center;
+    padding-bottom: 12px;
+}
+
+/*
+ * Various minor styling of the content of the Settings metabox.
+ * Spacing, alignment, widths...
+ */
+#types-edit-relationship-wrap div.overlay div.overlay-content {
+    margin: 25px;
+}
+
+#types-edit-relationship-wrap div.overlay .overlay-part {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+#types-edit-relationship-wrap div.overlay .overlay-part table {
+    margin: 0 auto;
+    width: 100%;
+}
+
+#types-edit-relationship-wrap div.overlay .overlay-part table td {
+    padding: 15px 0;
+    width: 50%;
+}
+
+#types-edit-relationship-wrap div.overlay .overlay-part .post-types-large {
+    /* Taken from the default WordPress heading style */
+    font-size: 23px;
+    font-weight: 400;
+    color: #23282d;
+}
+
+#types-edit-relationship-wrap div.overlay .overlay-part .relationship-possibilities-description {
+    font-size: larger;
+}
+
+#types-edit-relationship-wrap .cardinality-class-option i {
+    font-size: 56px;
+    margin-bottom: 6px;
+}
+
+#types-edit-relationship-wrap img.cardinality-class-scheme {
+    width: 70%;
+}
+
+
+/*
+ This is necessary because some field type icons still use
+ custom images loaded from legacy Types.
+ */
+#types-edit-relationship-wrap .types-association-field i {
+    width: 1.2em;
+    height: 1.2em;
+}
+
+/**
+ * Header
+ */
+h1.wizard {
+	margin-top: 30px;
+}
+h1.wizard .add_new_button,
+h1.edit .add_new_button {
+	display: none;
+}
+h1 .button.types-exit-wizard-button {
+	display: none;
+	float: right;
+}
+h1.wizard .button.types-exit-wizard-button {
+	display: initial;
+}
+
+/**
+ * WP Pointer tooltips
+ */
+.types-pointer-tooltip .wp-pointer-arrow-inner {
+	pointer-events: none;
+}
+.types-pointer-tooltip .wp-pointer-buttons {
+	display: none;
+}
+
+/**
+ * Forms styles
+ */
+#types_relationship_settings input[type=number]:invalid {
+	border: 1px solid rgba(255, 0, 0, 0.5);
+	box-shadow: 0 0 3px rgba(255, 0, 0, 0.7);
+}
+/**
+ * Extra styles for Intermediary Posts Deletion dialog
+ *
+ * @since 2.3
+ */
+
+#intermediary-progress-bar {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    height: 24px;
+    padding: 1px;
+    width: 100%;
+}
+
+#intermediary-progress-bar span {
+    min-width: 5px;
+    display: inline-block;
+    background: #f05a28;
+    height: 20px;
+    border-radius: 3px;
+}
+
+.toolset-intermediary-result .fa-check {
+    color: #289C40;
+    float: right;
+}
+.types-ipt-delete-progress-info{text-align:right;font-size:10px;}
+.types-delete-ipt-dialog-body{padding:8px;}
+
+@media (min-width: 768px) {
+    .toolset-confirmation-dialog-icon {
+        padding-left: 10px;
+        padding-right: 20px;
+    }
+}
+.types-trash-ipt{color:#ff0000; font-size: 20px; position: relative; left: 10px; cursor: pointer;}
+table.toolset-field-table tbody td.align-top{vertical-align: top; padding-top:14px;}
+.margin-right-18{margin-right: 18px;}
+.no-bottom-margin{margin-bottom: 0;}
+ul.types-delete-ipt-summary{margin-top: 0;margin-left: 18px;}
+ul.types-delete-ipt-summary li{list-style-type: disc;}
+
+
+.types-aliases-container {
+	display: flex;
+	padding: 5px 0;
+}
+.types-aliases-container p {
+	width: 150px;
+}
+/**
+ * Role labels
+ */
+.types-wizard-roles-container {
+	display: inline-block;
+	width: 49%;
+	padding: 15px 0;
+	vertical-align: top;
+}
+#types-wizard-step-5 .types-wizard-roles-container label {
+	padding: 0;
+}
+@media(min-width: 479px) {
+    .types-wizard-roles-container h3 {
+        padding-left: 32%;
+    }
+}
+.types-wizard-roles-container > div {
+	padding-bottom: 15px;
+}
+.types-wizard-roles-opener {
+	text-decoration: none;
+	color: #666;
+}
+.types-wizard-roles {
+	display: none;
+}
+
+/* Use BEM from now on. */
+
+.types-merge-relationships h4:first-of-type {
+    margin-top:0;
+}
+
+.types-merge-relationships__table-form {
+    margin: 0 15px 30px;
+}
+
+.types-merge-relationships__name {
+    font-style: italic;
+}
+
+.types-merge-relationships--list-style-standard {
+	list-style: disc;
+	margin-left: 2em;
+}
+
+.toolset-batch-process-dialog__log-dropdown {
+    cursor: pointer;
+}

@@ -1,0 +1,221 @@
+<?php /* Group Container */ ?>
+<script type="text/html" id="tplRepeatableGroup">
+	<p class="c-rgx__title" data-bind="text: repeatableGroup.title"></p>
+    <div class="c-rgx__warning" data-bind="visible: ! repeatableGroup.controlsActive && repeatableGroup.wpmlIsTranslationModeSupported">
+        <p>
+			<?php printf( __( '<b>Translation mode active</b>. In this mode you can translate existing items. Switch to the default language to add, delete or sort items of %s.', 'wpcf' ), '<b><span data-bind="text: repeatableGroup.title"></span></b>' ); ?>
+        </p>
+    </div>
+    <div class="c-rgx__warning" data-bind="visible: ! repeatableGroup.wpmlIsTranslationModeSupported">
+        <p>
+			<?php
+			$url_translation_links = apply_filters( 'wpml_get_post_translation_settings_link', '' );
+
+			if( $url_translation_links != '' ) {
+				$a_open_translation_settings = sprintf( '<a href="%s">', $url_translation_links );
+				$a_close_translation_settings = '</a>';
+			} else {
+				$a_open_translation_settings = '';
+				$a_close_translation_settings = '';
+			}
+
+			printf( __( 'This post type uses the <b>Translatable - only show translated items</b> WPML translation mode. In order to use it in a relationship, %sswitch to%s <b>Translatable - use translation if available or fallback to default language</b> mode.', 'wpcf' ), $a_open_translation_settings, $a_close_translation_settings );
+
+			?>
+        </p>
+    </div>
+	<div class="c-rgx js-rgx" data-bind="visible: repeatableGroup.wpmlIsTranslationModeSupported">
+		<div class="c-rgx__body">
+			<!-- ko if: repeatableGroup.items().length == 0 -->
+			<div class="c-rgx__empty--container" data-bind="visible: repeatableGroup.controlsActive">
+				<span class="spinner"
+					data-bind="style: { visibility: ( $data.repeatableGroup.isAddingItem() ? 'visible' : 'hidden') }, visible: $data.repeatableGroup.isAddingItem"
+					style="float: left;"
+				></span>
+				<a class="button" data-bind="click: repeatableGroup.addItem, text: 'Add first ' + repeatableGroup.title"> </a>
+			</div>
+			<!-- /ko -->
+			<!-- ko if: repeatableGroup.items().length > 0 -->
+			<table class="c-rgx__table c-rgx__table--master" data-bind="typesRepeatableGroupSortable:repeatableGroup.items">
+				<thead class="c-rgx__thead" data-bind="template: { name: 'tplHeadlines', foreach: repeatableGroup }"></thead>
+				<!-- ko foreach: repeatableGroup.items -->
+				<!-- ko template: { name: 'tplItems' } --><!-- /ko -->
+				<!-- /ko -->
+			</table>
+			<!-- /ko -->
+		</div>
+	</div>
+
+	<!-- ko if: repeatableGroup.items().length > 0 -->
+	<p class="c-rgx__btn--add"  data-bind="visible: repeatableGroup.controlsActive">
+		<span class="spinner"
+			data-bind="style: { visibility: ( $data.repeatableGroup.isAddingItem() ? 'visible' : 'hidden') }, visible: $data.repeatableGroup.isAddingItem"
+			style="float: left;"
+		></span>
+		<a class="button" data-bind="click: repeatableGroup.addItem, text: '<?php _e( 'Add New', 'wpcf' ); ?>' + ' ' + repeatableGroup.title"> </a>
+	</p>
+	<!-- /ko -->
+</script>
+
+
+<?php /* Group Headlines */ ?>
+<script type="text/html" id="tplHeadlines">
+	<tr>
+		<th class="c-rgx__th c-rgx__th--invisible"></th>
+		<!-- ko foreach: $data.headlines -->
+		<th class="c-rgx__th" data-bind="visible: $data.group.cols()[ $index() ].isVisible"><span data-bind="html: $data.title"></span> <i class="fa fa-lock js-wpcf-tooltip" data-bind="visible: $data.wpmlIsCopied" data-tooltip="<?php _e( 'This field is locked for editing because WPML will copy its value from the original language.', 'wpcf' ); ?>"></i></th>
+		<!-- /ko -->
+		<th class="c-rgx__th c-rgx__th--invisible"></th>
+	</tr>
+</script>
+
+<?php /* Group Items */ ?>
+<script type="text/html" id="tplItems">
+	<tbody class="c-rgx__tbody" data-bind="attr: { 'data-object': $data.storeItemForSortable( $element ), 'data-item-id': $data.id }">
+	<tr>
+		<th data-bind="attr: {
+		    rowspan: $data.activeNestedGroups() + 1,
+		    class: ! $data.group.controlsActive ? 'c-rgx__th types-rg-level-' + $data.group.level : $data.group.items().length > 1
+		        ? 'c-rgx__th c-rgx_sort--handle types-rg-level-' + $data.group.level + ' c-rgx__sort--item c-rgx__level--' + $data.group.level
+		        : 'c-rgx__th c-rgx_sort--handle types-rg-level-' + $data.group.level + ' c-rgx__sort--item-disabled c-rgx__level--' + $data.group.level
+            }">
+            <span data-bind="visible: $data.group.controlsActive">
+			<i class="fa fa-arrows-v c-rgx__icon c-rgx__icon--sortable" aria-hidden="true"></i>
+            </span>
+		</th>
+		<!-- ko foreach: $data.fields -->
+        <!-- ko template: $data.repeatableGroup ? 'tplItemGroupToggle' : 'tplItem' --><!-- /ko -->
+		<!-- /ko -->
+		<th data-bind="attr: { rowspan: $data.activeNestedGroups() + 1, class: 'c-rgx__th c-rgx__level--' + $data.group.level }">
+            <span data-bind="visible: $data.group.controlsActive">
+			<i class="fa fa-trash c-rgx__icon c-rgx__icon--trash" data-bind="click: $data.group.startItemDeletion" aria-hidden="true"></i>
+            </span>
+		</th>
+	</tr>
+
+	<!-- ko foreach: $data.fields -->
+	<!-- ko template: { name: 'tplItemGroup', if: $data.repeatableGroup } --><!-- /ko -->
+	<!-- /ko -->
+	</tbody>
+</script>
+
+<?php /* Delete Notice */ ?>
+<script type="text/html" id="tplDeleteNotice">
+	<div class="c-rgx__overlap--countdown js-rg-countdown" data-bind="visible: $data.item.shouldBeDeleted, style: { 'z-index': 10050 - $data.item.group.level }">
+        <span><?php printf( __( 'This item will be deleted in <b>%s second(s)</b>...', 'wpcf'), '<span data-bind="text: $data.item.shouldBeDeletedSeconds"></span>'); ?></span>
+		<a href="#" class="button button-primary" style="vertical-align: initial" data-bind="click: $data.item.stopDeletionCountdown">Stop Deletion</a>
+	</div>
+</script>
+<?php /* Group Item */ ?>
+<script type="text/html" id="tplItem">
+	<td class="c-rgx__td" data-bind="visible: $data.item.group.cols()[ $index() ].isVisible">
+		<!-- ko if: $index() === 0 -->
+		<!-- ko template: { name: 'tplDeleteNotice' } --><!-- /ko -->
+		<!-- /ko -->
+        <div data-bind="visible: $data.fieldConditionsMet">
+		    <div class="js-wpcf-tooltip c-rgx__input_container" data-bind="html: $data.htmlInput, attr: { 'data-object': $data.setElement( $element ), 'data-tooltip': $data.title }"></div>
+        </div>
+    </td>
+</script>
+
+<?php /* Group Toggle/Create */ ?>
+<script type="text/html" id="tplItemGroupToggle">
+	<?php /*
+    <!-- ko foreach: $data.repeatableGroup.headlines -->
+        <span data-bind="text: $data.title"></span><br />
+    <!-- /ko -->
+ */ ?>
+	<td class="c-rgx__td" data-bind="css: { 'c-rgx__td--nested-active': $data.repeatableGroup.visible() === true } ">
+		<!-- ko if: $index() === 0 -->
+			<!-- ko template: { name: 'tplDeleteNotice' } --><!-- /ko -->
+		<!-- /ko -->
+
+		<div class="c-rgx__nested--control">
+			<span class="c-rgx__count" data-bind="visible: ! $data.repeatableGroup.isPopulating()">
+				<span class="c-rgx__count--number" data-bind="text: ( $data.repeatableGroup.isPopulated() ? $data.repeatableGroup.items().length : '?' )"></span>
+			</span>
+			<span class="spinner"
+				data-bind="style: { visibility: ( $data.repeatableGroup.isPopulating() ? 'visible' : 'hidden') }, visible: $data.repeatableGroup.isPopulating"
+				style="float: left;"
+			></span>
+
+			<!-- ko template: $data.repeatableGroup.visible() === false
+			? $data.repeatableGroup.items().length > 0 || ! $data.repeatableGroup.isPopulated()
+				? 'tplItemGroupToggleShow'
+				: 'tplItemGroupToggleCreate'
+			: 'tplItemGroupToggleHide' --><!-- /ko -->
+		</div>
+	</td>
+</script>
+
+<?php /* Group Toggle/Create - Show Button */ ?>
+<script type="text/html" id="tplItemGroupToggleShow">
+	<a href="#" class="button c-rgx__btn js-wpcf-tooltip" data-bind="
+		click: $data.repeatableGroup.showButtonClick,
+		attr: { 'data-tooltip': $data.repeatableGroup.listHeadlines() },
+		disable: $data.repeatableGroup.isPopulating"
+	>
+        <span data-bind="text: (
+        	$data.repeatableGroup.isPopulated()
+        		? '<?php _e( 'Show', 'wpcf' ); ?>'
+        		: ( $data.repeatableGroup.isPopulating() ? '<?php _e( 'Loading...', 'wpcf' ); ?>' : '<?php _e( 'Load', 'wpcf' ); ?>' )
+        	)"
+		></span>
+	</a>
+</script>
+
+<?php /* Group Toggle/Create - Create Button */ ?>
+<script type="text/html" id="tplItemGroupToggleCreate">
+    <span data-bind="visible: repeatableGroup.controlsActive">
+		<span class="spinner"
+			data-bind="style: { visibility: ( $data.repeatableGroup.isAddingItem() ? 'visible' : 'hidden') }, visible: $data.repeatableGroup.isAddingItem"
+			style="float: left;"
+		></span>
+        <a href="#" class="button c-rgx__btn js-wpcf-tooltip" data-bind="click: function( item, event ) { repeatableGroup.addItem(item, event); }, attr: { 'data-tooltip': $data.repeatableGroup.listHeadlines() }">
+            <span><?php _e( 'Create', 'wpcf' ); ?></span>
+        </a>
+    </span>
+</script>
+
+<?php /* Group Toggle/Create - Hide Button */ ?>
+<script type="text/html" id="tplItemGroupToggleHide">
+	<a href="#" class="button c-rgx__btn" data-bind="{ click: function() { $data.repeatableGroup.toggleGroupVisibility() } }">
+		<span><?php _e( 'Hide', 'wpcf' ); ?></span>
+	</a>
+</script>
+
+<?php /* Group nested in Item */ ?>
+<script type="text/html" id="tplItemGroup">
+	<tr class="c-rgx__tr--nested" data-bind="visible: $data.repeatableGroup.visible">
+		<!-- ko if: $data.item.group.level < 1 -->
+		<th class="c-rgx__th c-rgx__th--invisible"></th>
+		<!-- /ko -->
+		<td class="c-rgx__td c-rgx__td--group-container js-rgx__td--group-container" data-bind="attr: { colspan: $data.item.group.headlines().length }">
+			<!-- ko if: $data.repeatableGroup.items().length > 0 -->
+			<div class="c-rgx c-rgx--overflow-fix"
+			     data-bind="style: { 'max-width': $data.item.group.level == 1 ? $data.repeatableGroup.nestedContainerElementMaxWidth() : 'none'},"
+			>
+				<table class="c-rgx__table c-rgx__table--slave" data-bind="typesRepeatableGroupSortable: $data.repeatableGroup.items">
+					<thead class="c-rgx__thead" data-bind="template: { name: 'tplHeadlines', foreach: $data.repeatableGroup }"></thead>
+					<!-- ko foreach: $data.repeatableGroup.items -->
+					<!-- ko template: { name: 'tplItems' } --><!-- /ko -->
+					<!-- /ko -->
+				</table>
+
+				<p class="c-rgx__btn--add">
+					<span class="spinner"
+						data-bind="style: { visibility: ( $data.repeatableGroup.isAddingItem() ? 'visible' : 'hidden') }, visible: $data.repeatableGroup.isAddingItem"
+						style="float: left;"
+					></span>
+                    <span data-bind="visible: repeatableGroup.controlsActive">
+					    <a class="button c-rgx__btn" data-bind="click: repeatableGroup.addItem, text: 'Add new ' + repeatableGroup.title"> </a>
+                    </span>
+				</p>
+			</div>
+			<!-- /ko -->
+		</td>
+		<!-- ko if: $data.item.group.level < 1 -->
+		<th class="c-rgx__th c-rgx__th--invisible"></th>
+		<!-- /ko -->
+	</tr>
+</script>

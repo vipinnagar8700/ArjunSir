@@ -1,0 +1,35 @@
+.elementor-widget-toolset-form .elementor-widget-container input[type="text"],
+.elementor-widget-toolset-form .elementor-widget-container textarea,
+.elementor-widget-toolset-form .elementor-widget-container select {
+	width: 100%;
+}
+
+.elementor-widget-toolset-form .elementor-widget-container input.date {
+	width: initial;
+}
+
+.elementor-widget-toolset-form .elementor-widget-container textarea {
+	resize: none;
+}
+
+.elementor-widget-toolset-form .elementor-widget-container label {
+	width: 100%;
+	display: inline-block;
+	font-weight: bold;
+	cursor: default;
+}
+
+.elementor-widget-toolset-form .elementor-widget-container li {
+	list-style-type: none;
+}
+
+.elementor-widget-toolset-form .elementor-widget-container a.add-new::before {
+	content: "\f502";
+	font-family: dashicons, sans-serif;
+}
+
+.elementor-widget-toolset-form .elementor-widget-container textarea.wysiwyg-editor {
+	font-size: 24px;
+	font-weight: bold;
+	text-align: center;
+}

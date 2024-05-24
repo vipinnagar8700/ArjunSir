@@ -1,0 +1,14 @@
+{#
+    Add new Custom Field (posts, users, terms).
+
+    @since 2.3
+#}
+<div class="add-new-container">
+	{# Each tab has a link #}
+	{% for tab in tabs %}
+		<div class="add-new-block">
+			<h3><a href="{{ tab.dialog.link }}" title="{{ tab.dialog.title }}"><span class="add-new-icon {{ tab.dialog.icon }}"></span>{{ tab.dialog.title }}</a></h3>
+			<p>{{ tab.dialog.description }}</p>
+		</div>
+	{% endfor %}
+</div>

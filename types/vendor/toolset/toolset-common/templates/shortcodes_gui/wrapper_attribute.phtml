@@ -1,0 +1,41 @@
+<?php
+/**
+ * underscore.js template for the shared shortcodes GUI.
+ * 
+ * Component: wrapper for attributes
+ *
+ * @since 3.1
+ */
+?>
+<script type="text/html" id="tmpl-toolset-shortcode-attribute-wrapper">
+    <#
+        data = _.defaults(
+            data,
+            {
+                defaultValue: '',
+                required: false,
+                hidden: false,
+                helper: false,
+                placeholder: ''
+            } 
+        );
+        data = _.defaults( data, { defaultForceValue: data.defaultValue } );
+    #>
+    <div class="toolset-shortcode-gui-attribute-wrapper js-toolset-shortcode-gui-attribute-wrapper js-toolset-shortcode-gui-attribute-wrapper-for-{{{data.attribute}}}" data-attribute="{{{data.attribute}}}" data-type="{{{data.type}}}" data-helper="{{{data.helper}}}" data-default="{{{data.defaultValue}}}"<# if ( data.hidden ) { #> style="display:none"<# } #>>
+        <# if ( _.has( data, 'label' ) ) { #>
+            <h3>{{{data.label}}}</h3>
+        <# } #>
+        <# if ( _.has( data, 'pseudolabel' ) ) { #>
+            <strong>{{{data.pseudolabel}}}</strong>
+        <# } #>
+        <# if (
+            _.has( data.templates, 'attributes' )
+            && _.has( data.templates.attributes, data.type )
+        ) {
+            print( data.templates.attributes[ data.type ]( data ) );
+        } #>
+        <# if ( _.has( data, 'description' ) ) { #>
+            <p class="description">{{{data.description}}}</p>
+        <# } #>
+    </div>
+</script>

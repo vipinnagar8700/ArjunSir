@@ -1,0 +1,24 @@
+{#
+    m2m activation setting in Toolset settings
+
+    @since m2m
+#}
+{% block setting %}
+    <div class="toolset-advanced-setting" data-bind="with: sections.m2mActivation">
+
+        {% if m2m_enabled == true %}
+            <p><strong>{{ __( 'Relationships migration', 'wpcf') }}</strong></p>
+            <p>{{ __( "This version of Types uses a new way to store post relationships. Your site has relationships that use the old storage, so the new Toolset->Relationships menu is disabled. Types can move these relationships for you, allowing you to use the new post-relationship features. The site's content and how it displays on the front-end will not be affected.", 'wpcf' ) }}</p>
+            <p><strong>{{ __( 'If you do not need to develop or extend this site with new the relationship functionality, it is perfectly safe to not run the migration.', 'wpcf' ) }}</strong></p>
+            <button class="button button-secondary" data-bind="click: openActivationDialog">
+                {{ __( 'Run the migration', 'wpcf' ) }}
+            </button>
+        {% endif %}
+
+    </div>
+
+    {% block footer %}
+        <script id="toolset_model_data" type="text/plain">{{ js_model_data }}</script>
+    {% endblock %}
+
+{% endblock %}

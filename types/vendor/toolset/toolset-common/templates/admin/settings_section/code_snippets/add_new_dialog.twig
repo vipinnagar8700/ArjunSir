@@ -1,0 +1,24 @@
+{#
+	Code snippet listing, dialog for adding a new code snippet.
+
+	@since 3.0.7
+#}
+
+<p>
+	{{ __( 'Please provide a unique value (slug) that will identify this code snippet.', 'wpv-views' ) }}
+	{{ __( 'Only lowercase letters, numbers, dashes, underscores, and dots are allowed.', 'wpv-views' ) }}
+</p>
+
+<table class="widefat toolset-field-table toolset_code_snippets--no-border">
+	<tr class="toolset_code_snippets--no-border">
+		<td><label>{{ __( 'Snippet slug', 'wpv-views' ) }}</label></td>
+		<td><input id="toolset_code_snippets__new_snippet_slug" type="text" data-bind="textInput: snippetSlugCandidate" title="{{ __( 'Snippet slug', 'wpv-views' ) }}"/></td>
+	</tr>
+</table>
+
+<p>
+	{{ sprintf(
+		__( 'The new snippet file will be created in the code snippet directory as: %s.', 'wpv-views' ),
+		'<code><span data-bind="text: snippetSlug"></span>.php</code>' )|raw
+	}}
+</p>

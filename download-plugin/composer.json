@@ -1,0 +1,19 @@
+{
+    "name": "metagauss/download-plugin",
+    "description": "Download any plugin from your wordpress admin panel's plugins page by just one click!",
+    "type": "project",
+    "license": "GPLv3",
+    "authors": [
+        {
+            "name": "metagauss",
+            "email": "download-plugin@metagauss.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload":{
+        "psr-4":{
+            "DPWAP\\": "app"
+        }
+    }
+}

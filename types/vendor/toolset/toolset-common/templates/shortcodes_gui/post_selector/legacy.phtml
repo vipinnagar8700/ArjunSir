@@ -1,0 +1,47 @@
+<?php
+/**
+ * Template for the legacy post selector by post relationship.
+ *
+ * @var array $current_post_type_parents
+ * @since Views 2.9.3
+ */
+
+$context = isset( $context ) ? $context : array();
+$current_post_type_parents = toolset_getarr( $context, 'current_post_type_parents', null );
+
+if ( empty( $current_post_type_parents ) ) {
+	return;
+}
+
+$custom_post_types = get_option( 'wpcf-custom-types', array() );
+
+?>
+<li class="toolset-shortcode-gui-item-selector-option toolset-shortcode-gui-item-selector-has-related js-toolset-shortcode-gui-item-selector-has-related">
+	<label for="toolset-shortcode-gui-item-selector-post-id-related">
+		<input type="radio" class="js-toolset-shortcode-gui-item-selector" id="toolset-shortcode-gui-item-selector-post-id-related" name="toolset_shortcode_gui_object_id" value="related" />
+		<?php echo __( 'The parent of the current post in another post type, set by a Types relationship', 'wpv-views' ); ?>
+	</label>
+	<div class="toolset-shortcode-gui-item-selector-is-related js-toolset-shortcode-gui-item-selector-is-related" style="display:none">
+		<ul class="toolset-advanced-setting tolset-mightlong-list" style="padding-top:15px;margin:5px 0 10px;">
+		<?php
+		$first = true;
+		foreach ( $current_post_type_parents as $slug  ) {
+			?>
+			<li>
+				<?php echo sprintf( '<label for="toolset-shortcode-gui-item-selector-post-relationship-id-%s">', $slug ); ?>
+				<?php echo sprintf(
+					'<input type="radio" name="related_object" id="toolset-shortcode-gui-item-selector-post-relationship-id-%s" value="$%s" %s />',
+					esc_attr( $slug ),
+					esc_attr( $slug ),
+					checked( $first, true, false )
+				); ?>
+				<?php echo esc_html( toolset_getnest( $custom_post_types, array( $slug, 'labels', 'singular_name' ), $slug ) ); ?>
+				</label>
+			</li>
+			<?php
+			$first = false;
+		}
+		?>
+		</ul>
+	</div>
+</li>

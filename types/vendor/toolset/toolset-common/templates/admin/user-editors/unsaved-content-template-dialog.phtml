@@ -1,0 +1,10 @@
+<p>
+	<?php
+		echo sprintf(
+			/* translators: Informative text for the modal that shows up when the user tries to edit an inline Content Template using an editor but the Content Template has unsaved changes. */
+			esc_html( __( 'Before switching to %2$s, you should save the %1$s Content Template.', 'wpv-views' ) ),
+			'<strong><span class="js_tooslet_unsaved_content_template_name"></span></strong>',
+			'<strong><span class="js_tooslet_unsaved_content_template_editor"></span></strong>'
+		);
+	?>
+</p>

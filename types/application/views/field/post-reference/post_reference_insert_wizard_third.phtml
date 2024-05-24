@@ -1,0 +1,30 @@
+<?php
+/**
+ * underscore.js template for the dialog for inserting a post reference field: wizard, step three.
+ *
+ * @since m2m
+ */
+?>
+<script type="text/html" id="tmpl-toolset-shortcode-attribute-info-postReferenceFieldWizardThird">
+<div class="toolset-shortcodes__tabs_single">
+	<h2><?php _e( 'Displaying post reference fields (3 of 3)', 'wpcf' ); ?></h2>
+	<p style="text-align:center">
+		<?php _e( 'Select this post reference field.', 'wpcf' ); ?>
+		<img
+			src="<?php echo TYPES_RELPATH . '/public/img/post-reference-field-wizard/step3.png'; ?>"
+			alt="<?php echo esc_attr( __( 'Step 3', 'wpcf' ) ); ?>"
+			style="display:block;margin:10px auto 0;border:solid 2px #ccc;box-shadow:0 10px 20px -15px;max-width:80%;"
+		/>
+	</p>
+	<hr />
+	<p>
+		<a
+			target="_blank"
+			title="<?php echo esc_attr( __( 'Documentation for displaying post reference fields', 'wpcf' ) ); ?>"
+			href="<?php echo Types_Helper_Url::get_url( 'displaying-post-reference-fields', true, 'displaying-post-reference-fields', Types_Helper_Url::UTM_MEDIUM_SHORTCODES ); ?>"
+		>
+			<?php _e( 'Documentation for displaying post reference fields', 'wpcf' ); ?>
+		</a>
+	</p>
+</div>
+</script>

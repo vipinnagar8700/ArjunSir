@@ -1,0 +1,33 @@
+parameters:
+  level: 2
+  checkFunctionArgumentTypes: true
+  checkArgumentsPassedByReference: true
+  checkUnionTypes: true
+  featureToggles:
+    disableRuntimeReflectionProvider: true
+  bootstrapFiles:
+    - tests/phpstan/bootstrap.php
+
+  paths:
+    - includes
+    - src/Recommendations
+    - templates
+    - installer.php
+    - loader.php
+
+  excludePaths:
+  	- tests
+
+  checkFunctionNameCase: true
+  inferPrivatePropertyTypeFromConstructor: true
+
+  ignoreErrors:
+    # Variables in files used as templates.
+    - '#^Variable \$[a-zA-Z0-0\\_]+ might not be defined\.$#'
+    # Class access in files used as templates.
+    - '#^Call to an undefined method object::[a-zA-Z0-9\_]+\(\)\.$#'
+    # FP Pointer Trait used assuming Functor trait is used.
+    - '#^Unsafe usage of new static\(\)\.$#'
+    # FP return types
+    - '#^Cannot call method tryCatch\(\) on [\(\)\|a-zA-Z0-9\\_]+\.$#'
+    - '#^Parameter \#[0-9]+ \$[a-zA-Z0-9\\_]+ of function OTGS\\Installer\\FP\\[a-zA-Z0-9\\_]+ expects [a-zA-Z0-9\\_\(\)\|\: ]+ mixed, [\:a-zA-Z0-9\\_\(\)\| ]+ given\.$#'

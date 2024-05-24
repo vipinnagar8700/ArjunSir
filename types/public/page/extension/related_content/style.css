@@ -1,0 +1,274 @@
+/*
+	Stylesheet for the related content meta box.
+
+	@since m2m
+*/
+
+/**
+ * Content
+ */
+.types-related-content .striped > tbody > tr {
+   background: #f9f9f9;
+}
+.types-related-content .striped > tbody > tr:nth-child(3n+3),
+.types-related-content .striped > tbody > tr:nth-child(4n+4) {
+	background: #fff;
+}
+
+.types-related-content-actions {
+	margin-bottom: 6px;
+}
+.column-post-field ~ .column-relationship-field {
+	border-left: 1px dashed #e1e1e1;
+}
+.column-post-field ~ .column-relationship-field ~ .column-relationship-field {
+	border-left: 0;
+}
+
+#toolset-page-content .toolset-page-spinner.overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 100;
+	background: rgba(255, 255, 255, 0.7);
+}
+.types-related-content .wp-list-table {
+	border-collapse: collapse;
+}
+
+/**
+ * Quick edit && Add new
+ */
+.types-quick-edit-fields {
+	display: none;
+	border-top: 1px dashed #e1e1e1;
+	/*border-bottom: 1px dashed #e1e1e1;*/
+}
+.types-quick-edit-fields,
+.types-new-relationship-form {
+	display: flex;
+	flex-flow: row wrap;
+}
+
+.types-quick-edit-fields-block,
+.types-quick-edit-fields-actions,
+.types-new-relationship-block {
+	flex: 1 100%;
+	padding: 10px;
+	box-sizing: border-box;
+}
+@media all and (min-width: 1200px) {
+	.types-quick-edit-fields-block {
+		flex: 1 50%;
+	}
+	.types-quick-edit-fields-block + .types-quick-edit-fields-block {
+		border-left: 1px dashed #e1e1e1;
+	}
+}
+.types-quick-edit-fields-actions {
+	border-top: 1px dashed #e1e1e1;
+}
+
+
+@media all and (min-width: 768px) {
+	.types-new-relationship-block {
+		flex: 1 50%;
+	}
+	.types-new-relationship-block + .types-new-relationship-block {
+		border-left: 1px dashed #e1e1e1;
+	}
+	.types-new-relationship-header {
+		margin-top: 0;
+	}
+	.types-new-relationship-connect-field {
+		margin-top: 30px;
+	}
+}
+
+.types-quick-edit-header,
+.types-new-relationship-header {
+	font-size: 15px;
+	text-align: center;
+}
+
+.types-warning input.types-quick-edit-enable-editing-button {
+	margin-left: 10px;
+}
+
+/**
+ * Add new dialog
+ */
+body .ui-datepicker.ui-widget-content {
+	z-index: 1000000 !important;
+}
+
+/**
+ * Connect existing dialog
+ */
+
+select[data-rel="select2"] {
+	width: 100%;
+}
+.toolset_select2-container {
+	z-index: 1000000 !important;
+}
+.toolset_select2-dropdown {
+	z-index: 1000001 !important;
+}
+.toolset_select2-search {
+	z-index: 1000002 !important;
+}
+#TB_window {
+	z-index: 1000050 !important;
+}
+
+/**
+ * Only one relationship
+ */
+.types-related-content-only-one-relations .fa-sort-alpha-asc {
+	display: none;
+}
+.types-related-content-only-one-relations tfoot {
+	display: none;
+}
+.types-related-content-only-one-relations .tablenav.bottom {
+	display: none;
+}
+
+/**
+* select2
+*/
+.toolset_select2-results__option:hover .types-select2-disabled-tooltip {
+	display: inline;
+}
+
+.types-select2-disabled-tooltip {
+	background: #666;
+	border-radius: 3px;
+	color: #ddd;
+	display: none;
+	left: 100%;
+	margin-left: 10px;
+	margin-top: -20px;
+	min-width: 150px;
+	padding: 10px;
+	position: absolute;
+}
+
+.types-select2-disabled-tooltip::before {
+	border-color: transparent #666 transparent;
+	border-style: solid;
+	border-width: 5px 5px 5px 0;
+	content: "";
+	margin-left: -15px;
+	margin-top: 12px;
+	position: absolute;
+}
+
+.types-select2-disabled-link {
+	position: absolute;
+	right: 5px;
+}
+
+.types-select2-language-flag {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+/**
+* Translatable warning
+*/
+.toolset-translatable-posts-wrapper {
+	display: flex;
+	align-items: flex-start;
+}
+.toolset-translatable-posts {
+	flex:  1 1 50%;
+}
+.toolset-translatable-posts ul {
+	border: 1px solid #e5e5e5;
+	margin-top: 8px;
+}
+.toolset-translatable-posts + .toolset-translatable-posts {
+	-webkit-margin-start: 8px;
+	-moz-margin-start: 8px;
+	margin-start: 8px;
+}
+.toolset-translatable-posts h4 {
+	margin: 0;
+}
+.toolset-translatable-posts img {
+	vertical-align: -1px;
+	-webkit-margin-end: 4px;
+	-moz-margin-end: 4px;
+	margin-end: 4px;
+}
+.toolset-translatable-posts li {
+	margin: 0;
+	padding: 8px 10px;
+	font-size: .9em;
+}
+.toolset-translatable-posts li:first-child {
+	font-weight: bold;
+	font-size: 1em;
+}
+.toolset-translatable-posts li:nth-child(odd)  {
+	background-color: #f9f9f9;
+}
+.types-related-content .js-show-tooltip {
+	cursor: pointer;
+}
+.types-related-content-actions .spinner {
+	float: none;
+}
+
+/**
+ * Select fields
+ */
+.types-separator-select-fields-form {
+	border-bottom: 1px solid #DFDFDF;
+}
+.types-container-select-fields-form {
+	display: grid;
+	grid-template-columns: 33.3% 33.3% 33.3%;
+}
+.types-container-select-fields-form span {
+	padding-bottom: 10px;
+}
+.wpcf-lable-disabled {
+	color: #ccc;
+}
+
+.types-related-content .types-related-content-table-wrapper {
+	width: 1px; /* WP 5.6 compatibility to make sure a relationship table can't exceed 100% of content width. */
+	max-width: 100%;
+	overflow: auto;
+	min-width: 100%;
+}
+.types-related-content-table-wrapper table {
+	width: calc(100% - 1px);
+}
+.toolset-dialog-connect-related-content, .toolset-dialog-new-related-content, .toolset-dialog-columns-to-be-displayed {
+	z-index: 100101 !important;
+}
+
+/* Conflicts with Twitter Bootstrap and jQuery UI */
+body .ui-dialog .ui-dialog-titlebar-close:not(.ui-button) {
+	background: transparent;
+	width: auto;
+	height: auto;
+	border: 0;
+	top: 5px;
+}
+body .ui-widget-overlay {
+	position: fixed;
+}
+
+
+/* Limit flag size in case a custom images are used */
+img.types-language-flag {
+	max-width: 18px;
+	max-height: 12px;
+}

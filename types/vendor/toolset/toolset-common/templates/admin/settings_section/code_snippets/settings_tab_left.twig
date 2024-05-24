@@ -1,0 +1,96 @@
+{#
+	Code snippet listing, left part of the settings section that is displayed below the section title.
+
+	We just show several dropdown sections with content depending on currently defined constants.
+
+	@since 3.0.7
+#}
+
+{% import _self as leftTab %}
+
+<p>
+	{{ __( 'Here, you can add and manage snippets of custom PHP code in order to modify the features of your site more easily.', 'wpv-views' ) }}
+</p>
+<p>
+	{{ sprintf(
+		__( 'For detailed information, read our documentation about %susing Toolset to add custom code%s.', 'wpv-views' ),
+		'<a href="https://toolset.com/documentation/programmer-reference/adding-custom-code/using-toolset-to-add-custom-code/?utm_source=plugin&utm_medium=gui&utm_campaign=toolset">',
+		'</a>'
+	)|raw }}
+</p>
+<p>
+	{{ __( 'All the snippets are located in the following directory:', 'wpv-views' ) }}
+	<code>{{ base_dir }}</code>
+</p>
+
+{% macro dropdownSectionBegin(sectionKey, title) %}
+	<p data-bind="click: function() { toggleSection('{{ sectionKey }}'); }" class="toolset_code_snippets__dropdown_header">
+		<i aria-hidden="true" data-bind="attr: { class: 'fa ' + (isSectionVisible('{{ sectionKey }}') ? 'fa-caret-up' : 'fa-caret-down') }"></i>
+		<strong>{{ title }}</strong>
+	</p>
+
+	<div class="toolset_code_snippets__dropdown" data-bind="visible: isSectionVisible('{{ sectionKey }}')">
+{% endmacro %}
+{% macro dropdownSectionEnd() %}
+	</div>
+{% endmacro %}
+
+
+{{ leftTab.dropdownSectionBegin('testMode', __( 'Test mode', 'wpv-views' )) }}
+	{% if( is_test_mode_enabled ) %}
+		<p>
+			{{ sprintf(
+				__( 'The test mode is enabled (via constant %s).', 'wpv-views'),
+				'<code>' ~ test_mode_constant ~ '</code>'
+			)|raw }}
+		</p>
+		<p>
+			{{ __( 'If you pass an additional URL parameter, no code snippets will be executed. For example:', 'wpv-views' ) }}<br />
+			<code>{{ site_url }}?{{ rescue_mode_parameter }}=1</code>
+		</p>
+	{% else %}
+		<p>
+			{{ sprintf(
+				__( 'The test mode is disabled. You can enable it by setting %s in your wp-config.php file.', 'wpv-views' ),
+				'<code>define( \'' ~ test_mode_constant ~ '\', true );</code>'
+			)|raw }}
+		</p>
+		<p>
+			{{ __( 'This will allow you to temporarily disable code snippets by adding a special URL parameter. <em>We encourage you to enable this mode</em> if you are editing code snippets manually, to be able to quickly recover from errors.', 'wpv-views' )|raw }}
+		</p>
+	{% endif %}
+{{ leftTab.dropdownSectionEnd() }}
+
+{{ leftTab.dropdownSectionBegin('disabling', __( 'Disabling code snippets', 'wpv-views' )) }}
+	<p>
+		{{ __( 'You can disable the code snippet support completely by adding the following line to your wp-config.php:', 'wpv-views') }}
+		<code>define( '{{ disable_snippets_constant }}', true );</code>
+	</p>
+
+	<p>
+		{{ __( 'Or, you can keep the code snippet support but hide this tab by adding the following line to your wp-config.php:', 'wpv-views' ) }}
+		<code>define( '{{ disable_gui_constant }}', true );</code>
+	</p>
+{{ leftTab.dropdownSectionEnd() }}
+
+{{ leftTab.dropdownSectionBegin('troubleshooting', __( 'Troubleshooting', 'wpv-views' )) }}
+	<p>
+		{{ sprintf(
+			__( 'Besides the usual %s you can use, we will display an error for any code snippet if it does any of the following:', 'wpv-views'),
+			'<a href="https://codex.wordpress.org/Debugging_in_WordPress">' ~ __( 'WordPress debugging techniques', 'wpv-views' ) ~ '</a>'
+		)|raw }}
+	</p>
+	<ol>
+		<li>{{ __( 'throws an exception or a throwable object', 'wpv-views' ) }}</li>
+		<li>{{ __( 'produces a notice, a warning or an error', 'wpv-views' ) }}</li>
+		<li>{{ __( 'returns a falsy value', 'wpv-views' ) }}</li>
+		<li>{{ __( 'produces non-empty output (for example via "echo")', 'wpv-views' ) }}</li>
+	</ol>
+	<p>
+		{{ sprintf(
+			__( 'Alternatively, you can use %s to write to your server log or a log file set by the %s constant.', 'wpv-views' ),
+			'<code>error_log()</code>',
+			'<code>WP_DEBUG_LOG</code>'
+		)|raw }}
+	</p>
+{{ leftTab.dropdownSectionEnd() }}

@@ -1,0 +1,67 @@
+.prf-dialog-content h3 {
+    text-align: center;
+}
+
+.prf-dialog-button {
+    position:absolute;
+    right: 8px;
+    bottom: 8px
+}
+
+.prf-dialog-relationship-type {
+    padding-bottom: 136px;
+    margin-bottom: 20px;
+    background-repeat: no-repeat;
+    background-position: 0 15px;
+    background-size: contain;
+}
+
+.prf-dialog-relationship-type span  {
+    font-weight: bold;
+    display: inline-block;
+    width: 47%;
+    margin: 0 0 0 3%;
+    text-align: left;
+}
+
+.prf-dialog-relationship-type span:last-child {
+    margin: 0 3% 0 0;
+    text-align: right;
+}
+
+.prf-dialog-relationship-type-one-to-one {
+    background-image: url("../../relationships/images/one-to-one-large.svg");
+}
+.prf-dialog-relationship-type-one-to-many {
+    background-image: url("../../relationships/images/one-to-many-large.svg");
+}
+.prf-dialog-relationship-type-many-to-many {
+    background-image: url("../../relationships/images/many-to-many-large.svg");
+}
+
+.prf-dialog-vertical-container {
+    display: table;
+}
+
+.prf-dialog-vertical-container p {
+    height: 145px;
+    display: table-cell;
+    vertical-align: middle;
+}
+.prf-link-disabled {
+    color: #cccccc;
+}
+.prf-link-disabled:hover {
+    color: #aaaaaa;
+}
+
+.ui-dialog-buttonset button:nth-child(1) {
+    margin-right: 10px;
+}
+
+.types-group-upload-cap-warning {
+	text-align: left !important;
+	color: #777;
+	font-style: italic;
+	padding:  12px 16px 16px;
+}

@@ -1,0 +1,11 @@
+/**
+ * Common CSS file with styling for applicable to all the user editors.
+ *
+ * @since 3.2.3
+ */
+
+.toolset-user-editors-backend {
+    background: #fff;
+    padding: 20px 20px 20px;
+	text-align: center;
+}

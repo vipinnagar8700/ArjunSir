@@ -1,0 +1,214 @@
+{#
+    Dialog for the m2m migration and activation process.
+
+    @since m2m
+#}
+
+{% import "@toolset/forms.twig" as forms %}
+
+
+<div class="js-types-m2m-activation-dialog-confirmation types-m2m-activation-dialog">
+    <div class="types-main-dialog-content types-main-dialog-content-fullwidth">
+
+
+        {#
+            First step: Confirmation with a preview of the relationships and associations to be created.
+        #}
+        <div data-bind="visible: ( 1 === step.current.number() )">
+            <p>
+                <strong>{{ __( 'This update will:', 'wpcf' ) }}</strong>
+            </p>
+            <ol>
+                <li>{{ __( 'Create new tables for relationships and associations', 'wpcf' ) }}</li>
+                <li>{{ __( 'Update the current post relationships in your site to use the new tables', 'wpcf' ) }}</li>
+                <li>{{ __( 'Migrate associations between individual posts.', 'wpcf' ) }}</li>
+                <li>{{ __( 'Enable the new Toolset->Relationships menu, so you can use post relationships', 'wpcf' ) }}</li>
+            </ol>
+
+            <div class="types-m2m-activation-details types-m2m-activation-space-top">
+                <p>
+                    <strong>{{ __( 'Relationships that will be updated', 'wpcf' ) }}</strong>
+                    {{ forms.spinner( 'step.confirmation.preview.isRelationshipTableBeingPopulated()' ) }}
+                </p>
+
+                <div class="types-m2m-activation-table-scroll">
+                <table class="widefat" data-bind="visible: step.confirmation.preview.isRelationshipTablePopulated">
+                    <thead>
+                        <tr>
+                            <td>{{ __( 'Parent post type', 'wpcf' ) }}</td>
+                            <td>{{ __( 'Child post type', 'wpcf' ) }}</td>
+                            <td>{{ __( 'Slug of the new relationship', 'wpcf' ) }}</td>
+                            <td>{{ __( 'Cardinality', 'wpcf' ) }}</td>
+                        </tr>
+                    </thead>
+                    <!-- ko if: (step.confirmation.preview.relationships().length > 0) -->
+                        <tbody data-bind="foreach: step.confirmation.preview.relationships">
+                            <tr>
+                                <td><span data-bind="text: parentPostType"></span> <span class="types-m2m-activation-warning-color" data-bind="visible: ! parentCanBeUsedInRelationship">*</span></td>
+                                <td><span data-bind="text: childPostType"></span> <span class="types-m2m-activation-warning-color" data-bind="visible: ! childCanBeUsedInRelationship">*</span></td>
+                                <td data-bind="text: relationshipSlug"></td>
+                                <td>{{ __( 'one-to-many', 'wpcf' ) }}</td>
+                            </tr>
+                        </tbody>
+                    <!-- /ko -->
+
+                    <!-- ko if: (step.confirmation.preview.relationships().length == 0) -->
+                        <tbody>
+                            <tr>
+                                <td colspan="3">
+                                    {{ __( 'No relationships found.', 'wpcf') }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    <!-- /ko -->
+                </table>
+                </div>
+
+            </div>
+
+            <div data-bind="visible: conflictWithWpmlTranslationMode">
+                <p class="types-m2m-activation-table-description types-m2m-activation-warning-color" >
+                    {{ __( '* This post type uses the "Translatable - only show translated items" WPML translation mode.', 'wpcf' )|raw }}
+                </p>
+                <label>
+                    <input type="checkbox" data-bind="
+                        checked: step.confirmation.userConfirmedChangingTranslationMode,
+                        disable: isInProgress() || isCompleted() || ! canSetCptTranslationStatus()"
+                    />
+                    {{ __( 'Change the translation mode for marked post types to "Translatable - use translation if available or fallback to default language"', 'wpcf' ) }}
+                </label>
+                <i class="fa fa-question-circle icon-question-sign js-show-tooltip types-pointer-tooltip"
+                   data-header="{{ __( 'WPML translation mode change', 'wpcf' ) }}"
+                   data-content="{{ dynamicStrings.translationModeTooltip }}"
+                   data-bind="click: ToolsetTypes.Utils.Pointer.show($element)">
+                </i>
+            </div>
+
+            <div data-bind="visible: hasTranslatablePostTypesInRelationships">
+                <p class="types-m2m-activation-space-top">
+                    <strong>{{ __( "Posts without a default language version", "wpcf" ) }}</strong>
+                </p>
+                <p>
+                    {{ __( "Because of the way relationships are stored, only posts that are non-translatable or that have a default language translation can be connected.", 'wpcf' ) }}
+                    {{ __( "What should happen with associations where a default language post is missing?", "wpcf" ) }}
+                </p>
+
+                <div class="types-m2m-radio">
+                    <div>
+                        <p>
+                            <input id="types-create-posts-when-default-language-missing" type="radio" value="create" data-bind="checked: step.confirmation.postWithoutDefaultTranslationHandling"/>
+                            <label for="types-create-posts-when-default-language-missing">
+                                {{ __( "Automatically create draft posts in default language. Then create the associations using these new posts", "wpcf" ) }}
+                            </label>
+                        </p>
+                        <p class="types-m2m-radio-suboption">
+                            <label>
+                                <input type="checkbox" data-bind="
+                                    enable: ( 'create' == step.confirmation.postWithoutDefaultTranslationHandling() ),
+                                    checked: step.confirmation.copyWhenCreatingPostTranslationCheckbox"
+                                />
+                                {{ __( "Copy entire content from original to default language post", "wpcf" ) }}
+                            </label>
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            <label>
+                                <input type="radio" value="skip" data-bind="checked: step.confirmation.postWithoutDefaultTranslationHandling" />
+                                {{ __( "Skip the association - existing connections between such posts will be lost", "wpcf" ) }}
+                            </label>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div data-bind="with: step.confirmation.legacyCodeScan">
+                {% include 'legacy_code_scan.twig' %}
+            </div>
+
+            <p class="types-m2m-activation-space-top">
+                <strong>{{ __( "Prevent people from accessing the site during the update", "wpcf" ) }}</strong>
+            </p>
+            <p>
+                {{ __( "This content migration will take a few minutes (depending on the size of your site). During this time, the front-end can show wrong content.", 'wpcf' )  }}
+            </p>
+            <label>
+                <input type="checkbox" data-bind="checked: step.confirmation.useMaintenanceMode, disable: isInProgress() || isCompleted()"/>
+                {{ __( "Put the site in maintenance mode during the content upgrade (recommended)", 'wpcf' ) }}
+            </label>
+
+            <p class="types-m2m-activation-space-top">
+                <strong>{{ __( "Please create a backup", "wpcf" ) }}</strong>
+            </p>
+            <p>
+                {{ __( "This process was tested thoroughly, but it's still highly recommended to create backup for your site's database before starting.", 'wpcf' )  }}
+            </p>
+            <label>
+                <input type="checkbox" data-bind="checked: step.confirmation.userConfirmed, disable: isInProgress() || isCompleted()"/>
+                {{ __( "I have created a database backup recently (required)", 'wpcf' ) }}
+            </label>
+
+        </div>
+
+        {#
+            Second step: Actual migration and display of individual steps.
+        #}
+        <div data-bind="visible: ( 2 === step.current.number() )">
+            <p>
+                {{ __( "Types is now updating the post relationships in your site. This can take a few minutes so please don't close this window.", 'wpcf' ) }}
+            </p>
+            <p>
+                {{ __( 'Right now, we are:', 'wpcf' ) }}
+            </p>
+            <ol class="js-types-m2m-proccess-status types-m2m-process-status">
+                {% for phase in [
+                    { index: 0, label: __( 'Creating new tables for relationships and associations', 'wpcf' ) },
+                    { index: 1, label: __( "Moving your site's relationships into new storage", 'wpcf' ) },
+                    { index: 2, label: __( 'Moving post connections to their new tables (this usually takes a few minutes)', 'wpcf' ) },
+                    { index: 3, label: __( 'Finalizing the process', 'wpcf' ) },
+                ] %}
+                    <li>
+                        <span class="types-m2m-migration-phase-label">{{ phase.label }}</span>
+                        <span class="types-m2m-migration-phase-status-icon">
+                            <!-- spinner when this phase is in progress -->
+                            <i data-bind="visible: isInProgress() && step.migration.currentMigrationPhase() == {{ phase.index }}" class="fa fa-spinner fa-spin fa-lg"></i>
+                            <!-- check mark when this phase is done -->
+                            <i data-bind="
+                                    visible: (
+                                        (step.migration.currentMigrationPhase() > {{ phase.index }} || ! isInProgress())
+                                        && step.migration.phase.getDisplayInfo({{ phase.index }}).visible
+                                    ),
+                                    attr: { class: step.migration.phase.getDisplayInfo({{ phase.index }}).icon },
+                                    style: { color: step.migration.phase.getDisplayInfo({{ phase.index }}).color },"
+                            ></i>
+                        </span>
+                    </li>
+                {% endfor %}
+            </ol>
+
+            {#
+                An error / warning message when the migration finishes.
+            #}
+            <div data-bind="visible: step.migration.message.isVisible, attr: { class: step.migration.message.classes }">
+                <p data-bind="text: step.migration.message.text"></p>
+            </div>
+
+            {#
+                Detailed output from the migration AJAX calls.
+            #}
+            <div data-bind="visible: ! step.migration.log.isEmpty() || isInProgress()" class="types-m2m-activation-details">
+                <p data-bind="click: step.migration.log.toggle" class="types-m2m-activation-details-dropdown types-m2m-activation-space-top">
+                    <i aria-hidden="true"
+                       data-bind="attr: { class: 'fa ' + (step.migration.log.isVisible() ? 'fa-caret-up' : 'fa-caret-down') }"
+                    ></i>
+                    {{ __( 'Technical details', 'wpcf' ) }}
+                </p>
+                <p data-bind="visible: step.migration.log.isVisible">
+                    <label>
+                        <textarea data-bind="valueScroll: step.migration.log.output" rows="10" readonly="readonly"></textarea>
+                    </label>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

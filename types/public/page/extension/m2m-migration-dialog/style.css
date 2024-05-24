@@ -1,0 +1,147 @@
+/*
+    Style for the m2m migration dialog. See Types_Page_Extension_M2m_Migration_Dialog for details.
+
+    @since 2.3-b4
+ */
+
+.types-m2m-activation-dialog {
+    max-width: 100%;
+}
+
+div.types-m2m-activation-dialog .types-image-for-current-step {
+    float: left;
+    width: 145px;
+    max-width: 25%;
+    text-align: center;
+}
+div.types-m2m-activation-dialog .types-image-for-current-step img {
+    max-width: 100%;
+    height: auto;
+}
+
+div.types-m2m-activation-dialog .types-main-dialog-content {
+    float: left;
+    width: 430px;
+    padding-left: 30px;
+    box-sizing: border-box;
+    max-width: 75%;
+}
+
+div.types-m2m-activation-dialog .types-main-dialog-content-fullwidth {
+    float: none;
+    width: 100%;
+    padding: 0 3px;
+    max-width: 100%;
+}
+
+div.types-m2m-activation-dialog ol.types-m2m-process-status > li {
+    position: relative;
+    padding-right: 30px;
+}
+
+div.types-m2m-activation-dialog .types-m2m-migration-phase-status-icon {
+    width: 30px;
+    text-align: right;
+    position: absolute;
+    top: -3px;
+    right: 0;
+}
+
+div.types-m2m-activation-dialog .toolset-m2m-activation-please-wait {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 16px;
+    clear: both;
+}
+
+div.types-m2m-activation-dialog div.types-m2m-activation-details textarea {
+    font-family: monospace;
+    font-size: x-small;
+    width: 100%;
+}
+
+
+div.types-m2m-activation-dialog div.types-m2m-activation-details .types-m2m-activation-details-dropdown {
+    cursor: pointer;
+}
+
+div.types-m2m-activation-dialog .types-m2m-activation-space-top {
+    margin-top: 25px;
+}
+
+div.types-m2m-activation-dialog .types-m2m-activation-table-layout p:first-child {
+    margin-bottom: 5px;
+}
+
+div.types-m2m-activation-dialog .types-m2m-activation-table-scroll {
+    max-height: 142px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: 1px solid #e5e5e5;
+}
+
+div.types-m2m-activation-dialog .types-m2m-activation-table-scroll table {
+    border: 0;
+}
+
+div.types-m2m-activation-dialog div.types-m2m-activation-details table td,
+div.types-m2m-activation-dialog div.types-m2m-activation-details table td code
+{
+    font-size: x-small;
+}
+
+div.types-m2m-activation-dialog div.types-m2m-activation-details table thead td {
+    font-weight: bold;
+}
+
+div.types-m2m-activation-dialog .types-m2m-activation-details button {
+    font-size: x-small !important;
+}
+
+div.types-m2m-activation-dialog .types-m2m-activation-table-description {
+    font-size: smaller;
+    margin-top: 0.5em;
+}
+
+div.types-m2m-activation-dialog .types-m2m-activation-warning-color {
+    color: red;
+}
+
+div.types-m2m-activation-post-association-preview .toolset-m2m-association-preview-slug {
+    font-family: monospace;
+}
+
+div.types-m2m-activation-post-association-preview .toolset-m2m-association-preview-button-area {
+    text-align: right;
+    margin-top: 10px;
+}
+
+div.types-m2m-activation-dialog .types-m2m-radio div {
+    display: block;
+    clear: both;
+}
+
+
+div.types-m2m-activation-dialog .types-m2m-radio p {
+    display: block;
+    padding-left: 20px;
+    cursor: inherit;
+}
+
+div.types-m2m-activation-dialog .types-m2m-radio input {
+    float: left;
+    margin-left: -20px;
+    margin-right: 10px;
+    margin-top: 6px; /* vertically align radio button with text */
+    padding: 0;
+}
+
+div.types-m2m-activation-dialog .types-m2m-radio p.types-m2m-radio-suboption {
+    padding-left: 40px;
+    font-size: smaller;
+}
+
+
+div.types-pointer-tooltip {
+    z-index: 100200 !important; /* has to be more than the migration .ui-dialog which currently has 100102 */
+}

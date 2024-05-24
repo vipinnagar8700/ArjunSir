@@ -1,0 +1,152 @@
+/*POST EDITOR OVERLAY*/
+.toolset-lock-overlay-dummy-container {
+	position: absolute;
+	top: -30px;
+	left: 0;
+	background: transparent;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 99%;
+	float: left;
+	opacity: 0;
+	z-index: 7777;
+	min-height: 240px; /* Gutenberg Editor can be very tiny, thus if there isn't too much text we need some default height */
+}
+
+.toolset-post-editor-overlay {
+	position: relative;
+	width: inherit;
+	height: inherit;
+	left: 0;
+	top: 15px;
+	z-index: 8888;
+	text-align: center;
+
+	/* IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+
+	/* IE 5-7 */
+	filter: alpha(opacity=0);
+
+	/* Netscape */
+	-moz-opacity: 0;
+
+	/* Safari 1.x */
+	-khtml-opacity: 0;
+
+	/* Good browsers */
+	opacity: 0;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	/* display:none;*/
+}
+
+.toolset-overlay-non-transparent {
+	position: absolute !important;
+	float: left;
+	background: #fcf8e3;
+	margin: 0 0 0 -1px !important;
+	padding: 0 !important;
+	top: 52px;
+	height: inherit;
+	/* IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+
+	/* IE 5-7 */
+	filter: alpha(opacity=0);
+
+	/* Netscape */
+	-moz-opacity: 0;
+
+	/* Safari 1.x */
+	-khtml-opacity: 0;
+
+	/* Good browsers */
+	opacity: 0;
+	z-index: 8889;
+	text-align: center;
+	border-radius: 2px;
+	width:100%;
+	/* display:none;*/
+}
+
+.toolset-post-content-editor-layout-info {
+	position: relative;
+	top: 50px;
+}
+
+.toolset-post-content-editor-layout-info p:first-child {
+	font-size: 24px;
+	margin-bottom: 0px;
+}
+
+.toolset-post-content-editor-layout-info p {
+	margin-top: 4px;
+}
+
+.toolset-post-content-editor-layout-info p:first-child span {
+	font-weight: bold;
+}
+
+.toolset-post-content-editor-layout-info p.toolset-post-content-editor-layout-info-buttons-wrap {
+	margin-top: 10px;
+}
+
+.toolset-post-content-editor-layout-info p.toolset-post-content-editor-layout-info-buttons-wrap button {
+	margin-right: 0px;
+	margin-left: 4px;
+}
+
+.toolset-post-content-editor-layout-info p.toolset-post-content-editor-layout-info-buttons-wrap button:first-child {
+	margin-right: 10px;
+	margin-left: 0px;
+}
+
+.toolset-post-content-show-post-post-editor-wrap {
+	position: relative;
+	top: 50px;
+	left: 28%;
+	font-size: 16px;
+	font-weight: normal;
+	width: 46%;
+	line-height: 22px;
+}
+
+.toolset-post-content-show-post-post-editor-wrap p {
+	padding-top: 4px;
+	margin-top: 0px;
+}
+
+.toolset-gutenberg-message-in-post-editor {
+	display: none;
+	line-height: 18px;
+}
+
+.toolset-editor-controls {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.toolset-gutenberg-message-in-post-editor {
+}
+
+.toolset-alert {
+	font-size: 14px;
+}
+/** Target only elements inside the overlay (.toolset-lock-overlay-dummy-container .toolset-overlay-non-transparent) and force elements in the overlay inside Gutenberg editor page (#wpwrap .edit-post-visual-editor .toolset-lock-overlay-dummy-container .toolset-overlay-non-transparent) to take our styles */
+#wpwrap .edit-post-visual-editor .toolset-lock-overlay-dummy-container .toolset-overlay-non-transparent .button, .toolset-lock-overlay-dummy-container .toolset-overlay-non-transparent .button {
+	padding: 0 10px 1px;
+}
+#wpwrap .edit-post-visual-editor .toolset-lock-overlay-dummy-container .toolset-overlay-non-transparent .button.button-secondary, .toolset-lock-overlay-dummy-container .toolset-overlay-non-transparent .button.button-secondary {
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	box-shadow: 0 1px 0 #cccccc;
+}
+#wpwrap .edit-post-visual-editor .toolset-lock-overlay-dummy-container .toolset-overlay-non-transparent .button.button-primary-toolset, .toolset-lock-overlay-dummy-container .toolset-overlay-non-transparent .button.button-primary-toolset {
+	border: 1px solid #EF6223;
+	border-radius: 3px;
+	box-shadow: inset 0 1px 0 rgba(239, 239, 239, 0.5), 0 1px 0 rgba(0,0,0,.15);
+	text-shadow: 0 -1px 1px #EF6223, 1px 0 1px #EF6223, 0 1px 1px #EF6223, -1px 0 1px #EF6223;
+}

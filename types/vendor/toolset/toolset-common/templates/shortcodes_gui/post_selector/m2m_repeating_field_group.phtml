@@ -1,0 +1,40 @@
+<?php
+/**
+ * Template for the m2m post selector by RFGs.
+ *
+ * @var string|null $current_post_type
+ * @var array $relationship_definitions
+ * @since Views 2.9.3
+ */
+
+$context = isset( $context ) ? $context : array();
+$current_post_type = toolset_getarr( $context, 'current_post_type', null );
+$relationship_definitions = toolset_getarr( $context, 'relationship_definitions', null );
+
+if ( empty( $relationship_definitions ) ) {
+	return;
+}
+?>
+<li class="toolset-shortcode-gui-item-selector-option toolset-shortcode-gui-item-selector-has-related js-toolset-shortcode-gui-item-selector-has-related">
+	<label for="toolset-shortcode-gui-item-selector-post-id-grouprepeated">
+		<input type="radio" class="js-toolset-shortcode-gui-item-selector" id="toolset-shortcode-gui-item-selector-post-id-grouprepeated" name="toolset_shortcode_gui_object_id" value="grouprepeated" />
+		<?php echo esc_html( __( 'The post owner of the Types repeatable group field', 'wpv-views' ) ); ?>
+	</label>
+	<div class="toolset-shortcode-gui-item-selector-is-related js-toolset-shortcode-gui-item-selector-is-related" style="display:none">
+		<ul class="toolset-advanced-setting toolset-mightlong-list" style="padding-top:15px;margin:5px 0 10px;">
+		<?php
+		foreach ( $relationship_definitions as $relationship_definition ) {
+			$relationship_selectors_factory = new Toolset_Shortcode_Attr_Item_Gui_Factory(
+				$relationship_definition, $current_post_type, 'grouprepeated_object'
+			);
+			$relationship_selectors = $relationship_selectors_factory->get_options();
+			foreach ( $relationship_selectors as $relationship_selector_option ) {
+				// Escaped when genetaring the options: the end result here is valid HTML.
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo '<li>' . $relationship_selector_option . '</li>';
+			}
+		}
+		?>
+		</ul>
+	</div>
+</li>

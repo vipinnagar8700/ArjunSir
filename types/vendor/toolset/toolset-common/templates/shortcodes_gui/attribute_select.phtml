@@ -1,0 +1,18 @@
+<?php
+/**
+ * underscore.js template for the shared shortcodes GUI.
+ * 
+ * Component: select attributes
+ *
+ * @since 3.1
+ */
+?>
+<script type="text/html" id="tmpl-toolset-shortcode-attribute-select">
+    <select id="{{{data.shortcode}}}-{{{data.attribute}}}" class="js-shortcode-gui-field<# if ( data.required ) { #> js-toolset-shortcode-gui-required<# } #>">
+        <# _.each( data.options, function( optionLabel, optionKey ) { #>
+            <option value="{{{optionKey}}}"<# if ( optionKey == data.defaultForceValue ) { #> selected="selected"<# } #>>
+                {{{optionLabel}}}
+            </option>
+        <# }); #>
+    </select>
+</script>

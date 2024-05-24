@@ -1,0 +1,20 @@
+<?php
+/**
+ * underscore.js template for the dialog for inserting a post reference field: intro.
+ *
+ * @since m2m
+ */
+?>
+<script type="text/html" id="tmpl-toolset-shortcode-attribute-info-postReferenceField">
+<div class="toolset-shortcodes__tabs_single">
+	<h2><?php _e( 'Displaying post reference fields', 'wpcf' ); ?></h2>
+	<p>
+		<?php
+		echo sprintf(
+			__( 'The %s is a <em>post reference field</em> that links to another post. You can display any of the fields of that post by selecting it when inserting the field.', 'wpcf' ),
+			'<strong>{{{data.title}}}</strong>'
+		);
+		?>
+	</p>
+</div>
+</script>

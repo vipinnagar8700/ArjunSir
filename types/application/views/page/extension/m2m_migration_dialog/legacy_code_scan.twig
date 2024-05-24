@@ -1,0 +1,74 @@
+{#
+    Section of the m2m migration dialog that scans for and shows occurences of
+    custom legacy relationship code that needs attention before migration.
+
+    @since 2.3-b5
+#}
+
+
+{% import "@toolset/forms.twig" as forms %}
+
+{% set legacyCodeDocumentationLink = 'https://toolset.com/2018/03/how-to-prepare-your-sites-for-the-new-post-relationships-coming-in-types-2-3' %}
+
+<div>
+    <p class="types-m2m-activation-space-top">
+        <strong>{{ __( "Custom legacy code", "wpcf" ) }}</strong>
+    </p>
+    <p data-bind="visible: isBeingPopulated">
+        {{ forms.spinner( 'true' ) }}
+        {{ __( 'Please wait while we scan for usages of legacy relationsip code that might cause backward compatibility issues.', 'wpcf' ) }}
+    </p>
+
+    <div data-bind="visible: hasResults() && ! isBeingPopulated()" class="types-m2m-activation-details">
+        <p class="types-m2m-activation-warning-color">
+            {{ __( 'We have detected legacy relationship code on your site that might cause <strong>backward compatibility issues.</strong>', 'wpcf' )|raw }}
+        </p>
+        <p>{{ __( 'Although most of the detected issues might be a false alarm, please make sure to investigate them and fix any potential problems in advance.', 'wpcf' ) }}</p>
+        <p>
+            {{
+                sprintf(
+                    __( 'For more information about the custom code support for relationships, please refer to %s.', 'wpcf' ),
+                    sprintf( '<a href="%s" target="_blank">%s <i class="fa fa-external-link " aria-hidden="true"></i></a>', legacyCodeDocumentationLink, __( 'our documentation', 'wpcf' ) )
+                )|raw
+            }}
+        </p>
+        <div class="types-m2m-activation-table-scroll">
+            <table class="widefat">
+                <thead>
+                    <tr>
+                        <td>{{ __( 'Type', 'wpcf' ) }}</td>
+                        <td>{{ __( 'Location', 'wpcf' ) }}</td>
+                        <td>{{ __( 'Problematic code', 'wpcf' ) }}</td>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: results">
+                    <tr>
+                        <td data-bind="text: domainName"></td>
+                        <td data-bind="text: location"></td>
+                        <td><code data-bind="text: occurence"></code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p>
+            {{ forms.checkbox(
+                'checked: userConfirmation, disabled: ! isPopulated()',
+                '',
+                __( 'I have checked my site for legacy custom code usage and made necessary adjustments.', 'wpcf' ) )
+            }}
+        </p>
+    </div>
+
+    <div data-bind="visible: ! hasResults() && ! isBeingPopulated()">
+        {{
+            sprintf(
+                __( 'We haven\'t detected any legacy relationship code on your site, but if you are aware of using it, please refer to %s for detailed information on how to prevent any potential problems.', 'wpcf' ),
+                sprintf( '<a href="%s" target="_blank">%s <i class="fa fa-external-link " aria-hidden="true"></i></a>', legacyCodeDocumentationLink, __( 'our documentation', 'wpcf' ) )
+            )|raw
+        }}
+
+        <p>
+            {{ forms.checkbox( 'checked: userConfirmation, disabled: ! isPopulated()', '', __( 'I understand the risks involved with legacy custom code.', 'wpcf' ) ) }}
+        </p>
+    </div>
+</div>

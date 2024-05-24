@@ -1,0 +1,6 @@
+{
+    "require": {
+		"scssphp/scssphp": "1.11.*",
+		"wikimedia/less.php": "^4.1"
+    }
+}

@@ -1,0 +1,35 @@
+{#
+    The Relationships page template that will be used if m2m is not active yet.
+
+    @since 2.3-b4
+#}
+
+{% extends "@toolset/base.twig" %}
+
+{% block title %}{{ __( 'Relationships', 'wpcf') }}{% endblock %}
+
+{% block content %}
+
+    <h2>{{ __( 'Your site has relationships that use the old storage.', 'wpcf' ) }}</h2>
+    <p>{{ __( 'A "post relationship" is the connection between different posts on a website. This particularly includes "custom post types".', 'wpcf' ) }}</p>
+
+    <p>{{ __( 'There are three possible types of post relationships:', 'wpcf' ) }}</p>
+    <ul class="ul-disc">
+        <li>{{ __( 'One-to-many', 'wpcf' ) }}</li>
+        <li>{{ __( 'Many-to-many', 'wpcf' ) }}</li>
+        <li>{{ __( 'One-to-one', 'wpcf' ) }}</li>
+    </ul>
+
+    <p>{{ __( 'Using a post relationship makes it easier to build and run advanced sites.', 'wpcf' ) }}</p>
+
+    <p>{{ __( 'Building a site using related posts allows you to separate information into independent pieces, which can then be combined in multiple ways. This eliminates data duplication, enabling you to edit each piece of information only once and use it in any manner you desire.', 'wpcf' ) }}</p>
+
+    <p>{{ __( 'This is important for both large and small sites.', 'wpcf' ) }}</p>
+
+    <p>{{ sprintf( __( 'Please read our <a href="%s">comprehensive guide</a> to learn how to use Toolset to leverage the power behind post relationships.', 'wpcf' ), 'https://toolset.com/course-lesson/what-are-post-relationships-and-how-they-work/?utm_source=plugin&utm_medium=gui&utm_campaign=types' ) | raw }}</p>
+
+    <p><strong>{{ __( 'If you do not need to develop or extend this site with new the relationship functionality, it is perfectly safe to not run the migration.', 'wpcf' ) }}</strong></p>
+
+    <p><button class="button button-large types-relationships-inactive__run-migration-button" >{{ __( 'Run the migration', 'wpcf' ) }}</button></p>
+
+{% endblock %}

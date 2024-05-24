@@ -1,0 +1,32 @@
+{#
+    Dialog for confirming the deletion of a relationship definition.
+
+    @since m2m
+#}
+
+<div style="margin-left: 100px;">
+    <div style="float: right; width: 100%">
+        <p>
+            {{
+                __( 'You are about to delete the relationship "%s". Are you sure you want to do that?', 'wpcf' )
+                |format( '<span data-bind="text: relationshipDisplayName"></span>' )
+                |raw
+            }}
+
+            {{ __( 'Deleting a relationship means that all of its connections between posts will also be deleted.', 'wpcf' ) | raw }}
+
+			{{ __( 'If the relationship has intermediary posts, those will be deleted as well.', 'wpcf' ) }}
+        </p>
+        <p>
+            <strong>{{ __( 'This cannot be undone.', 'wpcf' ) }}</strong>
+        </p>
+        <p>
+            {{ __( 'Instead, it is possible to just deactivate the relationship, which will hide it from the site entirely, and it will only stay visible on this page.', 'wpcf' ) }}
+            {{ __( 'If you need again it in the future, you can re-activate it easily.', 'wpcf' ) }}
+        </p>
+    </div>
+    <div style="float: left; width: 100px; margin-left: -100px;">
+        <i class="fa fa-exclamation-triangle fa-4x" style="margin: 20px;"></i>
+    </div>
+    <div style="clear: both"></div>
+</div>

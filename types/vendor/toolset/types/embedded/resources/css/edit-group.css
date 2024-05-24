@@ -1,0 +1,35 @@
+/**
+ * Extra styles for the editing group page
+ *
+ * @since 2.3
+ */
+
+#intermediary-progress-bar {
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+	box-sizing: border-box;
+	height: 24px;
+	padding: 1px;
+	width: 100%;
+}
+
+#intermediary-progress-bar span {
+	min-width: 5px;
+	display: inline-block;
+	background: #f05a28;
+	height: 20px;
+	border-radius: 3px;
+}
+
+.toolset-intermediary-result .fa-check {
+	color: #289C40;
+	float: right;
+}
+
+@media (min-width: 768px) {
+	.toolset-confirmation-dialog-icon {
+		padding-left: 10px;
+		padding-right: 20px;
+	}
+}

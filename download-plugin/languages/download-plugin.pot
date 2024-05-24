@@ -1,0 +1,436 @@
+# Blank WordPress Pot
+# Copyright 2014 ...
+# This file is distributed under the GNU General Public License v3 or later.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: "
+"Download Plugin Pot "
+"v2.0.4\n"
+"Report-Msgid-Bugs-To: "
+"Translator Name "
+"<translations@example."
+"com>\n"
+"POT-Creation-Date: "
+"2022-05-11 16:15+0530\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Your "
+"Name <you@example.com>\n"
+"Language-Team: Metagauss "
+"<support@metagauss.com>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/"
+"plain; charset=UTF-8\n"
+"Content-Transfer-"
+"Encoding: 8bit\n"
+"Plural-Forms: "
+"nplurals=2; plural=n != "
+"1;\n"
+"X-Textdomain-Support: "
+"yesX-Generator: Poedit "
+"1.6.4\n"
+"X-Poedit-SourceCharset: "
+"UTF-8\n"
+"X-Poedit-KeywordsList: "
+"__;_e;esc_html_e;"
+"esc_html_x:1,2c;"
+"esc_html__;esc_attr_e;"
+"esc_attr_x:1,2c;"
+"esc_attr__;_ex:1,2c;"
+"_nx:4c,1,2;"
+"_nx_noop:4c,1,2;_x:1,2c;"
+"_n:1,2;_n_noop:1,2;"
+"__ngettext:1,2;"
+"__ngettext_noop:1,2;_c,"
+"_nc:4c,1,2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Generator: Poedit "
+"3.0.1\n"
+"X-Poedit-"
+"SearchPath-0: .\n"
+
+#: app/Main.php:54
+#: app/Plugins/Base.php:144
+#: app/Plugins/templates/dpwap_plugin_info.php:13
+#: app/Themes/Base.php:24
+#: app/Themes/templates/dpwap_theme_info.php:12
+msgid "Download"
+msgstr ""
+
+#: app/Main.php:56
+msgid "Download Plugins"
+msgstr ""
+
+#: app/Main.php:58
+msgid "Download Themes"
+msgstr ""
+
+#: app/Main.php:62
+msgid "Download Users"
+msgstr ""
+
+#: app/Plugins/Base.php:63
+msgid "Multiple Upload"
+msgstr ""
+
+#: app/Plugins/Base.php:63
+msgid " Multiple Upload"
+msgstr ""
+
+#: app/Plugins/Base.php:64
+msgid "Dpwap Activate"
+msgstr ""
+
+#: app/Plugins/Base.php:64
+msgid " Dpwap Activate"
+msgstr ""
+
+#: app/Plugins/Base.php:65
+msgid "Dpwap Status"
+msgstr ""
+
+#: app/Plugins/Base.php:65
+msgid " Dpwap Status"
+msgstr ""
+
+#: app/Plugins/Base.php:66
+msgid ""
+"Dpwap Plugin Download"
+msgstr ""
+
+#: app/Plugins/Base.php:66
+msgid ""
+" Dpwap Plugin Download"
+msgstr ""
+
+#: app/Plugins/Base.php:104
+msgid ""
+"server maximum upload "
+"size limit"
+msgstr ""
+
+#: app/Plugins/Base.php:105
+msgid "MB"
+msgstr ""
+
+#: app/Plugins/Base.php:106
+msgid ""
+"Please upload vaild .zip "
+"extension file."
+msgstr ""
+
+#: app/Plugins/Base.php:107
+msgid ""
+"Max. 20 uploads are "
+"supported at a time."
+msgstr ""
+
+#: app/Plugins/Base.php:108
+#: app/Plugins/Dpwapuploader.php:75
+msgid ""
+"Plugin activated "
+"successfully."
+msgstr ""
+
+#: app/Plugins/Base.php:109
+msgid "Plugin activated"
+msgstr ""
+
+#: app/Plugins/Base.php:110
+msgid "Please wait..."
+msgstr ""
+
+#: app/Plugins/Base.php:111
+msgid ""
+"You are all set! Install "
+"and activate our "
+"following plugins from "
+"wordpress.org to add "
+"selected features."
+msgstr ""
+
+#: app/Plugins/Base.php:112
+msgid ""
+"Select at least one "
+"Feature"
+msgstr ""
+
+#: app/Plugins/Base.php:113
+msgid ""
+"Please select a plugin "
+"(or multiple plugins) to "
+"begin download."
+msgstr ""
+
+#: app/Plugins/Base.php:114
+msgid ""
+"Max. 30 downloads are "
+"supported at a time"
+msgstr ""
+
+#: app/Plugins/Base.php:177
+msgid ""
+"This may take few "
+"minutes based on the "
+"number and size of the "
+"plugins"
+msgstr ""
+
+#: app/Plugins/Base.php:365
+#: app/Plugins/templates/dpwap_plugin_info.php:32
+msgid ""
+"Upload Multiple Plugins"
+msgstr ""
+
+#: app/Plugins/Dpwapuploader.php:94
+msgid ""
+"Unpacking the package..."
+msgstr ""
+
+#: app/Plugins/Dpwapuploader.php:95
+msgid ""
+"Installing the plugin..."
+msgstr ""
+
+#: app/Plugins/Dpwapuploader.php:96
+msgid ""
+"Plugin installed "
+"sucessfully."
+msgstr ""
+
+#: app/Plugins/Dpwapuploader.php:134
+msgid "Cannot open file: "
+msgstr ""
+
+#: app/Plugins/Dpwapuploader.php:190
+#: app/Plugins/Dpwapuploader.php:198
+#: app/Plugins/Dpwapuploader.php:202
+msgid "not found. Try"
+msgstr ""
+
+#: app/Plugins/Dpwapuploader.php:190
+#: app/Plugins/Dpwapuploader.php:198
+#: app/Plugins/Dpwapuploader.php:202
+msgid "manual"
+msgstr ""
+
+#: app/Plugins/Dpwapuploader.php:190
+#: app/Plugins/Dpwapuploader.php:198
+#: app/Plugins/Dpwapuploader.php:202
+msgid "install"
+msgstr ""
+
+#: app/Plugins/Dpwapuploader.php:193
+msgid "Found"
+msgstr ""
+
+#: app/Plugins/Dpwapuploader.php:193
+msgid ""
+"Processing "
+"installation..."
+msgstr ""
+
+#: app/Plugins/Dpwapuploader.php:198
+msgid "Package for"
+msgstr ""
+
+#: app/Plugins/Dpwapuploader.php:259
+#, php-format
+msgid ""
+"Maximum upload file "
+"size: %d%s."
+msgstr ""
+
+#: app/Plugins/Dpwapuploader.php:289
+msgid "Installing Plugins"
+msgstr ""
+
+#: app/Plugins/Dpwapuploader.php:306
+msgid "This is"
+msgstr ""
+
+#: app/Plugins/Dpwapuploader.php:306
+msgid ""
+"not a valid zip archive."
+msgstr ""
+
+#: app/Plugins/templates/activate-status.php:7
+msgid "Activation Status"
+msgstr ""
+
+#: app/Plugins/templates/activate-status.php:16
+msgid ""
+"Return to Plugin "
+"Installer"
+msgstr ""
+
+#: app/Plugins/templates/dpwap_plugin_info.php:3
+msgid "Download Plugin"
+msgstr ""
+
+#: app/Plugins/templates/dpwap_plugin_info.php:4
+msgid "Upload Plugin"
+msgstr ""
+
+#: app/Plugins/templates/dpwap_plugin_info.php:10
+msgid "Single Plugin"
+msgstr ""
+
+#: app/Plugins/templates/dpwap_plugin_info.php:12
+#: app/Plugins/templates/dpwap_plugin_info.php:30
+#: app/Themes/templates/dpwap_theme_info.php:11
+msgid "Click on the"
+msgstr ""
+
+#: app/Plugins/templates/dpwap_plugin_info.php:14
+msgid ""
+"link under plugin name "
+"on Plugins page."
+msgstr ""
+
+#: app/Plugins/templates/dpwap_plugin_info.php:19
+#: app/Plugins/templates/dpwap_plugin_info.php:28
+msgid "Multiple Plugins"
+msgstr ""
+
+#: app/Plugins/templates/dpwap_plugin_info.php:20
+msgid ""
+"On Plugins page, choose "
+"multiple plugins using "
+"checkboxes and select "
+"Download option in bulk "
+"action dropdown."
+msgstr ""
+
+#: app/Plugins/templates/dpwap_plugin_info.php:34
+msgid ""
+"on Plugins → Add New "
+"page."
+msgstr ""
+
+#: app/Plugins/templates/dpwap_setting.php:21
+msgid ""
+"Thank you for installing "
+"Download Plugin!"
+msgstr ""
+
+#: app/Plugins/templates/dpwap_setting.php:26
+msgid ""
+"It is now super easy to "
+"download any plugin from "
+"your website dashboard "
+"with a single click!"
+msgstr ""
+
+#: app/Plugins/templates/dpwap_setting.php:30
+#: app/Plugins/templates/dpwap_setting.php:60
+#: app/Plugins/templates/dpwap_setting.php:85
+msgid "Next"
+msgstr ""
+
+#: app/Plugins/templates/dpwap_setting.php:51
+msgid ""
+"Download multiple "
+"plugins together!"
+msgstr ""
+
+#: app/Plugins/templates/dpwap_setting.php:56
+msgid ""
+"Check multiple plugins "
+"and select Download "
+"option in Bulk Actions "
+"dropdown."
+msgstr ""
+
+#: app/Plugins/templates/dpwap_setting.php:76
+msgid ""
+"Upload and install "
+"multiple plugins!"
+msgstr ""
+
+#: app/Plugins/templates/dpwap_setting.php:81
+msgid ""
+"Use the new button named "
+"<strong> Install "
+"Multiple Plugins</"
+"strong>, on Add New "
+"Plugin page. You can "
+"multi-select more than "
+"one plugin zip from your "
+"computer and start the "
+"installation process."
+msgstr ""
+
+#: app/Plugins/templates/dpwap_setting.php:101
+msgid ""
+"If you wish to know more "
+"about how to use these "
+"new feature, please"
+msgstr ""
+
+#: app/Plugins/templates/dpwap_setting.php:102
+msgid "read our guide."
+msgstr ""
+
+#: app/Plugins/templates/dpwap_setting.php:105
+msgid "Prev"
+msgstr ""
+
+#: app/Plugins/templates/multiple_upload_plugin.php:17
+msgid ""
+"oops!!! Seems like the "
+"directory permission are "
+"not set right so some "
+"functionalities of "
+"plugin will not work."
+msgstr ""
+
+#: app/Plugins/templates/multiple_upload_plugin.php:19
+msgid ""
+"Please set the directory "
+"permission for the "
+"folder \"uploads\" "
+"inside \"wp-content\" "
+"directory to 777."
+msgstr ""
+
+#: app/Plugins/templates/multiple_upload_plugin.php:25
+msgid "Click to toggle"
+msgstr ""
+
+#: app/Plugins/templates/multiple_upload_plugin.php:29
+msgid ""
+"You can select and "
+"upload multiple Plugins "
+"in .zip format"
+msgstr ""
+
+#: app/Plugins/templates/multiple_upload_plugin.php:37
+msgid "Install Now"
+msgstr ""
+
+#: app/Plugins/templates/multiple_upload_plugin.php:49
+msgid "Activate all"
+msgstr ""
+
+#: app/Plugins/templates/multiple_upload_plugin.php:60
+msgid ""
+"Uploading is in "
+"progress..."
+msgstr ""
+
+#: app/Themes/templates/dpwap_theme_info.php:3
+msgid "Download Theme"
+msgstr ""
+
+#: app/Themes/templates/dpwap_theme_info.php:9
+msgid "Single Theme"
+msgstr ""
+
+#: app/Themes/templates/dpwap_theme_info.php:13
+msgid ""
+"button on right side of "
+"the theme name on Themes "
+"page."
+msgstr ""

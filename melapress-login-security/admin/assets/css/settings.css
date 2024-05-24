@@ -1,0 +1,474 @@
+.ppm-wrap{
+	position: relative
+}
+.ppm-wrap .page-head{
+	position: relative;
+	padding-right: 250px;
+}
+.ppm-wrap .page-head .action{
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 236px;
+}
+.ppm-wrap .page-head h2{
+	font-size: 23px;
+  font-weight: 400;
+}
+.ppm-wrap .short-message{
+	font-style: italic;
+}
+
+td.col-indented {
+	padding: 0 50px 15px;;
+	box-sizing: border-box;
+}
+
+td .small-input {
+	max-width: 155px;
+}
+
+ul#ppm-exempted-list {
+	width: 250px;
+}
+
+li.ppm-exempted-list-item {
+	float: left;
+	display: inline-block;
+	margin: 2px 3px;
+	padding: 3px 5px 3px 5px;
+	background: #fff;
+	border-radius: 16px;
+	position: relative;
+}
+
+li.ppm-exempted-list-item.ppm-exempted-roles {
+    background: #e0e0e0;
+}
+
+li.ppm-exempted-list-item a.remove {
+	float: right;
+	text-align: center;
+	text-decoration: none;
+	margin-left: 3px;
+}
+
+li.ppm-exempted-list-item a.remove::before {
+	content: "\f335";
+	color: #fff;
+	font: 400 14px/15px dashicons;
+	display: inline-block;
+}
+
+li.ppm-exempted-list-item a.remove:hover::before{
+	color: #fff;
+}
+
+.user-btn {
+    margin-right: 10px !important;
+		margin-bottom: 10px !important;
+}
+
+.user-btn .remove-item {
+    background: red;
+    height: 14px;
+    width: 14px;
+    position: absolute;
+    color: #fff;
+    border-radius: 7px;
+    line-height: 11px;
+    text-align: center;
+    font-size: 10px;
+    display: block;
+    right: -7px;
+    top: -5px;
+}
+
+div#reset-container {
+    display: inline-block;
+    top: 20px;
+    vertical-align: top;
+}
+
+div#reset-container input#_ppm_reset {
+    background: #cc6600;
+    border-color: #c00000;
+    color: #fff;
+    font-size: larger;
+    height: 36px;
+    padding: 0 22px;
+}
+
+.ppm-settings{
+    display: inline-block;
+}
+
+.ppm-settings p.description{
+    clear:both;
+    max-width:570px;
+}
+
+.ppm-settings.disabled,
+.disabled th,
+.disabled p.description,
+.disabled label, .ppm-settings.disabled *,
+.ppm-settings .disabled {
+	color: #bbbbbb;
+}
+
+.disabled a {
+	opacity: 0.5;
+}
+
+.ppm-settings .disabled {
+	opacity: 0.5;
+    pointer-events: none;
+}
+
+#roles_sortable.disabled {
+	height: 0;
+    overflow: hidden;
+    margin: 0;
+}
+
+/* HIDE/DISPLAY SETTINGS */
+.ppm-settings.disabled {
+    height: 0;
+    overflow: hidden;
+}
+
+.nav-tab-wrapper.disabled .nav-tab {
+	display: none;    
+}
+
+.nav-tab:focus, .nav-tab:hover {
+    box-shadow: none;
+}
+
+/**
+ * Disable arrow for password history input
+ */
+#ppm-history::-webkit-inner-spin-button, #ppm-history::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+#ppm-history {
+	-moz-appearance: textfield;
+}
+
+/**
+ * InactiveUsersTable styles
+ */
+.tablenav.top #ppmwp_inactive_check_now:not(:first-child) {
+	margin-left: -10px;
+}
+
+#ppm-expiry-unit {
+	position: relative;
+	top: -2px;
+}
+
+/* Fix icon positioning */
+.ppm-wrap .nav-tab .dashicons, .ppm-wrap .nav-tab.dashicons-before:before {
+    font-size: 18px;
+    line-height: 25px;
+    position: relative;
+    left: -3px;
+}
+
+#roles_sortable li {
+    display: block;
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 2.15384615;
+    min-height: 30px;
+    margin: 0;
+    padding: 0 10px 0 0;
+    cursor: pointer;
+    border-width: 1px;
+    border-style: solid;
+    -webkit-appearance: none;
+    border-radius: 3px;
+    white-space: nowrap;
+    box-sizing: border-box;
+    color: #2271b1;
+    border-color: #2271b1;
+    background: #f6f7f7;
+}
+
+#roles_sortable li .dashicons {
+    transform: rotate( 90deg );
+    font-size: 17px;
+    opacity: 0.5;
+    position: relative;
+    top: 4px;
+}
+
+
+#ppmwp-role_tab_link_wrapper {
+    float: left;
+    height: 35px;
+    overflow: hidden;
+    position: relative;
+    width: 242px;
+}
+
+#ppmwp-role_tab_link_wrapper:hover, #ppmwp-role_tab_link_wrapper:hover #ppmwp_links-inner-wrapper {
+    overflow: visible;
+}
+#ppmwp-role_tab_link_wrapper a, #ppmwp-role_tab_link_wrapper .dummy {display: block;clear: both;width: 180px;}
+
+#ppmwp_links-inner-wrapper {
+    position: absolute;
+    overflow: hidden;
+    width: auto;
+    max-width: 242px;
+    z-index: 100;
+    background: #eee;;
+}
+
+#ppmwp-role_tab_link_wrapper > span.dashicons {
+    position: absolute;
+    right: 40px;
+    z-index: 500;
+    top: 8px;
+}
+
+#ppm-failed-login-reset-attempts {
+    min-width: 60px;
+}
+
+.setting-heading th {
+    width: auto;
+    padding: 0;
+}
+
+.setting-heading h3 {
+    margin-top: 0;
+}
+
+.setting-heading h3.mt-40 {
+    margin-top: 40px;;
+}
+
+.upgrade-sidebar {
+    width: 280px;
+    position: relative;
+    top: 90px;
+}
+
+.sidebar-present {
+    width: calc( 100% - 280px );
+    float: left;
+}
+
+.premium-link {
+    background: #dd2b0f;
+    color: #fff !important;
+    padding: 8px 12px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 15px;
+    display: inline-block;
+}
+
+.c4wp-pro-features-ul li {
+    padding-left: 25px;
+    position: relative;
+    margin-bottom: 15px;
+}
+
+ul.c4wp-pro-features-ul li.dashicons-yes-alt:before {
+    color:#dd2b0f;
+    position: absolute;
+    left: -2px;
+    top: 1px;
+}
+
+.mls-reset-all-wrapper {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+@media all and (max-width: 900px) {
+    .mls-reset-all-wrapper {
+        position: relative;
+    }  
+    .sidebar-present {
+        width: 100%;
+        float: none;
+    }
+}
+
+.inactiveusers th.column-actions {
+    text-align: right;
+}
+
+.day-span {
+    min-width: 100px;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 500;
+    position: relative;
+    bottom: 1px;
+}
+
+.timed-login-select {
+    min-width: 60px;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 500;
+    position: relative;
+    bottom: 1px;  
+}
+
+#TB_title {
+    background: #fff;
+    border-bottom: none;
+    height: 32px;
+    padding: 5px;
+}
+
+#TB_window {
+    position: fixed;
+    background-color: #fff;
+    z-index: 100050;
+    visibility: hidden;
+    text-align: left;
+    top: 50%;
+    left: 50%;
+    -webkit-box-shadow: 0 3px 6px rgba( 0, 0, 0, 0.3 );
+    box-shadow: 0 3px 6px rgba( 0, 0, 0, 0.3 );
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+#TB_ajaxContent p {
+    margin-top: 0 !important;
+}
+
+#TB_ajaxContent {
+    clear: both;
+    padding: 2px 15px 15px 15px;
+}
+
+#TB_closeWindowButton {
+    position: absolute;
+    left: auto;
+    right: 2px;
+    width: 25px;
+    height: 25px;
+    border: 0;
+    padding: 0;
+    background: none;
+    cursor: pointer;
+    outline: none;
+    -webkit-transition: color .1s ease-in-out, background .1s ease-in-out;
+    transition: color .1s ease-in-out, background .1s ease-in-out;
+    top: 4px;
+}
+
+#import-from-email {
+    min-width: 300px;
+    margin-bottom: 20px;
+}
+.user-import-result {
+    background-color: green;
+    margin-left: 5px;
+    color: #fff;
+    border-radius: 25px;
+    padding: 3px 10px 4px;
+    font-size: 10px;
+    width: auto;
+    min-width: 0 !important;
+    position: relative;
+    bottom: 1px;
+    line-height: 13px;
+    float: right;
+}
+.user-import-result a {
+    color: #fff;
+    margin-left: 10px;
+}
+.user-import-result.error {
+    background-color: red;
+}
+#csv-examples pre {
+    white-space: pre-line !important;
+    font-size: 12px;
+    color: #888;
+    font-style: italic;
+}
+
+.mls-modal-main-wrapper {
+    position: fixed;
+    z-index: -9999;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    display: flex;
+    transition: all 0.2s ease-in-out;
+}
+
+.mls-modal-main-wrapper.show {
+    z-index: 9999;
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+}
+.mls-modal-content {
+    align-self: center;
+    max-width: 600px;
+    background: #fff;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+.mls-modal-content h3 {
+    margin-top: 0;
+}
+
+@media all and (min-width: 1400px) {
+    .mls-modal-content {
+        min-width: 600px;;
+    }  
+}
+.c4wp-buttony-list {
+	display: inline-block;
+	border-width: 1px;
+	border-style: solid;
+	padding: 2px 4px;
+	margin: 2px 0 0 2px;
+	border-radius: 3px;
+	cursor: default;
+	background: #EFE;
+	border-color: #5B5;
+}
+.c4wp-buttony-list span {
+	text-decoration: none;
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFF;
+	margin-left: 2px;
+	background: #BBB;
+	border-radius: 25px;
+	height: 14px;
+	display: inline-block;
+	vertical-align: middle;
+	width: 14px;
+	text-align: center;
+	line-height: 12px;
+}
+
+#ppm-wp-settings textarea {
+    min-height: 120px;
+}
+#reset-role-select {
+    position: relative;
+    top: -1px;
+}

@@ -1,0 +1,333 @@
+<?php /* Group Container */ ?>
+<script type="text/html" id="tplRepeatableGroup">
+    <p class="c-rgx__title" data-bind="text: repeatableGroup.title"></p>
+    <div class="c-rgx__warning" data-bind="visible: ! repeatableGroup.controlsActive && repeatableGroup.wpmlIsTranslationModeSupported">
+        <p>
+            <?php printf( __( '<b>Translation mode active</b>. In this mode you can only translate existing items. To add, delete or sort items of %s switch to the default language.', 'wpcf' ), '<b><span data-bind="text: repeatableGroup.title"></span></b>' ); ?>
+        </p>
+    </div>
+    <div class="c-rgx__warning" data-bind="visible: ! repeatableGroup.wpmlIsTranslationModeSupported">
+        <p>
+            <?php
+            $url_translation_links = apply_filters( 'wpml_get_post_translation_settings_link', '' );
+
+            if( $url_translation_links != '' ) {
+	            $a_open_translation_settings = sprintf( '<a href="%s">', $url_translation_links );
+	            $a_close_translation_settings = '</a>';
+            } else {
+	            $a_open_translation_settings = '';
+	            $a_close_translation_settings = '';
+            }
+
+            printf( __( 'This post type uses the <b>Translatable - only show translated items</b> WPML translation mode. In order to use it in a relationship, %sswitch to%s <b>Translatable - use translation if available or fallback to default language</b> mode.', 'wpcf' ), $a_open_translation_settings, $a_close_translation_settings );
+
+            ?>
+        </p>
+    </div>
+    <div class="c-rgx js-rgy" data-bind="visible: repeatableGroup.wpmlIsTranslationModeSupported">
+        <div class="c-rgy__body">
+            <!-- ko if: repeatableGroup.items().length == 0 -->
+            <div class="c-rgx__empty--container" data-bind="visible: repeatableGroup.controlsActive">
+				<span class="spinner"
+					data-bind="style: { visibility: ( repeatableGroup.isAddingItem() ? 'visible' : 'hidden') }, visible: repeatableGroup.isAddingItem"
+					style="float: left;"
+				></span>
+				<a class="button"
+                   data-bind="click: repeatableGroup.addItem, text: '<?php _e( 'Add first', 'wpcf' ); ?>' + ' ' + repeatableGroup.title"> </a>
+            </div>
+            <!-- /ko -->
+            <!-- ko if: repeatableGroup.items().length > 0 -->
+            <table class="c-rgx__table c-rgx__table--master c-rgy__table--master"
+                   data-bind="typesRepeatableGroupSortable:repeatableGroup.items">
+                <thead> <?php /* IMPORTANT to keep thead - for having same markup as horizontal at this place */ ?>
+                <tr>
+                    <th><?php /* sort col */ ?></th>
+                    <th><?php /* item col */ ?></th>
+                    <th><?php /* delete col */ ?></th>
+                </tr>
+                </thead>
+                <!-- ko foreach: repeatableGroup.items -->
+                <!-- ko template: { name: 'tplItems' } --><!-- /ko -->
+                <!-- /ko -->
+            </table>
+            <!-- /ko -->
+        </div>
+    </div>
+
+    <!-- ko if: repeatableGroup.items().length > 0 -->
+    <p class="c-rgx__btn--add"  data-bind="visible: repeatableGroup.controlsActive">
+		<span class="spinner"
+			data-bind="style: { visibility: ( repeatableGroup.isAddingItem() ? 'visible' : 'hidden') }, visible: repeatableGroup.isAddingItem"
+			style="float: left;"
+		></span>
+		<a class="button" data-bind="click: repeatableGroup.addItem, text: '<?php _e( 'Add New', 'wpcf' ); ?>' + ' ' + repeatableGroup.title"> </a>
+    </p>
+    <!-- /ko -->
+</script>
+
+
+<?php /* Group Headlines */ ?>
+<script type="text/html" id="tplHeadlines">
+    <tr>
+        <th class="c-rgx__th c-rgx__th--invisible"></th>
+        <!-- ko foreach: $data.headlines -->
+        <th class="c-rgx__th"><span data-bind="html: $data.title"></span></th>
+        <!-- /ko -->
+        <th class="c-rgx__th c-rgx__th--invisible"></th>
+    </tr>
+</script>
+
+<?php /* Group Items */ ?>
+<script type="text/html" id="tplItems">
+    <tbody class="c-rgx__tbody"
+           data-bind="attr: { 'data-object': $data.storeItemForSortable( $element ), 'data-item-id': $data.id }">
+    <tr>
+        <th data-bind="attr: {
+		    rowspan: $data.activeNestedGroups() + 1,
+		    class: ! $data.group.controlsActive ? 'c-rgx__th types-rg-level-' + $data.group.level : $data.group.items().length > 1
+		        ? 'c-rgx__th c-rgx_sort--handle types-rg-level-' + $data.group.level + ' c-rgx__sort--item'
+		        : 'c-rgx__th c-rgx_sort--handle types-rg-level-' + $data.group.level + ' c-rgx__sort--item-disabled'
+            }">
+            <span data-bind="visible: $data.group.controlsActive">
+            <i class="fa fa-arrows-v c-rgx__icon c-rgx__icon--sortable" aria-hidden="true"></i>
+            </span>
+        </th>
+        <td>
+            <!-- ko template: { name: 'tplDeleteNotice' } --><!-- /ko -->
+
+	        <?php /* Title Change */ ?>
+            <div class="c-rgy__overlap--title-container" data-bind="visible: $data.group.controlsActive">
+
+                <?php // Only render RFG Item introduction, when the user did not dismissed it
+                if( ! Toolset_Admin_Notices_Manager::is_notice_dismissed_by_notice_id( Types_Ajax_Handler_Repeatable_Group::NOTICE_KEY_FOR_RFG_ITEM_INTRODUCTION ) ): ?>
+                    <div class="c-rgy__overlap--title-introduction" data-bind="typesRFGTitleIntroductionVisible: $data.group.itemTitleIntroductionActive() && $data.editTitleActive()">
+                        <p>
+                            <b><?php _e( 'Field group title', 'wpcf' ); ?></b>
+                        </p>
+
+                        <p>
+	                        <?php _e( "Give this field group a title, so you can easily identify it. The title doesn't appear anywhere on the site's front-end.", 'wpcf' ); ?>
+                        </p>
+
+                       <p>
+                           <span data-bind="click: function() { $data.group.disableTitleIntroduction( $data ) }"><?php _e( "Don't show this message again.", 'wpcf' ); ?></span>
+                       </p>
+                    </div>
+                <?php endif; ?>
+
+                <div class="c-rgy__overlap--title" data-bind="visible: $data.editTitleActive">
+                    <input class="js-rg-title-input" data-bind="hasFocus: $data.editTitleActive, value: $data.title, event: { blur: $data.editTitleDone }" type="text" placeholder="<?php _e( 'Enter your internal title for the item.', 'wpcf' ); ?>" />
+                </div>
+            </div>
+
+
+            <div class="c-rgy__item--toggle" data-bind="click: $data.toggleVisibility, event: { mouseover: $data.editTitleTriggerShow, mouseout: $data.editTitleTriggerHide }">
+                <span data-bind="html: $data.title() ? $data.title : '-'"></span>
+                <?php /* <span data-bind="html: $data.summaryString"></span> */ ?>
+                <div class="c-rgy__overlap--title-trigger" data-bind="visible: $data.group.controlsActive && $data.editTitleTriggerVisible() && ! $data.editTitleActive(), click: function( e ) { $data.editTitleStart( $index() ) }, clickBubble: false, event: { mouseover: $data.editTitleTriggerShow, mouseout: $data.editTitleTriggerHide }">
+                    <i class="fa fa-pencil"></i>
+                </div>
+            </div>
+			<?php /* Note that the collapsible class is important for highlighting fields on validation errors. */ ?>
+            <div class="c-rgy__item--fields collapsible" data-bind="visible: $data.visible">
+	            <?php /* This field won't be stored. It's here to make sure the RFG is in $_POST for sorting */ ?>
+                <input type="hidden" data-bind="attr: { name: 'types-repeatable-group['+ $data.id +'][_id]', value: $data.id }" />
+
+	            <?php /* List RFG fields */ ?>
+                <!-- ko foreach: $data.fields -->
+                <!-- ko template: $data.repeatableGroup ? 'tplItemGroupToggle' : 'tplItem' --><!-- /ko -->
+                <!-- /ko -->
+            </div>
+        </td>
+
+        <th data-bind="attr: { rowspan: $data.activeNestedGroups() + 1, class: 'c-rgx__th types-rg-level-' + $data.group.level }">
+            <span data-bind="visible: $data.group.controlsActive">
+            <i class="fa fa-trash c-rgx__icon c-rgx__icon--trash" data-bind="click: $data.group.startItemDeletion"
+               aria-hidden="true"></i>
+            </span>
+        </th>
+    </tr>
+    </tbody>
+</script>
+
+<?php /* Delete Notice */ ?>
+<script type="text/html" id="tplDeleteNotice">
+    <div class="c-rgx__overlap--countdown js-rg-countdown"
+         data-bind="visible: $data.shouldBeDeleted, style: { 'z-index': 10050 - $data.group.level }">
+        <div data-bind="visible: $data.shouldBeDeletedSeconds() > 0">
+            <span><?php printf( __( 'This item will be deleted in <b>%s second(s)</b>...', 'wpcf'), '<span data-bind="text: $data.shouldBeDeletedSeconds"></span>'); ?></span>
+            <a href="#" class="button button-primary" style="vertical-align: initial"
+               data-bind="click: $data.stopDeletionCountdown"><?php _e( 'Stop Deletion', 'wpcf' ); ?></a>
+        </div>
+        <div data-bind="visible: $data.shouldBeDeletedSeconds() == 0">
+            <span><b><?php  _e( 'Deleting...', 'wpcf'); ?></b></span>
+        </div>
+    </div>
+</script>
+<?php /* Group Item */ ?>
+<script type="text/html" id="tplItem">
+    <div data-bind="visible: $data.fieldConditionsMet">
+        <p class="c-rgx__title"><span data-bind="html: $data.title"></span>
+			<i class="fa fa-lock js-wpcf-tooltip" data-bind="visible: $data.wpmlIsCopied"
+				data-tooltip="<?php _e( 'This field is locked for editing because WPML will copy its value from the original language.', 'wpcf' ); ?>"></i>
+            <span class="field-translation" style="position: relative;">
+            <i class="fa fa-globe field-translation-trigger js-wpcf-tooltip"
+				data-tooltip="<?php _e( 'Click to see the value to translate', 'wpcf' ); ?>"
+				data-bind="visible: $data.item.group.wpmlFilterExistsForOriginalData && ! $data.wpmlIsCopied && $data.item.group.isTranslatable,
+					click: $data.getOriginalTranslation"
+			></i>
+            <span class="field-translation-tooltip" data-translation-loaded="0" style="display:none;"><?php _e( 'Loading... please wait.', 'wpcf' ); ?></span>
+        </span>
+        </p>
+        <div class="c-rgx__input_container" data-bind="html: $data.htmlInput, attr: { 'data-object': $data.setElement( $element ) }"></div>
+    </div>
+</script>
+
+<?php
+/**
+ * Template for the field translation preview when we receive multi-language structured data back
+ * from the json_repeatable_group_field_original_translation AJAX call.
+ *
+ * @since 3.4
+ */
+?>
+<script type="text/html" id="tplTranslationPreview">
+	<div class="c-rg__translation-preview">
+		<div class="c-rg__translation-preview-languages" data-bind="foreach: translations">
+			<!--suppress HtmlRequiredAltAttribute, RequiredAttributes -->
+			<img
+				data-bind="
+					attr: {
+						src: languageFlagUrl,
+						alt: languageCode,
+						class: 'c-rg__translation-preview-language-flag '
+							+ ( isActive() ? 'c-rg__translation-preview-language-flag--active' : '' ),
+					},
+					click: function() { isActive( true ); }"
+			/>
+		</div>
+		<div class="c-rg__translation-preview-content" data-bind="html: currentPreview"></div>
+	</div>
+</script>
+
+<?php /* Group Toggle/Create */ ?>
+<script type="text/html" id="tplItemGroupToggle">
+	<?php /*
+    <!-- ko foreach: $data.repeatableGroup.headlines -->
+        <span data-bind="text: $data.title"></span><br />
+    <!-- /ko -->
+ */ ?>
+    <p class="c-rgx__title" data-bind="text: $data.repeatableGroup.title"></p>
+    <div class="c-rgy__group--toggle"
+         data-bind="css: { 'c-rgy__group--toggle-active': $data.repeatableGroup.visible() === true } ">
+
+        <div class="c-rgx__nested--control">
+            <span class="c-rgx__count" data-bind="visible: ! $data.repeatableGroup.isPopulating()">
+				<span class="c-rgx__count--number"
+					data-bind="text: ( $data.repeatableGroup.isPopulated() ? $data.repeatableGroup.items().length : '?' )"
+				></span>
+			</span>
+			<span class="spinner"
+				data-bind="style: { visibility: ( $data.repeatableGroup.isPopulating() ? 'visible' : 'hidden') }, visible: $data.repeatableGroup.isPopulating"
+				style="float: left;"
+			></span>
+
+            <!-- ko template: $data.repeatableGroup.visible() === false
+			? ( $data.repeatableGroup.items().length > 0 || ! $data.repeatableGroup.isPopulated())
+				? 'tplItemGroupToggleShow'
+				: 'tplItemGroupToggleCreate'
+			: 'tplItemGroupToggleHide' --><!-- /ko -->
+
+            <!-- ko template: { name: 'tplItemGroup', if: $data.repeatableGroup } --><!-- /ko -->
+        </div>
+    </div>
+</script>
+
+<?php /* Group Toggle/Create - Show Button */ ?>
+<script type="text/html" id="tplItemGroupToggleShow">
+    <a href="#" class="button c-rgx__btn js-wpcf-tooltip"
+       data-bind="
+       		click: $data.repeatableGroup.showButtonClick,
+       		attr: { 'data-tooltip': $data.repeatableGroup.listHeadlines() },
+			disabled: $data.repeatableGroup.isPopulating"
+	>
+        <span data-bind="text: (
+        	$data.repeatableGroup.isPopulated() ?
+        	'<?php _e( 'Show', 'wpcf' ); ?>'
+        	: $data.repeatableGroup.isPopulating() ? '<?php _e( 'Loading...', 'wpcf' ); ?>' : '<?php _e( 'Load', 'wpcf' ); ?>')"
+		></span>
+    </a>
+</script>
+
+<?php /* Group Toggle/Create - Create Button */ ?>
+<script type="text/html" id="tplItemGroupToggleCreate">
+    <span data-bind="visible: repeatableGroup.controlsActive">
+		<span class="spinner"
+			data-bind="style: { visibility: ( repeatableGroup.isAddingItem() ? 'visible' : 'hidden') }, visible: repeatableGroup.isAddingItem"
+			style="float: left;"
+		></span>
+        <a href="#" class="button c-rgx__btn js-wpcf-tooltip"
+           data-bind="click: function( item, event ) { repeatableGroup.addItem(item, event); }, attr: { 'data-tooltip': $data.repeatableGroup.listHeadlines() }">
+            <span><?php _e( 'Create', 'wpcf' ); ?></span>
+        </a>
+    </span>
+</script>
+
+<?php /* Group Toggle/Create - Hide Button */ ?>
+<script type="text/html" id="tplItemGroupToggleHide">
+    <a href="#" class="button c-rgx__btn" data-bind="{ click: function() { $data.repeatableGroup.toggleGroupVisibility() }  }">
+        <span><?php _e( 'Hide', 'wpcf' ); ?></span>
+    </a>
+</script>
+
+<?php /* Group nested in Item */ ?>
+<script type="text/html" id="tplItemGroup">
+    <div class="c-rgy--nested"
+		data-bind="visible: $data.repeatableGroup.visible,
+			style: { 'z-index': 10050 - $data.item.group.level, 'transform': $data.repeatableGroup.verticalTransformStyle },
+			attr: { 'data-rfg-id': $data.repeatableGroup.id, 'data-parent-post-id': $data.repeatableGroup.getParent() }"
+	>
+        <!-- ko if: $data.repeatableGroup.items().length > 0 -->
+        <div class="c-rgx c-rgy__body--nested"
+             data-bind="style: { 'max-height': $data.repeatableGroup.nestedContainerElementMaxHeight()},
+             attr: { class: $data.repeatableGroup.nestedContainerElementClass() }"
+        >
+
+            <p class="c-rgx__title" data-bind="text: $data.repeatableGroup.title"></p>
+
+            <div class="c-rgy__items--nested">
+                <table class="c-rgx__table c-rgx__table--slave"
+                       data-bind="typesRepeatableGroupSortable: $data.repeatableGroup.items">
+                    <thead> <?php /* IMPORTANT to keep thead - for having same markup as horizontal at this place */ ?>
+						<tr>
+							<th><?php /* sort col */ ?></th>
+							<th><?php /* item col */ ?></th>
+							<th><?php /* delete col */ ?></th>
+						</tr>
+                    </thead>
+                    <!-- ko foreach: $data.repeatableGroup.items -->
+                    <!-- ko template: { name: 'tplItems' } --><!-- /ko -->
+                    <!-- /ko -->
+                </table>
+            </div>
+            <p class="c-rgx__btn--add">
+                <span data-bind="visible: repeatableGroup.controlsActive">
+					<a class="button c-rgx__btn"
+						data-bind="click: repeatableGroup.toggleGroupVisibility,
+							visible: repeatableGroup.needsOverflowFix"
+					>
+						<?php _e( 'Hide', 'wpcf' ); ?>
+					</a>
+					<a class="button c-rgx__btn"
+					   data-bind="click: repeatableGroup.addItem, text: '<?php _e( 'Add New', 'wpcf' ); ?>' + ' ' + repeatableGroup.title"> </a>
+					<span class="spinner"
+						data-bind="style: { visibility: ( $data.repeatableGroup.isAddingItem() ? 'visible' : 'hidden') }, visible: $data.repeatableGroup.isAddingItem"
+						style="float: left;"
+					></span>
+				</span>
+			</p>
+
+        </div>
+        <!-- /ko -->
+    </div>
+</script>

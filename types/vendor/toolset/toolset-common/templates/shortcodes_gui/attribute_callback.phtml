@@ -1,0 +1,21 @@
+<?php
+/**
+ * underscore.js template for the shared shortcodes GUI.
+ *
+ * Component: attributes with custo render and collect callback.
+ *
+ * @since 3.1
+ */
+?>
+<script type="text/html" id="tmpl-toolset-shortcode-attribute-callback">
+    <input id="{{{data.shortcode}}}-{{{data.attribute}}}"
+		data-type="callback"
+		class="js-shortcode-gui-field"
+		value="{{{data.defaultForceValue}}}"
+		type="hidden">
+	<div id="js-toolset-{{{data.shortcode}}}-{{{data.attribute}}}-render" class="js-shortcode-gui-field-callback-render"></div>
+	<#
+	var attributeGui = Toolset.hooks.applyFilters( 'toolset-filter-get-shortcode-gui-attribute-callback-gui', '', data.shortcode, data.attribute );
+	print( attributeGui );
+	#>
+</script>

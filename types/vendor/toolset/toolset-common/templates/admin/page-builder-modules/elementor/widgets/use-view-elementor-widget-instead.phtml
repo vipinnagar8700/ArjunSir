@@ -1,0 +1,25 @@
+<?php
+/**
+ * Template for the suggestion to use the Toolset View Elementor widget instead of the WP Views/WP Views Filter Wordpress widget.
+ *
+ * @since 3.1.1
+ */
+?>
+<div class="elementor-widget-toolset-warning">
+	<p>
+		<?php
+		echo sprintf(
+			esc_html( __( 'It is recommended to use the %1$s Elementor widget instead of the %2$s WordPress widget.', 'wpv-views' ) ),
+			'<strong>' . esc_html( __( 'Toolset View', 'wpv-views' ) ) . '</strong>',
+			'<strong>' . esc_html( $context['widget_type'] ) . '</strong>'
+		);
+		?>
+	</p>
+	<p><?php
+		echo sprintf(
+			esc_html( __( 'The %1$s WordPress widget might not work properly in Elementor.', 'wpv-views' ) ),
+			'<strong>' . esc_html( $context['widget_type'] ) . '</strong>'
+		);
+		?>
+	</p>
+</div>

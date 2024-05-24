@@ -1,0 +1,111 @@
+<tr>
+    <td>
+        <div class="types-information-td-inner">
+            <p class="types-information-paragraph toolset-dashboard-post-type">
+                {% if post_type_edit_link %}
+                    <a href="{{ post_type.get_edit_link }}">{{ post_type.name }}</a>
+                {% else %}
+                    {{ post_type.name }}
+                {% endif %}
+            </p>
+			{% if ( is_block_editor_available and ( post_type.is_from_types or post_type.is_builtin ) ) %}
+				<div class="toolset-dashboard__editor-mode">
+
+					<label>
+						{# Translators: Label for the value of the Editor mode setting of a post type, displayed on the Toolset Dashboard page. #}
+						{{ __( 'Post editor:', 'wpcf' ) }}
+					</label>
+
+					<p class="toolset-dashboard__editor-mode-label" data-post-type="{{ post_type.get_name }}">
+						{% if post_type.is_builtin and ( not post_type.is_builtin_editable ) %}
+							<a class="toolset-dashboard__editor-mode-change" href="{{ post_type.get_edit_link }}">
+								{{ post_type.get_editor_mode_label }}
+								<i class="fa fa-edit"></i>
+							</a>
+						{% else %}
+							<a class="toolset-dashboard__editor-mode-change">
+								<span class="toolset-dashboard__editor-mode-label-value" data-post-type="{{ post_type.get_name }}">{{ post_type.get_editor_mode_label }}</span>
+								<i class="fa fa-edit" data-post-type="{{ post_type.get_name }}"></i>
+							</a>
+						{% endif %}
+					</p>
+					<p class="toolset-dashboard__editor-mode-selection" data-post-type="{{ post_type.get_name }}">
+						<select>
+							{# Translators: Editor mode for a post type. #}
+							{% for option in [
+								{ value: 'classic', label: __( 'Classic editor', 'wpcf' ) },
+								{ value: 'block', label: __( 'Block editor', 'wpcf' ) },
+								{ value: 'per_post', label: __( 'Editor choice per post', 'wpcf' ) },
+							] %}
+								<option value="{{ option.value }}" {{ ( option.value == post_type.get_editor_mode ) ? 'selected="selected"' : '' }}>
+									{{ option.label }}
+								</option>
+							{% endfor %}
+						</select>
+						<button class="button button-secondary button-small" data-post-type="{{ post_type.get_name }}">{{ __( 'OK', 'wpcf' ) }}</button>
+					</p>
+				</div>
+			{% endif %}
+        </div>
+    </td>
+    <td>
+        <div class="types-information-td-inner">
+            <ul>
+                {% for field_group in post_type.get_field_groups() %}
+                    <li><a href="{{ field_group.get_edit_link }}&ref=dashboard">{{ field_group.get_display_name() }}</a></li>
+                {% endfor %}
+            </ul>
+
+            <p class="types-information-link">
+                <a class="button" href="{{ admin_url }}admin.php?page=types-helper&action=new-post-field-group&type={{ post_type.get_name() }}&ref=dashboard">{{ labels.create_field_group }}</a>
+            </p>
+        </div>
+    </td>
+    <td>
+        <div class="types-information-td-inner">
+            <ul>
+                {% for taxonomy in post_type.get_taxonomies() %}
+					{% if taxonomy.is_third_party() %}
+						<li>{{ taxonomy.name }}</li>
+					{% else %}
+						<li><a href="{{ taxonomy.get_edit_link }}&ref=dashboard">{{ taxonomy.name }}</a></li>
+					{% endif %}
+                {% endfor %}
+            </ul>
+
+            <p class="types-information-link">
+                <a class="button" href="{{ admin_url }}admin.php?page=wpcf-edit-tax&assign_type={{ post_type.get_name() }}&ref=dashboard">{{ labels.create_taxonomy }}</a>
+            </p>
+        </div>
+    </td>
+    <td>
+        {% for information in table.get_template() %}
+            {% include '@types/page/dashboard/table/tbody-cell.twig' %}
+        {% endfor %}
+    </td>
+    {% if post_type.get_name() == 'page' or post_type.get_name() == 'attachment'  %}
+        <td>
+            <div class="types-information-td-inner">
+                <p class="types-information-paragraph">{{ labels.no_archive_for|format( post_type.name ) }}</p>
+            </div>
+        </td>
+    {% elseif table.get_archive( 'show-also-for-builtin' ) %}
+        <td>
+            {% for information in table.get_archive( 'show-also-for-builtin' ) %}
+                {% include '@types/page/dashboard/table/tbody-cell.twig' %}
+            {% endfor %}
+        </td>
+    {% endif %}
+	{% if not is_toolset_blocks_available %}
+		<td>
+			{% for information in table.get_views() %}
+				{% include '@types/page/dashboard/table/tbody-cell.twig' %}
+			{% endfor %}
+		</td>
+	{% endif %}
+    <td>
+        {% for information in table.get_forms() %}
+            {% include '@types/page/dashboard/table/tbody-cell.twig' %}
+        {% endfor %}
+    </td>
+</tr>

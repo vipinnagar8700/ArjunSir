@@ -1,0 +1,231 @@
+/**
+ * ProTickets Stylesheet
+ * (Some of these styles may override your current theme's styles)
+ *
+ * To add your own custom styles, create a stylesheet with the name
+ * wootickets.css in the tribe-events/wootickets directory of your theme.
+ * Your new stylesheet will be loaded after our own stylesheet.
+ *
+ * To replace our stylsheet altogether, you can use the 'tribe_wootickets_stylesheet_url' filter.
+ *
+ * @package TribeWooTickets
+ *
+ */
+
+/* = Pro Tickets Admin/Skeleton Styles
+=============================================*/
+.tribe-events-tickets .tickets_price {
+	color: #000;
+	font-style: italic;
+	font-weight: bold;
+}
+
+.tickets_name {
+	color: #777;
+	font-size: 13px;
+}
+
+.single-tribe_events #tribe-events-content form.cart,
+.single-tribe_events #tribe-events-content div.cart {
+	margin: 0 0 30px;
+}
+
+.tribe-events-tickets {
+	border-bottom: 0;
+	margin: 0;
+	width: 100%;
+	position: relative;
+
+	.tribe-link-tickets-message {
+		background: rgba(200, 200, 200, .8);
+		bottom: 0;
+		left: 0;
+		position: absolute;
+		right: 0;
+		text-align: center;
+		top: 0;
+
+		.no-javascript-msg {
+			left: 50%;
+			position: absolute;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			width: 90%;
+		}
+	}
+
+}
+
+.tribe-events-tickets td {
+	padding: 8px 10px;
+	vertical-align: middle;
+}
+
+.tribe-events-tickets td.woocommerce {
+	border-bottom: 1px solid #dfdfdf;
+}
+
+.tribe-events-tickets .tickets_nostock {
+	display: inline-block;
+	text-align: center;
+}
+
+.tribe-events-tickets-title {
+	font-size: 1.4em;
+	font-weight: bold;
+	margin: 20px 0 15px;
+}
+
+
+/* = WooTickets Mobile Styles (max-width: 600px)
+=============================================*/
+@media (max-width: 600px) {
+	/* = WooTickets
+	=============================================*/
+
+	td.tickets_name {
+		font-size: 18px;
+	}
+
+	.tribe-events-tickets,
+	.tribe-events-tickets tbody {
+		display: block;
+	}
+
+	.tribe-events-tickets tr {
+		border-top: 1px solid #ddd;
+		padding-bottom: 8px;
+		padding-top: 10px;
+	}
+
+	.tribe-events-tickets td,
+	.tribe-events-style-full .tribe-events-tickets td {
+		border: 0;
+		display: inline-block;
+	}
+}
+
+#tribe-events-report .wrap {
+	padding: 10px;
+}
+
+#tribe-events-report .wrap > h2 {
+	display: inline-block;
+}
+
+#tribe-events-report .wrap > h2:after {
+	content: ':';
+	display: inline-block;
+	margin: 0 10px 0 0;
+}
+
+#tribe-events-report .wrap > h2 + h2:after {
+	content: '';
+	display: none;
+}
+
+#tribe-events-report #tribe-filters {
+	background: #fff;
+	padding: 10px 0 0 0;
+}
+
+#tribe-events-report .toggle-row {
+	display: none;
+}
+
+#tribe-events-report .button,
+#tribe-events-report .export.button {
+	display: inline-block;
+	font-size: 1.2rem;
+	line-height: normal;
+	padding: 10px 20px;
+}
+
+#tribe-events-report .eventtable {
+	border: none;
+}
+
+#tribe-events-report .eventtable td {
+	border: none;
+	font-size: 14px;
+	padding-top: 0;
+}
+
+#tribe-events-report .eventtable h4 {
+	border-bottom: 1px solid #ededed;
+	margin-top: 0;
+}
+
+#tribe-events-report .ticket_list tr td {
+	vertical-align: top;
+}
+
+#tribe-events-report .ticket_list tr td .totals {
+	background: #2ea2cc;
+	color: #fff;
+	font-size: 20px;
+	font-weight: 400;
+	height: auto;
+	line-height: 30px;
+	padding: 20px 10px;
+	text-align: center;
+	width: auto;
+}
+
+#tribe-events-report .action {
+	margin-right: 7px;
+}
+
+#tribe-events-report .export {
+	font-size: 14px;
+}
+
+#tribe-events-report .actions {
+	margin-bottom: 14px;
+}
+
+#tribe-events-report .tablenav div:nth-child(3) {
+	background: #f5f5f5;
+	font-size: 12px;
+	padding: 7px 14px;
+}
+
+#tribe-events-report .tablenav div:nth-child(3) input {
+	background: #fff;
+}
+
+#tribe-events-report .tribe-scrollable-table {
+	background-attachment: local, local, scroll, scroll;
+	background-color:      white;
+	background-image:      -webkit-linear-gradient(to right, #fff, rgba(255, 255, 255, 0)), -webkit-linear-gradient(to left, #fff, rgba(255, 255, 255, 0)), -webkit-linear-gradient(to right, #f5f5f5, rgba(195, 195, 197, 0)), -webkit-linear-gradient(to left, #f5f5f5, rgba(195, 195, 197, 0));
+	background:            linear-gradient(to right, #fff, rgba(255, 255, 255, 0)), linear-gradient(to left, #fff, rgba(255, 255, 255, 0)), linear-gradient(to right, #f5f5f5, rgba(195, 195, 197, 0)), linear-gradient(to left, #f5f5f5, rgba(195, 195, 197, 0));
+	background-image:      -o-linear-gradient(to right, #fff, rgba(255, 255, 255, 0)), -o-linear-gradient(to left, #fff, rgba(255, 255, 255, 0)), -o-linear-gradient(to right, #f5f5f5, rgba(195, 195, 197, 0)), -o-linear-gradient(to left, #f5f5f5, rgba(195, 195, 197, 0));
+	background-image:      -moz-linear-gradient(to right, #fff, rgba(255, 255, 255, 0)), -moz-linear-gradient(to left, #fff, rgba(255, 255, 255, 0)), -moz-linear-gradient(to right, #f5f5f5, rgba(195, 195, 197, 0)), -moz-linear-gradient(to left, #f5f5f5, rgba(195, 195, 197, 0));
+	background-image:      -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, #fff), color-stop(100%, rgba(255, 255, 255, 0))), -webkit-gradient(linear, 100% 50%, 0% 50%, color-stop(0%, #fff), color-stop(100%, rgba(255, 255, 255, 0))), -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, #f5f5f5), color-stop(100%, rgba(195, 195, 197, 0))), -webkit-gradient(linear, 100% 50%, 0% 50%, color-stop(0%, #f5f5f5), color-stop(100%, rgba(195, 195, 197, 0)));
+	background-position:   0 0, 100% 0, 0 0, 100% 0;
+	background-repeat:     no-repeat;
+	background-size:       4em 100%, 4em 100%, 1em 100%, 1em 100%;
+	margin-bottom:         1.6em;
+	overflow-x:            auto;
+	width:                 100%;
+}
+
+#tribe-events-report .wp-list-table {
+	border-bottom: none;
+	border-collapse: separate;
+	border-spacing: 7px;
+	font-size: 14px;
+	margin-bottom: 0;
+	width: auto;
+}
+#tribe-events-report tfoot {
+	display: none;
+}
+
+.orders {
+	#the-list {
+		.cancelled, .refunded {
+			font-style: italic;
+		}
+	}
+}

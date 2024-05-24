@@ -1,0 +1,345 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Shop as Customer v1.08\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2015-05-06 22:13:09+0000\n"
+"Last-Translator: admin <brent@kairaweb.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#. translators: plugin header field 'Name'
+#: shop-as-customer.php:0
+#@ shop-as-customer
+msgid "WooCommerce Shop as Customer"
+msgstr ""
+
+#. translators: plugin header field 'Description'
+#: shop-as-customer.php:0
+#@ shop-as-customer
+msgid "Shop as Customer allows a store Administrator or Shop Manager to shop the front-end of the store as another User, allowing all functionality such as, order creation, checkout and plugins that only work on the product or cart pages and not the Admin Order page, to function normally as if they were that Customer."
+msgstr ""
+
+#. translators: plugin header field 'Author'
+#: shop-as-customer.php:0
+#@ shop-as-customer
+msgid "cxThemes"
+msgstr ""
+
+#. translators: plugin header field 'AuthorURI'
+#: shop-as-customer.php:0
+#@ shop-as-customer
+msgid "http://codecanyon.net/user/cxThemes"
+msgstr ""
+
+#: shop-as-customer.php:180
+#: shop-as-customer.php:181
+#: shop-as-customer.php:1165
+#: shop-as-customer.php:1214
+#@ shop-as-customer
+msgid "Shop as Customer"
+msgstr ""
+
+#: shop-as-customer.php:327
+#: shop-as-customer.php:503
+#: shop-as-customer.php:1014
+#, php-format
+#@ shop-as-customer
+msgid "Shopping as %1$s"
+msgstr ""
+
+#: shop-as-customer.php:338
+#@ shop-as-customer
+msgid "Create this Order"
+msgstr ""
+
+#: shop-as-customer.php:340
+#: shop-as-customer.php:356
+#: shop-as-customer.php:519
+#: shop-as-customer.php:538
+#: shop-as-customer.php:557
+#@ shop-as-customer
+msgid "what this button does"
+msgstr ""
+
+#: shop-as-customer.php:343
+#: shop-as-customer.php:359
+#: shop-as-customer.php:522
+#: shop-as-customer.php:541
+#: shop-as-customer.php:560
+#@ shop-as-customer
+msgid "Choosing"
+msgstr ""
+
+#: shop-as-customer.php:343
+#@ shop-as-customer
+msgid "Create This Order"
+msgstr ""
+
+#: shop-as-customer.php:343
+#: shop-as-customer.php:359
+#: shop-as-customer.php:522
+#: shop-as-customer.php:541
+#: shop-as-customer.php:560
+#@ shop-as-customer
+msgid "will"
+msgstr ""
+
+#: shop-as-customer.php:345
+#@ shop-as-customer
+msgid "Create the Order in WooCommerce"
+msgstr ""
+
+#: shop-as-customer.php:346
+#@ shop-as-customer
+msgid "Take you to the next page where you are able to send the Customer Invoice email to the customer with a link for them to Pay."
+msgstr ""
+
+#: shop-as-customer.php:347
+#@ shop-as-customer
+msgid "It will not contact the customer until you choose to on the next page"
+msgstr ""
+
+#: shop-as-customer.php:354
+#@ shop-as-customer
+msgid "Pay for this Order"
+msgstr ""
+
+#: shop-as-customer.php:359
+#@ shop-as-customer
+msgid "Pay for This Order"
+msgstr ""
+
+#: shop-as-customer.php:361
+#@ shop-as-customer
+msgid "Proceed normally with selected Payment Method. You will be expected to pay 'on behalf' of the customer"
+msgstr ""
+
+#: shop-as-customer.php:362
+#@ shop-as-customer
+msgid "Create the order in WooCommerce"
+msgstr ""
+
+#: shop-as-customer.php:363
+#@ shop-as-customer
+msgid "On your successful payment, the Processing Order email will be sent to the customer and the order can be dealt with in the normal way"
+msgstr ""
+
+#: shop-as-customer.php:496
+#@ shop-as-customer
+msgid "Invoice sent to Customer successfully."
+msgstr ""
+
+#: shop-as-customer.php:517
+#: shop-as-customer.php:522
+#@ shop-as-customer
+msgid "Send Request-to-Pay to Customer"
+msgstr ""
+
+#: shop-as-customer.php:524
+#@ shop-as-customer
+msgid "Send the Customer Invoice email to the customer with a link to pay"
+msgstr ""
+
+#: shop-as-customer.php:525
+#@ shop-as-customer
+msgid "The customer will link back to the Checkout page with available payment options presented to them where they can choose one and pay"
+msgstr ""
+
+#: shop-as-customer.php:526
+#@ shop-as-customer
+msgid "The order will remain as Pending until they successfully Pay wherafter it will change to Processing"
+msgstr ""
+
+#: shop-as-customer.php:536
+#: shop-as-customer.php:541
+#@ shop-as-customer
+msgid "Send the Invoice Email to Customer"
+msgstr ""
+
+#: shop-as-customer.php:543
+#@ shop-as-customer
+msgid "Send the Customer Invoice email with a summary of the order. There is no payment due and no Pay link will display on the email"
+msgstr ""
+
+#: shop-as-customer.php:555
+#@ shop-as-customer
+msgid "Switch back and View Order"
+msgstr ""
+
+#: shop-as-customer.php:560
+#@ shop-as-customer
+msgid "Switch Back and View Order"
+msgstr ""
+
+#: shop-as-customer.php:562
+#@ shop-as-customer
+msgid "Switch back to your main user (Admin or Shop Manager)"
+msgstr ""
+
+#: shop-as-customer.php:563
+#@ shop-as-customer
+msgid "Take you to the order in the admin section of WooCommerce"
+msgstr ""
+
+#: shop-as-customer.php:564
+#@ shop-as-customer
+msgid "Not send any email to the customer"
+msgstr ""
+
+#: shop-as-customer.php:620
+#@ shop-as-customer
+msgctxt "Shop as Customer title on user profile screen"
+msgid "Shop as Customer"
+msgstr ""
+
+#: shop-as-customer.php:621
+#: shop-as-customer.php:873
+#@ shop-as-customer
+msgid "Shop&nbsp;As"
+msgstr ""
+
+#: shop-as-customer.php:698
+#: shop-as-customer.php:713
+#@ shop-as-customer
+msgid "Could not switch back to originating user."
+msgstr ""
+
+#: shop-as-customer.php:736
+#: shop-as-customer.php:751
+#, php-format
+#@ shop-as-customer
+msgid "Back to %1$s (%2$s)."
+msgstr ""
+
+#: shop-as-customer.php:740
+#: shop-as-customer.php:847
+#, php-format
+#@ shop-as-customer
+msgid "Back to %1$s (%2$s)"
+msgstr ""
+
+#: shop-as-customer.php:753
+#, php-format
+#@ shop-as-customer
+msgid "Shop as %1$s (%2$s)."
+msgstr ""
+
+#: shop-as-customer.php:1001
+#, php-format
+#@ shop-as-customer
+msgid "Howdy, %1$s"
+msgstr ""
+
+#: shop-as-customer.php:1054
+#@ shop-as-customer
+msgid "Shopping as"
+msgstr ""
+
+#: shop-as-customer.php:1072
+#, php-format
+#@ shop-as-customer
+msgid ""
+"\n"
+"\t\t\t<div class=\"shopping-as-details-holder\">\n"
+"\t\t\t\t<div class=\"shopping-as-name\">%1$s</div>\n"
+"\t\t\t\t<div class=\"shopping-as-email\">%2$s</div>\n"
+"\t\t\t</div>\n"
+"\t\t"
+msgstr ""
+
+#: shop-as-customer.php:1084
+#, php-format
+#@ shop-as-customer
+msgid "<div class=\"email-holder\">Back to %1$s</div>"
+msgstr ""
+
+#: shop-as-customer.php:1176
+#: shop-as-customer.php:1351
+#@ shop-as-customer
+msgid "Find a Customer..."
+msgstr ""
+
+#: shop-as-customer.php:1188
+#@ shop-as-customer
+msgid "Recent"
+msgstr ""
+
+#: shop-as-customer.php:1219
+#@ shop-as-customer
+msgid "Your settings have been successfully saved."
+msgstr ""
+
+#: shop-as-customer.php:1249
+#@ shop-as-customer
+msgid "User Role"
+msgstr ""
+
+#: shop-as-customer.php:1250
+#@ shop-as-customer
+msgid "Which users can shop as other users"
+msgstr ""
+
+#: shop-as-customer.php:1273
+#@ shop-as-customer
+msgid "Save Settings"
+msgstr ""
+
+#. translators: plugin header field 'PluginURI'
+#: shop-as-customer.php:0
+#@ shop-as-customer
+msgid "http://codecanyon.net/item/shop-as-customer-for-woocommerce/7043722"
+msgstr ""
+
+#. translators: plugin header field 'Version'
+#: shop-as-customer.php:0
+#@ shop-as-customer
+msgid "1.08"
+msgstr ""
+
+#: shop-as-customer.php:413
+#: shop-as-customer.php:443
+#, php-format
+#@ shop-as-customer
+msgid "Order created by %1$s"
+msgstr ""
+
+#: shop-as-customer.php:684
+#@ shop-as-customer
+msgid "back to previous page"
+msgstr ""
+
+#: shop-as-customer.php:686
+#@ shop-as-customer
+msgid "Sorry, you can't shop as this customer."
+msgstr ""
+
+#: shop-as-customer.php:686
+#@ shop-as-customer
+msgid "They have higher capabilites so switching would not be secure."
+msgstr ""
+
+#: shop-as-customer.php:1418
+#, php-format
+#@ shop-as-customer
+msgid "%sShop as Customer for WooCommerce needs WooCommerce%s %sWooCommerce%s must be active for Shop as Customer to work. Please install & activate WooCommerce."
+msgstr ""
+
+#: shop-as-customer.php:1435
+#, php-format
+#@ shop-as-customer
+msgid "%sShop as Customer for WooCommerce is inactive%s This version of Shop as Customer requires WooCommerce %s or newer. For more information about our WooCommerce version support %sclick here%s."
+msgstr ""
+

@@ -1,0 +1,57 @@
+/* Capacity Table */
+.tribe-tickets-editor-capacity-table {
+	tbody tr:not(:last-child) {
+		box-shadow: none;
+	}
+}
+
+#tribe_show_attendees {
+	margin-left: .4em;
+}
+
+.tribe-warning-toggle {
+	border: none;
+	box-shadow: none;
+	float: right;
+	margin: 0 10px 0 0;
+	transition: all .5s ease;
+
+	label {
+		line-height: 33px;
+
+		.event-warnings {
+			color: red;
+		}
+		.event-warnings,
+		.event-warnings-close {
+
+			.dashicons {
+				font-size: 18px;
+				line-height: 33px;
+
+			}
+		}
+	}
+
+	#tribe-tickets-warning {
+		display: none;
+	}
+}
+
+.recurring-warning {
+	color: red;
+	padding: 10px;
+	transition: all .5s ease;
+
+	.dashicons {
+		font-size: 40px;
+		height: 0;
+		line-height: 75px;
+		width: 0;
+	}
+
+	.recurring-warning-msg {
+		min-height: 38px;
+		padding: 0 0 0 50px;
+	}
+}

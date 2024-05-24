@@ -1,0 +1,12 @@
+/* ON THE GO GENERAL STYLES */
+[class^="icon-"] {
+    display:inline-block;
+    width: auto;
+    height: auto;
+    line-height: normal;
+    background-image: none;
+    background-position: 0% 0%;
+    background-repeat: repeat;
+    margin-top: 0;
+    vertical-align: middle;
+}

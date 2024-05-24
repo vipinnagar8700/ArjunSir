@@ -1,0 +1,72 @@
+/**
+ * Styling for the "Custom Code" tab on the Toolset Settings page.
+ *
+ * Trying to follow BEM as much as possible.
+ *
+ * @since 3.0.8
+ */
+
+#toolset-code-snippets-main {
+	max-width: 100%;
+}
+
+#toolset_code_snippets__new_snippet_slug:invalid {
+	border: 1px solid red;
+}
+
+.toolset_code_snippets--fullwidth {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 100%;
+}
+
+.toolset_code_snippets__code_area {
+	height: 20em;
+}
+
+.toolset_code_snippets--no-border {
+	border: none !important;
+}
+
+.toolset_code_snippets__buttonpane {
+	padding-top: 5px;
+}
+
+.toolset_code_snippets--left {
+	float: left;
+}
+
+.toolset_code_snippets--right {
+	float: right;
+}
+
+.toolset_code_snippets__snippet_edit_area {
+	display: block;
+}
+
+.toolset_code_snippets__codemirror_wrap {
+	border: 1px solid #ccc;
+}
+
+.toolset_code_snippets--small-block p,
+.toolset_code_snippets--small-block code {
+	font-size: 11px;
+}
+
+.toolset_code_snippets__dropdown_header {
+	cursor: pointer;
+}
+
+.toolset_code_snippets__option + .toolset_code_snippets__option {
+	margin-left: 10px;
+}
+
+.toolset_code_snippets__error_indication {
+	color: red;
+}
+
+
+.toolset_code_snippets__warning_indication {
+    color: darkorange;
+}

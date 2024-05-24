@@ -1,0 +1,19 @@
+<div id="wpv-ct-change-editor" class="hidden" data-title="<?php esc_html_e( 'Switch Template editor', 'wpv-views' ) ?>">
+	<?php if ( $snapshot_id ) { ?>
+		<p><?php esc_html_e( 'You are switching back to the Classic Editor for your Content Templates. You can restore the contents of the previous, Classic Editor template or reset it.', 'wpv-views' ); ?></p>
+		<p>
+			<a href="<?php echo esc_url( $admin_url ); ?>" class="button button-primary"><?php esc_html_e( 'Restore Template', 'wpv-views' ); ?></a>
+			<a href="<?php echo esc_url( $admin_url . '&reset=true'); ?>" class="button button-secondary"><?php esc_html_e( 'Reset Template', 'wpv-views' ); ?></a>
+		</p>
+	<?php } else { ?>
+		<p><?php esc_html_e( 'You are switching back to the Classic Editor for your Content Templates. There is no previous Classic Editor template so the template will be reset.', 'wpv-views' ); ?></p>
+		<p><strong><?php esc_html_e( 'Are you sure?', 'wpv-views' ); ?></strong></p>
+		<p>
+			<a href="<?php echo esc_url( $admin_url . '&reset=true'); ?>" class="button button-primary"><?php esc_html_e( 'Yes, reset the Template content', 'wpv-views' ); ?></a>
+		</p>
+	<?php } ?>
+</div>
+
+<a href="#" id="wpv-ct-change-editor-opener" title="<?php esc_attr_e( 'Stop using the Block Editor on this Content Template', 'wpv-views' ); ?>">
+	<?php esc_html_e( 'Use the Classic Editor for this Template', 'wpv-views' ); ?>
+</a>

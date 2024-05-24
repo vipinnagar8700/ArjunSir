@@ -1,0 +1,485 @@
+
+.wpt-form-fieldset {
+    background-color: #ffffff;
+    padding: 0 15px 15px 15px;
+    border: 1px solid #cccccc;
+    margin: 15px 0 25px 0;
+}
+.wpt-form-fieldset fieldset {
+    margin-bottom: 0;
+}
+.wpt-fields-form fieldset {
+    width: auto;
+}
+.wpt-form-fieldset legend {
+    font-weight: bold;
+}
+.wpt-form-fieldset .legend-collapsed {
+    padding-left: 15px;
+    background-image: url('../images/expand.png');
+    background-repeat: no-repeat;
+    background-position: 0 2px;
+    cursor: pointer;
+}
+.wpt-form-fieldset .legend-expanded {
+    padding-left: 15px;
+    background-image: url('../images/collapse.png');
+    background-repeat: no-repeat;
+    background-position: 0 3px;
+    cursor: pointer;
+}
+.wpt-form-fieldset .collapsed {
+    display: none;
+}
+
+.wp-core-ui .wpt-form-item .button {
+    margin-bottom: 0;
+    vertical-align: middle;
+}
+.wpt-radios .wpt-form-item,
+.wpt-checkboxes .wpt-form-item {
+    margin: 1px 0 2px;
+}
+@media (max-width: 782px) {
+    .wpt-radios .wpt-form-item,
+    .wpt-checkboxes .wpt-form-item {
+        margin: 5px 0 10px;
+    }
+}
+.wpt-radio .wpt-form-item .wpt-form-label,
+.wpt-radios .wpt-form-item .wpt-form-label,
+.wpt-checkbox .wpt-form-item .wpt-form-label,
+.wpt-checkboxes .wpt-form-item .wpt-form-label {
+	display: inline-block;
+}
+
+.wpt-field {
+    margin-bottom: 15px;
+}
+@media (max-width: 782px) {
+    .wpt-checkbox {
+        margin-top: 20px;
+    }
+}
+.wpt-field-item {
+    margin-bottom: 15px;
+    position: relative;
+}
+.wpt-field-item:last-of-type {
+    margin-bottom: 5px;
+}
+
+/* Make sure image previews don't escape their boundaries even if a full size image is used. */
+.wpt-field-item .wpt-file-preview img {
+	max-width: 100%;
+	max-height: 100%;
+	height: auto;
+	width: auto;
+}
+
+.wpt-form-fieldset .wpt-form-item:first-child {
+    margin-top: 5px;
+}
+.wpt-form-submit {
+    margin-top: 15px;
+}
+.wpt-form-description {
+    font-size: 0.9em;
+    color: #888;
+    margin-bottom: 7px;
+}
+.wpt-form-description > p {
+    margin: 0;
+	white-space: normal;
+}
+.wpt-form-textarea,
+.wpt-form-textfield,
+.wpt-form-select {
+    width: 100%;
+}
+.js-wpt-field-with-files .wpt-form-textfield {
+    width: 80%;
+    width: calc(100% - 150px);
+    vertical-align: middle;
+}
+
+.wpt-form-label {
+    white-space: nowrap;
+}
+.wpt-form-label i {
+	margin: 0 5px;
+}
+.wpt-form-label i.icon-warning-sign {
+	color: #ccc;
+	font-size: 1.1em;
+}
+.wpt-form-label i.icon-warning-sign:hover {
+	color: #007CBD;
+}
+.wpt-form-textfield-label,
+.wpt-form-textarea-label {
+    font-size: 1em;
+    font-weight: bold;
+    display: block;
+}
+.wpt-form-title-checkboxes,
+.wpt-form-title-radios,
+.wpt-form-select-label {
+    font-size: 1em;
+    font-weight: bold;
+}
+.wpt-form-error {
+    background-color: #ffffe0;
+    border: 1px solid #e6db55;
+    padding: 5px 10px;
+    width: auto;
+    margin: 10px 0;
+    display: block;
+}
+input.wpt-form-error {
+    background-color: #F8F8F8;
+    border-color: red !important;
+}
+.wpt-fields-form .ui-draggable .wpt-form-fieldset .wpt-form-fieldset legend {
+    cursor: pointer;
+}
+.wpt-fields-form .ui-sortable {
+    padding: 0 0 10px 0;
+}
+.wpt-fields-form .ui-sortable-placeholder {
+    border: 1px dashed #CCCCCC;
+    width: auto;
+    visibility: visible !important;
+}
+.wpt-form-fields-delete,
+.wpt-fields-form-move-field {
+    float: left;
+    margin-top: 3px;
+    margin-right: 5px;
+}
+.wpt-fields-form-move-field {
+    cursor: move;
+}
+.wpt-fields-form .taxonomy-title {
+    margin-top: 10px;
+    font-style: italic;
+}
+.wpt-message {
+    padding: 0 0.6em;
+    border-radius: 3px 3px 3px 3px;
+    border-style: solid;
+    border-width: 1px;
+    margin: 1em 0 1em 0;
+}
+.wpt-error {
+    background-color: #FFEBE8;
+    border-color: #CC0000;
+    padding: 5px;
+}
+.wpt-hidden,
+.wpt-hide {
+    display: none;
+}
+
+.wpt-form-label {
+    margin-bottom: 0;
+}
+
+.wpt-date input{
+    display: inline-block;
+    max-width: 150px;
+}
+.wpt-date .wpt-form-select{
+	width: auto;
+}
+.wpt-date .wpt-form-item-select {
+    display: inline-block;
+}
+.wpt-date-clear {
+    vertical-align: text-bottom;
+    cursor: pointer;
+}
+
+img.ui-datepicker-trigger {
+    margin-left: 5px;
+    cursor: pointer;
+}
+.wpt-cp-preview {
+    width: 22px;
+    height: 22px;
+    float: left;
+    border: 1px solid #BBBBBB;
+}
+.wpt-repetitive {
+    margin-bottom: 30px;
+}
+.wpt-repetitive .ui-sortable {
+    margin-top: 10px;
+}
+.wpt-repetitive .ui-sortable .wpt-field-item {
+    padding-left: 30px;
+}
+.wpt-repetitive .ui-sortable .wpt-repadd {
+    margin-top: 10px;
+    margin-left: 30px;
+}
+.wpt-repdrag {
+    position: absolute;
+    left: 0;
+    top: 4px;
+    cursor: move;
+    color: #555;
+}
+.wpt-repdrag:hover,
+.wpt-repdrag:focus,
+.wpt-repdrag:active {
+    color: initial;
+}
+.wpt-repdelete {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #a00;
+}
+.wpt-repdelete:hover,
+.wpt-repdelete:focus {
+    color: #d94f4f;
+}
+
+    /* STRANGE */
+#ui-datepicker-div {
+    display: none;
+}
+#wpt-skype-edit-button-popup h3 {
+    clear: both;
+}
+#wpt-skype-edit-button-popup .button-secondary {
+    display: block;
+    clear: both;
+    margin-top: 2em;
+}
+
+#wpt-skype-edit-button-popup .wpcf-form-item-select
+{
+    float: left;
+    margin-right: 20px;
+}
+
+#wpt-skype-edit-button-popup .main
+{
+    width: 350px;
+}
+#wpt-skype-edit-button-popup-preview
+{
+    background-color: #e5eef3;
+    border: 1px solid #c1c1c1;
+    min-height: 250px;
+    padding: 10px 20px;
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    width: 200px;
+    z-index: 1000;
+}
+
+#TB_ajaxContent #wpt-skype-edit-button-popup-preview-button p
+{
+    line-height: 36px;
+    margin: 0;
+    padding: 0;
+}
+
+#wpt-skype-edit-button-popup-preview-button.dark-background
+{
+    background-color: #b2b5b8;
+}
+
+#wpt-skype-edit-button-popup-preview-button.dropdown small
+{
+    display: block;
+}
+
+#wpt-skype-edit-button-popup-preview-button small
+{
+    display: none;
+}
+
+#wpt-skype-edit-button-popup-preview-button li
+{
+    text-align: left;
+}
+
+#wpt-skype-edit-button-popup-preview-button
+{
+    background-color: #fff;
+    min-height: 120px;
+    text-align: center;
+    width: 200px;
+}
+#wpt-skype-edit-button-popup input {
+    margin-top: 5px;
+    vertical-align: top;
+}
+
+/* File */
+
+#media-upload {
+    background: none;
+}
+#media-upload #media-search {
+    height: auto;
+    margin: 0;
+    position: static;
+}
+
+/* ----------------------------------------------------------------------------
+3.0 - Toolset Primary Button Style
+---------------------------------------------------------------------------- */
+
+.wp-core-ui .button-primary-toolset {
+    background: #F15D30;
+    border-color: #F15D30;
+ 	color: #fff;
+	text-decoration: none;
+    box-shadow: none;
+}
+
+.wp-core-ui .button-primary-toolset.hover,
+.wp-core-ui .button-primary-toolset:hover,
+.wp-core-ui .button-primary-toolset.focus,
+.wp-core-ui .button-primary-toolset:focus,
+.wp-core-ui .button-primary-toolset.active,
+.wp-core-ui .button-primary-toolset:active {
+    background: #d6410f;
+    border-color: #d6410f;
+	color: #fff;
+    box-shadow: none;
+}
+
+.wp-core-ui .button-primary-toolset[disabled],
+.wp-core-ui .button-primary-toolset:disabled,
+.wp-core-ui .button-primary-toolset.disabled {
+	cursor: default;
+    opacity: 0.65;
+}
+
+
+
+/*=====================================================
+Repeatable Image field
+ ======================================================*/
+
+
+.wpt-repetitive.wpt-image  .wpt-field-item {
+    display: inline-block;
+    width: 150px;
+    padding: 0;
+    text-align: center;
+    margin-right: 15px;
+}
+.wpt-repetitive.wpt-image  .wpt-file-preview {
+    width: 150px;
+    height: 150px;
+    background: #fafafa;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.wpt-repetitive.wpt-image  .wpt-file-preview img {
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+    width: auto;
+}
+
+.wpt-repetitive.wpt-image  .wpt-field-item .form-item {
+    display: block;
+}
+.wpt-repetitive.wpt-image  .wpt-field-item .form-item input[type="text"]{
+    direction: rtl;
+    width: 100%;
+}
+
+.wpt-repetitive.wpt-image  .wpt-repdelete {
+    position: absolute;
+    top: -5px;
+    right: -7px;
+    font-size: 0;
+}
+
+.wpt-repetitive.wpt-image  .wpt-repdelete:before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    content: "\f158";
+    font-family: dashicons;
+    font-size: 16px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    color: #fff;
+    background: #d94f4f;
+    border-radius: 100px;
+}
+
+.wpt-repetitive.wpt-image  .wpt-repdrag {
+    position: absolute;
+    top: 65px;
+    left: 65px;
+    display: none;
+    width: 22px;
+    padding: 2px;
+    box-sizing: border-box;
+    height: 22px;
+    font-size: 18px;
+    border-radius: 31px;
+    background: #e6e6e6;
+    cursor: move;
+}
+.wpt-repetitive.wpt-image  .wpt-repdrag:hover {
+    background: #dedede;
+
+}
+
+.wpt-repetitive.wpt-image  .wpt-repdelete,
+.wpt-repetitive.wpt-image  .wpt-repdrag {
+    visibility: hidden;
+}
+.wpt-repetitive.wpt-image .wpt-field-item:hover  .wpt-repdelete,
+.wpt-repetitive.wpt-image .wpt-field-item:hover  .wpt-repdrag {
+    visibility: visible;
+}
+.wpt-repetitive.wpt-image  .button.wpt-repadd {
+    width: 150px;
+    height: 150px;
+    margin-top: 0;
+    margin-left: 0;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    vertical-align: top;
+    color: #6b6b6b !important;
+    border-color: transparent;
+    background: #f7f7f7;
+    box-shadow: none;
+    text-shadow: none;
+    font-weight: 500;
+}
+.wpt-repetitive.wpt-image .button.wpt-repadd:before {
+    content: "\f502";
+    font-family: dashicons;
+    font-size: 50px;
+    margin-bottom: 10px;
+    margin-top: 15px;
+    display: block;
+    color: #dcdcdc;
+    cursor: move;
+}
+.wpt-repetitive.wpt-image .button.wpt-repadd:hover {
+    background: #fafafa;
+    box-shadow:  0 2px 2px #e2e4e7;
+    color: #6b6b6b !important;
+    border-color: transparent;
+}
+
+

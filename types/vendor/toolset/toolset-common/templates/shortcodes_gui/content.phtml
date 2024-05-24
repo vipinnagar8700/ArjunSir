@@ -1,0 +1,18 @@
+<?php
+/**
+ * underscore.js template for the shared shortcodes GUI.
+ * 
+ * Component: content
+ *
+ * @since 3.1
+ */
+?>
+<script type="text/html" id="tmpl-toolset-shortcode-content">
+    <#
+        data = _.defaults( data, { defaultValue: '', required: false, hidden: false, placeholder: '' } );
+        data = _.defaults( data, { defaultForceValue: data.defaultValue } );
+    #>
+    <div class="toolset-shortcode-gui-attribute-wrapper js-toolset-shortcode-gui-content-wrapper" <# if ( data.hidden ) { #> style="display:none"<# } #>>
+        <textarea id="toolset-shortcode-gui-content-{{{data.shortcode}}}" type="text" class="large-text js-toolset-shortcode-gui-content">{{{data.defaultValue}}}</textarea>
+    </div>
+</script>

@@ -1,0 +1,100 @@
+{#
+Markup for the creation of a repeatable field group on the field group edit page.
+
+@since m2m
+#}
+<div id="{{ group.get_id_with_prefix() }}" data-repeatable-group-id="{{ group.get_id() }}" data-repeatable-group-slug="{{ group.get_post_type().get_slug() }}" class="toolset-postbox types-repeatable-group"
+     data-tooltip="{{ __( 'This group is inactive. You can edit it, but it is not usable on the post edit screen as long as the field group is assigned to more than one post type.', 'wpcf' ) }}">
+
+    <div data-toolset-collapsible=".toolset-postbox" class="toolset-collapsible-handle"
+         title="{{ __( 'Click to toggle', 'wpcf' ) }}" aria-expanded="true"><br></div>
+    <h3 data-toolset-collapsible=".toolset-postbox" class="toolset-postbox-title js-toolset-sortable-handle"><i
+                class="fa fa-repeat"></i>
+        <span class="wpcf-legend-update">{{ group.get_display_name() }}</span>
+        <span class="description">({{ __( 'Repeatable Group', 'wpcf' ) }})</span>
+    </h3>
+    <table class="widefat toolset-collapsible-inside js-wpcf-slugize-container" style="table-layout:fixed;">
+        <tbody>
+        <tr>
+            <td colspan="2">
+                <input type="hidden" name="wpcf[fields][{{ group.get_id_with_prefix() }}_presaveslug]" value="{{ group.get_slug() }}">
+                <input type="hidden" name="wpcf[fields][{{ group.get_id_with_prefix() }}_start]" value="1">
+
+                {# This table is needed because otherwise the fields width will change when adding an expanded field to the group #}
+                <table class="widefat" style="border: 0; box-shadow: none;">
+                    <tbody>
+                    <tr class="js-wpcf-fields-typeproof">
+                        <td>
+                            <input type="hidden" name="" value="1">
+                            <label class="wpcf-form-label wpcf-form-textfield-label" for="">
+                                {{ __( 'Group name', 'wpcf' ) }}
+                            </label>
+                        </td>
+                        <td>
+                            <input type="text"
+                                   name="wpcf[fields][{{ group.get_id_with_prefix() }}_name]"
+                                   data-types-validate-required="true"
+                                   class="widefat js-wpcf-slugize-source wpcf-forms-set-legend"
+                                   placeholder="{{ __( 'Enter group name' ) }}" value="{% if group.get_slug() %}{{ group.get_display_name() }}{% endif %}"/>
+                        </td>
+                    </tr>
+                    <tr class="js-wpcf-fields-typeproof">
+                        <td>
+                            <label class="wpcf-form-label wpcf-form-textfield-label" for="">
+                                {{ __( 'Group slug', 'wpcf' ) }}
+                            </label>
+                        </td>
+                        <td>
+                            <input type="text"
+                                   name="wpcf[fields][{{ group.get_id_with_prefix() }}_slug]"
+                                   data-types-repeatable-group-id="{{ group.get_id() }}"
+                                   data-types-validate-required="true"
+                                   data-types-validate-post-type-slug="true"
+                                   class="widefat js-wpcf-slugize"
+                                   placeholder="{{ __( 'Enter group slug' ) }}" value="{% if group.get_display_name() %}{{ group.get_slug() }}{% endif %}" />
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr class="wpcf-border-top">
+            <td colspan="2" style="text-align: left;">
+                <div id="repeatable-fields-group-{{ group.get_id() }}" class="types-repeatable-group-fields js-types-fields-sortable">
+                    {{ fields_rendered|raw }}
+                </div>
+
+                <button type="button" data-add-field-to="repeatable-fields-group-{{ group.get_id() }}"
+                        class="wpcf-fields-btn js-wpcf-fields-add-new wpcf-form-button form-button button"
+                        data-wpcf-dialog-title="{{ __( 'Add New Field', 'wpcf' ) }}"
+                        data-wpcf-message-loading="{{ __( 'Please Wait, Loading…', 'wpcf' ) }}"
+                        data-wpcf-type="wpcf-fields"
+                        data-wpcf-id="{{ group.get_id() }}"
+                        data-wpcf-page="wpcf-edit">
+                    <span class="dashicons dashicons-plus"></span> {{ __( 'Add New Field', 'wpcf' ) }}
+                </button>
+                <button type="button" data-add-field-to="repeatable-fields-group-{{ group.get_id() }}"
+                        class="wpcf-fields-btn wpcf-form-button form-button button"
+                        data-bind="click: addRepeatableGroup">
+                    <span class="dashicons dashicons-plus"></span> {{ __( 'Add New Repeatable Group', 'wpcf' ) }}
+                </button>
+
+                <input type="hidden" name="wpcf[fields][{{ group.get_id_with_prefix() }}_end]" value="1">
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="2">
+                {# class removed: js-wpcf-field-remove #}
+                <a href="#" class="wpcf-field-remove"
+                   data-bind="click: deleteRepeatableGroup"
+                   data-types-repeatable-group-id="{{ group.get_id() }}"
+                   data-message-confirm="Are you sure?">
+                    <i class="fa fa-trash"></i> {{ __( 'Remove Repeatable Group', 'wpcf' ) }}
+                </a>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</div>

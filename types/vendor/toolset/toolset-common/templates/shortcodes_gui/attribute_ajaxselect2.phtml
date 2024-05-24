@@ -1,0 +1,19 @@
+<?php
+/**
+ * underscore.js template for the shared shortcodes GUI.
+ * 
+ * Component: select2 attributes with AJAX search
+ *
+ * @since 3.1
+ */
+?>
+<script type="text/html" id="tmpl-toolset-shortcode-attribute-ajaxSelect2">
+    <select
+        id="{{{data.shortcode}}}-{{{data.attribute}}}"
+        class="js-shortcode-gui-field js-toolset-shortcode-gui-field-ajax-select2<# if ( data.required ) { #> js-toolset-shortcode-gui-required<# } #>"
+        data-action="{{{data.action}}}"
+        data-nonce="{{{data.nonce}}}"
+        data-placeholder="{{{data.placeholder}}}"
+        >
+    </select>
+</script>

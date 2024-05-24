@@ -1,0 +1,134 @@
+{#
+    Main template for the Custom Posts page.
+
+    Only extends page-specific blocks of the genetic listing template.
+
+    @since 2.3
+#}
+{% extends "@toolset/listing.twig" %}
+
+{# we need its macros #}
+{% import "@toolset/listing.twig" as listing %}
+
+{% import _self as customfields %}
+
+{#
+	Heading must be rewrite in order to add the 'Add new' button
+	and the tabs
+#}
+{% block heading %}
+	<h1>
+		{% block title %}
+			{{ strings.misc.pageTitle }}
+			{% if strings.misc.addNew %}
+				<a data-bind="click: onAddNewCustomFieldAction" class="add-new-h2">{{ strings.misc.addNew }}</a>
+			{% endif %}
+		{% endblock %}
+	</h1>
+	<!-- ko if: (tabs().length != 0) -->
+			{% block tabsOptions %}
+				<p class="toolset-tab-controls">
+					{% for slug,data in tabs %}
+						<a href="{{ data.url }}" class="js-toolset-nav-tab toolset-nav-tab nav-tab {{ data.class }}" data-target="{{ slug }}" data-bind="click: onTabChange.bind($data, '{{ slug }}')">{{ data.text }}</a>
+					{% endfor %}
+				</p>
+			{% endblock %}
+	<!-- /ko -->
+{% endblock %}
+
+{# Content needs the Field Control box #}
+{% block content %}
+	<div id="poststuff">
+		<div data-bind="attr: { class: getTabContentStyles() }">
+	        {{ parent() }}
+	        {# Field Control Box #}
+			<div class="postbox field-control-box js-wpcf-slugize-container" data-bind="visible: fieldControlBox" style="display:none">
+				<h2 class="toolset-postbox-header" data-bind="text: fieldControlBox().title"></h2>
+				<div class="inside">
+					<span data-bind="text: fieldControlBox().text"></span>
+					<a class="button"
+					   data-bind="text: fieldControlBox().button, attr: { href: fieldControlBox().link, title: fieldControlBox().button }"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+
+{% block columnHeaders %}
+    {{ listing.columnHeader(strings.column.name, true, 'displayNameText', 'column-title column-primary') }}
+    {{ listing.columnHeader(strings.column.description, true, 'descriptionGroup') }}
+    {{ listing.columnHeader(strings.column.isActive, true, 'isActive') }}
+		<!-- ko if: (currentDomain() == 'posts') -->
+			{{ listing.columnHeader(strings.column.postTypes, false) }}
+			{{ listing.columnHeader(strings.column.taxonomies, false) }}
+		<!-- /ko -->
+		<!-- ko if: (currentDomain() == 'users') -->
+			{{ listing.columnHeader(strings.column.availableFor, false) }}
+		<!-- /ko -->
+		<!-- ko if: (currentDomain() == 'terms') -->
+			{{ listing.columnHeader(strings.column.isActive, false) }}
+		<!-- /ko -->
+{% endblock %}
+
+
+{# Only the row actions, which will be embedded in the main column. #}
+{% block rowActions %}
+    <span class="edit">
+        <a data-bind="attr: {href: editLink}">{{ strings.rowAction.edit }}</a> |
+    </span>
+    <span class="status">
+        <a data-bind="click: onChangeActiveAction, text: display.isActiveGroup"></a> |
+    </span>
+
+	{# Choose one of the options. Delete link will be unavailable if the field group contains a RFG #}
+    <span class="delete" data-bind="visible: ! containsRFG()">
+        <a data-bind="click: onDeleteAction">{{ strings.rowAction.delete }} </a>
+    </span>
+	<span class="delete" style="color: #555" data-bind="visible: containsRFG">
+		{{ strings.rowAction.delete }}
+		<i class="fa fa-question-circle icon-question-sign js-show-tooltip"
+				data-header="{{ __( 'Repeating field group inside', 'wpcf' ) }}"
+				data-content="{{ __( 'This field group contains one or more repeatable field groups inside and cannot be deleted directly from the listing page. Instead, click on the Edit link and delete it from there.', 'wpcf' ) }}"
+				data-bind="click: ToolsetTypes.Utils.Pointer.show($element)"></i>
+	</span>
+{% endblock %}
+
+
+{# The bulk action checkbox has a custom logic here. #}
+{% block checkboxCell %}
+	<td>
+		<input type="checkbox" data-bind="checked: isCheckedForBulkAction, enable: isBulkActionAllowed" />
+	</td>
+{% endblock %}
+
+
+
+{# Other table cells besides the main one (with displayName and row actions) #}
+{% block tdCells %}
+    {# List of groups the field belongs to (if managed by Types) #}
+	<td data-colname="{{ strings.column.description }}" data-bind="text: descriptionGroup"></td>
+	<td data-colname="{{ strings.column.isActive }}" data-bind="text: (isActive() ? '{{ __( 'Yes', 'wpcf' ) }}' : '{{ __( 'No', 'wpcf' ) }}')"></td>
+	<!-- ko if: (display.currentDomain == 'posts') -->
+		<td data-colname="{{ strings.column.postTypes }}"  data-bind="html: postTypes"></td>
+		<td data-colname="{{ strings.column.taxonomies }}"  data-bind="html: taxonomies"></td>
+	<!-- /ko -->
+	<!-- ko if: (display.currentDomain == 'users') -->
+		<td data-colname="{{ strings.column.availableFor }}"  data-bind="text: availableFor"></td>
+	<!-- /ko -->
+	<!-- ko if: (display.currentDomain == 'terms') -->
+		<td data-colname="{{ strings.column.taxonomies }}"  data-bind="html: taxonomies"></td>
+	<!-- /ko -->
+{% endblock %}
+
+{# Each tab has its own noItemsFound #}
+{% block tbodyNoItems %}
+	<tbody>
+		<tr>
+			<th scope="row" class="check-column">
+				<input type="checkbox" disabled />
+			</th>
+			<td colspan="5" data-bind="html: noItemsFound()"></td>
+		</tr>
+	</tbody>
+{% endblock %}

@@ -1,0 +1,47 @@
+{#
+    Table that displays associations that will be created during the m2m migration and activation process.
+
+    @since m2m
+#}
+
+<table class="widefat">
+    <thead>
+        <tr>
+            <td>{{ __( 'Parent post', 'wpcf' ) }}</td>
+            <td>{{ __( 'Child post', 'wpcf' ) }}</td>
+            <td>{{ __( 'Relationship', 'wpcf' ) }}</td>
+        </tr>
+    </thead>
+    <!-- ko if: (associations().length > 0) -->
+        <tbody data-bind="foreach: associations">
+            <tr>
+                <td>
+                    <span data-bind="text: parent.title"></span>
+                    <span class="toolset-m2m-association-preview-slug">(<span data-bind="text: parent.slug"></span>)</span>
+                </td>
+                <td>
+                    <span data-bind="text: child.title"></span>
+                    <span class="toolset-m2m-association-preview-slug">(<span data-bind="text: child.slug"></span>)</span>
+                </td>
+                <td>
+                    <span data-bind="text: relationshipSlug"></span>
+                </td>
+            </tr>
+        </tbody>
+    <!-- /ko -->
+
+    <!-- ko if: (associations().length == 0) -->
+        <tbody>
+            <tr>
+                <td colspan="3">
+                    <!-- ko if: (hasMoreAssociations()) -->
+                        {{ __( 'Loading...', 'wpcf' ) }}
+                    <!-- /ko -->
+                    <!-- ko if: (!hasMoreAssociations()) -->
+                        {{ __( 'No post associations found.', 'wpcf') }}
+                    <!-- /ko -->
+                </td>
+            </tr>
+        </tbody>
+    <!-- /ko -->
+</table>

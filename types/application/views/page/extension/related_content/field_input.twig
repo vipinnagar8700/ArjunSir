@@ -1,0 +1,16 @@
+{#
+	Fields container
+
+	@since m2m
+#}
+{% if fields %}
+
+    <div id="{{ id }}" class="types-fields-container">
+        {% for field in fields %}
+            {{ field.rendered | raw }}
+        {% endfor %}
+        <input name="nonce" type="hidden" value="{{ nonce }}"/>
+        <input name="wpnonce" type="hidden" value="{{ wpnonce }}"/>
+    </div>
+
+{% endif %}

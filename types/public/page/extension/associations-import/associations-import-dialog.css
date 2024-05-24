@@ -1,0 +1,133 @@
+#toolset-associations-import .toolset-alert p:first-child {
+    margin-top: 0;
+}
+
+#toolset-associations-import .toolset-alert p:last-child {
+    margin-bottom: 0;
+}
+
+#toolset-associations-import table {
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+#toolset-associations-import table thead tr {
+    position: relative;
+    background: #666;
+    color: #fff;
+    cursor: pointer;
+}
+
+#toolset-associations-import table thead .table-headline-description {
+    margin: 5px 0 0;
+    font-size: 0.9em;
+    font-weight: normal;
+    width: auto;
+    max-width: none;
+}
+
+#toolset-associations-import table thead tr:hover {
+    background: #777;
+}
+
+#toolset-associations-import table thead tr i.fa {
+    position: absolute;
+    top: 10%;
+    top: calc( 50% - 14px );
+    right: 10px;
+}
+
+#toolset-associations-import table th,
+#toolset-associations-import table td {
+    text-align: left;
+}
+
+#toolset-associations-import table th {
+    padding: 10px;
+    border-radius: 0px;
+}
+
+#toolset-associations-import table tr td {
+    padding: 5px 10px;
+    font-size: 0.9em;
+    background: #fafafa;
+    border: 1px solid #e8e8e8;
+    width: 25%;
+}
+
+#toolset-associations-import table tr:nth-of-type(odd) td {
+    background: #f2f2f2;
+}
+
+#toolset-associations-import table tr.row-loading td {
+    text-align: center;
+}
+
+#toolset-associations-import table tr.row-column-description td {
+    background-color: #fff;
+    font-weight: bold;
+}
+
+#toolset-associations-import table tr.row-pagination td {
+    text-align: right;
+}
+
+#toolset-associations-import table tr.row-pagination .fa {
+    cursor: pointer;
+}
+#toolset-associations-import table tr.row-pagination .page-count {
+    text-align: center;
+    display: inline-block;
+    width: 70px;
+    vertical-align: text-bottom;
+}
+
+#toolset-associations-import table tfoot tr td {
+    font-weight: bold;
+    text-align: center;
+}
+
+#toolset-associations-import .toolset-association-error {
+    color: #b94a48;
+    font-weight: bold;
+}
+
+#toolset-associations-import .toolset-association-success {
+    color: #468847;
+}
+
+@media only screen and (min-width: 1400px) {
+    p {
+        max-width: 650px;
+    }
+
+    .toolset-tabbed-section-item-associations .toolset-setting-container {
+        max-width: none;
+    }
+
+    .toolset-tabbed-section-item-associations .toolset-settings-header {
+        width: 270px;
+    }
+
+    .toolset-tabbed-section-item-associations .toolset-setting {
+        margin-left: 9px;
+        width: calc( 100% - 279px );
+    }
+
+    #toolset-associations-import table {
+        width: 900px;
+    }
+}
+
+/* tooltip - move to toolset-common */
+.association-tooltip{
+    margin:8px;
+    padding:8px;
+    border:1px solid #ccc;
+    color: #333;
+    border-radius: 4px;
+    background-color: #fff;
+    position: absolute;
+    z-index: 2;
+}

@@ -1,0 +1,33 @@
+<div id="types-metabox-relationships">
+
+	<div class="types-metabox-relationships-actions alignright">
+		<p><a href="{{ createRelationshipURL }}" class="button">{{ __( 'Add New Relationship', 'wpcf' ) }}</a></p>
+	</div>
+	<table class="wp-list-table widefat striped" cellspacing="0">
+		<thead>
+			<tr>
+				<th></th>
+				<th>{{ __( 'Type', 'wpcf' ) }}</th>
+				<th>{{ __( 'Name', 'wpcf' ) }}</th>
+				<th>{{ __( 'Connected Post Type', 'wpcf' ) }}</th>
+				<th>{{ __( 'Shown in post editor', 'wpcf' ) }}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% if relationships is empty %}
+				<tr><td colspan="5" class="column-comments">{{ __( 'No relationships found', 'wpcf' ) }}</td></th>
+			{% else %}
+				{% for relationship in relationships %}
+					<tr>
+						<td><i class="icon-{{ relationship.type }}" style="font-size: 30px;"></i></td>
+						<td>{{ relationship.typeFormatted }}</td>
+						<td>{{ relationship.editRelationshipLink|raw }}</td>
+						<td>{{ relationship.postTypes|raw }}</td>
+						<td><input type="checkbox" name="ct[show_relationship][{{ relationship.slug }}]" {{ relationship.visible ? 'checked="checked"' : '' }} /></td>
+					</tr>
+				{% endfor %}
+			{% endif %}
+		</tbody>
+	</table>
+	<p>{{ relationshipsPageNotice|raw }}</p>
+</div>

@@ -1,0 +1,72 @@
+{#
+	Template for the generic batch process dialog.
+
+	See BatchProcessDialog.js and Toolset_Ajax_Handler_Batch_Process.
+
+	Required context:
+	- dialog.dialogStepCount: Number of (wizard)steps in the dialog. We assume that the last one contains the batch process.
+
+	@since 3.0.5
+#}
+
+{% import "@toolset/forms.twig" as forms %}
+
+<!--suppress CheckTagEmptyBody -->
+<div class="toolset-batch-process-dialog">
+
+    {% block dialogSteps %}
+		{# All previous steps go here. #}
+    {% endblock %}
+
+    {% block batchProcessStep %}
+        <div data-bind="if: ( {{ dialog.dialogStepCount|default(2) }} === currentDialogStepNumber() )">
+
+			{% block batchProcessIntroduction %}{% endblock %}
+
+			{% block batchProcessPhases %}
+				<ol data-bind="foreach: phase.definition" class="toolset-batch-process-dialog__process-status">
+                    <li>
+                        <span class="toolset-batch-process-dialog__phase-label" data-bind="text: label"></span>
+                        <span class="toolset-batch-process-dialog__phase-status-icon">
+                            <!-- spinner when this phase is in progress -->
+                            <i data-bind="visible: $root.isInProgress() && $root.currentProcessPhase() == ( $index() + 1 )" class="fa fa-spinner fa-spin fa-lg"></i>
+                            <!-- check mark when this phase is done -->
+                            <i data-bind="
+                                    visible: true || (
+                                        ($parent.currentProcessPhase() > ( $index() + 1 ) || ! $parent.isInProgress())
+                                        && $parent.phase.getDisplayInfo( $index() + 1 ).visible
+                                    ),
+                                    attr: { class: $parent.phase.getDisplayInfo( $index() + 1 ).icon },
+                                    style: { color: $parent.phase.getDisplayInfo( $index() + 1 ).color },"
+                            ></i>
+                        </span>
+                    </li>
+				</ol>
+
+            {% endblock %}
+
+			{% block processMessage %}
+                {# An error / warning message when the process finishes. #}
+                <div data-bind="visible: processMessage.isVisible, attr: { class: processMessage.classes }">
+                    <p data-bind="text: processMessage.text"></p>
+                </div>
+
+                {# Detailed output from the migration AJAX calls. #}
+                <div data-bind="visible: ! processLog.isEmpty() || isInProgress()" class="toolset-batch-process-dialog__log-output">
+                    <p data-bind="click: processLog.toggle" class="toolset-batch-process-dialog__log-dropdown toolset-batch-process-dialog--space-top">
+                        <i aria-hidden="true"
+                           data-bind="attr: { class: 'fa ' + (processLog.isVisible() ? 'fa-caret-up' : 'fa-caret-down') }"
+                        ></i>
+                        {{ __( 'Technical details', 'wpv-views' ) }}
+                    </p>
+                    <p data-bind="visible: processLog.isVisible">
+                        <label>
+                            <textarea data-bind="valueScroll: processLog.output" rows="10" readonly="readonly"></textarea>
+                        </label>
+                    </p>
+                </div>
+            {% endblock %}
+        </div>
+    {% endblock %}
+
+</div>

@@ -1,0 +1,113 @@
+{#
+	Template for the Merge Relationships dialog on the Relationships page.
+
+	@since 3.0.5
+#}
+
+{% import _self as self %}
+
+{% extends "@toolset/batch_process_dialog.twig" %}
+
+{% macro span( elementName, binding ) %}
+	<span class="types-merge-relationships__{{ elementName }}" data-bind="text: {{ binding }}"></span>
+{% endmacro %}
+
+{% block dialogSteps %}
+	<div class="types-merge-relationships" data-bind="if: ( 1 === currentDialogStepNumber() )">
+		<h4>{{ __( 'You are about to merge two one-to-many relationships that share the same child post type:' ) }}</h4>
+		<ul data-bind="foreach: relationships" class="types-merge-relationships--list-style-standard">
+			<li>
+				<span data-bind="text: displayName" class="types-merge-relationships__name"></span>
+				(<code data-bind="text: slug" class="types-merge-relationship__slug"></code>)
+				<br>
+				<span data-bind="text: display.description"></span>
+			</li>
+		</ul>
+		<p>
+			{{ __( 'into a single many-to-many relationship:', 'wpcf' ) }}
+		</p>
+
+		<h4>{{ __( 'This is going to happen:', 'wpcf') }}</h4>
+		<ol>
+			<li>
+				{{
+					sprintf(
+						__( 'Relationships %s and %s will <strong>cease to exist</strong>.', 'wpcf'),
+						self.span( 'name', 'relationships()[0].displayName' ),
+						self.span( 'name', 'relationships()[1].displayName' )
+					)|raw
+				}}
+			</li>
+			<li>
+				{{
+					sprintf(
+						__( 'A <strong>new many-to-many relationship</strong> between %s and %s will be created.', 'wpcf'),
+						self.span( 'name', 'relationships()[0].display.postType.parent'),
+						self.span( 'name', 'relationships()[1].display.postType.parent')
+					)|raw
+				}}
+			</li>
+			<li>
+				{{
+					sprintf(
+						__( 'The post type <strong>%s will be used as an intermediary post type</strong> for this relationship.', 'wpcf'),
+						self.span( 'name', 'relationships()[0].display.postType.child')
+					)|raw
+				}}
+			</li>
+			<li>
+				{{
+					sprintf(
+						__( '%s <strong>posts that aren\'t properly connected</strong> to both %s and %s will be <strong>deleted</strong>.', 'wpcf' ),
+						self.span( 'name', 'relationships()[0].display.postType.child'),
+						self.span( 'name', 'relationships()[0].display.postType.parent'),
+						self.span( 'name', 'relationships()[1].display.postType.parent')
+					)|raw
+				}}
+			</li>
+		</ol>
+		<h4>
+			{{ __( 'Before proceeding, please specify the name of the new relationship', 'wpcf') }}:
+		</h4>
+		<table class="types-merge-relationships__table-form ">
+			<tr>
+				<td>
+					<label for="types-merge-relationships__new-relationship-plural">{{ __( 'Relationship name plural', 'wpcf' ) }}</label>
+				</td>
+				<td>
+					<input id="types-merge-relationships__new-relationship-plural" type="text" data-bind="value: newDisplayNamePlural" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="types-merge-relationships__new-relationship-singular">{{ __( 'Relationship name singular', 'wpcf' ) }}</label>
+				</td>
+				<td>
+					<input id="types-merge-relationships__new-relationship-singular" type="text" data-bind="value: newDisplayNameSingular" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="types-merge-relationships__new-relationship-slug">{{ __( 'Slug', 'wpcf' ) }}</label>
+				</td>
+				<td>
+					<input id="types-merge-relationships__new-relationship-slug" type="text" data-bind="value: newSlug" />
+				</td>
+			</tr>
+		</table>
+
+		<div class="notice notice-warning">
+			<p><strong>{{ __( 'Important', 'wpcf') }}: </strong>{{ __( 'While it may simplify your work when managing the site in the future, there are certain risks involved. If you use slugs of these two relationships in Toolset shortcodes, Views query filters, in custom code or elsewhere, it will stop working after the merging and you will have to manually adjust the site setup.', 'wpcf') }}</p>
+			<p><strong>{{ __( 'We recommend performing the merging only in a safe (staging) evironment, after you have created a full backup of your database.', 'wpcf') }}</strong></p>
+			<p>
+				<label>
+					<input type="checkbox" data-bind="checked: isConfirmedByUser" />
+                    {{ __( 'I understand the risk and I have created a full backup of the site.', 'wpcf' ) }}
+				</label>
+			</p>
+		</div>
+
+
+
+	</div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{#
+    Dialog for confirming the deletion of a intermediary post type.
+
+    @since m2m
+#}
+
+<div style="margin-left: 100px;">
+    <div style="float: right; width: 100%">
+        <div data-bind="visible: progressVisible() == false && deleteProcessCompleted() == false" class="types-delete-ipt-dialog-body">
+            <p><strong>{{
+            __( 'You are about to delete the post type "%s".', 'wpcf' )
+            |format( '<span data-bind="text: postTypeDisplayName"></span>' )
+            |raw
+                    }}</strong></p>
+
+            {{ __( 'This will remove all intermediary posts, the custom field group attached to the intermediary post type and the intermediary post type itself.', 'wpcf' ) | raw }}
+
+            <p data-bind="visible: alertVisible">
+                <strong>{{ __( 'This cannot be undone. Are you sure you want to do this?', 'wpcf' ) }}</strong>
+            </p>
+        </div>
+        <div data-bind="visible: progressVisible() == true && deleteProcessCompleted() == false">
+            <p>{{
+                __( 'We are deleting posts from intermediary post type: "%s".', 'wpcf' )
+                | format( '<span data-bind="text: postTypeDisplayName"></span>' )
+                | raw
+                }}</p>
+
+            <div class="toolset_progress_bar" id="intermediary-progress-bar"><span></span></div>
+            <div class="types-ipt-delete-progress-info">
+                <span data-bind="text: progressAssociationsAmount"></span>{{ __( ' out of  ', 'wpcf' ) }}<span data-bind="text: totalAssociationsAmount"></span>{{ __( ' associations has been updated.  ', 'wpcf' ) }}<br />
+                <span data-bind="text: progressAmount"></span>{{ __( ' out of  ', 'wpcf' ) }}<span data-bind="text: totalAmount"></span>{{ __( ' posts have been deleted.  ', 'wpcf' ) }}
+                <span data-bind="text: remainingAmount"></span>{{ __( ' posts still needs deletion. ', 'wpcf' ) | raw }}
+            </div>
+            <p><strong>{{  __( 'This process can take a while - please do not close this dialog nor browser window!', 'wpcf' ) | raw }}</strong>
+            </p>
+        </div>
+        <div data-bind="visible: progressVisible() == false && deleteProcessCompleted() == true">
+            <p class="pad-bot-0 no-bottom-margin"><strong>{{ __( 'We have deleted:', 'wpcf' ) | raw }}</strong></p>
+            <ul class="types-delete-ipt-summary">
+                <li><span data-bind="text: totalAmount"></span>{{ __( ' post(s) from intermediary post type: %s.  ', 'wpcf' ) | format( '<span data-bind="text: postTypeDisplayName"></span>' ) | raw }}</li>
+                <li data-bind="visible: deletedGroups() > 0">{{ __( 'Custom Field Group attached to the Intermediary Post Type.  ', 'wpcf' ) }}</li>
+                <li></span>{{ __( 'The Intermediary Post Type: %s itself.  ', 'wpcf' ) | format( '<span data-bind="text: postTypeDisplayName"></span>' ) | raw }}</li>
+            </ul>
+        </div>
+    </div>
+    <div style="float: left; width: 100px; margin-left: -100px;">
+        <i class="fa fa-trash fa-5x" style="margin: 20px;"></i>
+    </div>
+    <div style="clear: both"></div>
+</div>

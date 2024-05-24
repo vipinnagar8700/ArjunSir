@@ -1,0 +1,21 @@
+<div id="toolset-intermediary-dialog" class="toolset-confirmation-dialog" title="<?php _e( 'Updating existing associations', 'wpcf' ); ?>" style="display: none" data-count="<?php echo $context[ 'number_associations_without_intermediary' ]; ?>" data-wpnonce="<?php echo $context[ 'wpnonce' ]; ?>" data-close="<?php _e( 'Close', 'wpcf' ); ?>">
+	<div class="toolset-confirmation-dialog-icon">
+		<i class="fa fa-5x fa-exclamation-triangle"></i>
+	</div>
+	<div class="toolset-confirmation-dialog-content">
+		<div id="toolset-intermediary-dialog-main-content">
+			<?php // translators: number of existing associations. ?>
+			<p><?php echo sprintf( __( '%d existing associations need an update with the new association filed(s)', 'wpcf' ), $context[ 'number_associations_without_intermediary' ] ); ?></p>
+			<div class="toolset_progress_bar" id="intermediary-progress-bar"><span></span></div>
+			<p><strong><?php esc_html_e( 'This process can take a while - please do not close this dialog nor browser window!', 'wpcf' ); ?></strong></p>
+			<div id="toolset-intermediary-dialog-confirmation-content" class="hidden">
+				<ul class="toolset-intermediary-result">
+					<li>
+						<span class="types-m2m-migration-phase-label"><?php esc_html_e( 'All  existing associations have been updated.', 'wpcf' ); ?></span>
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

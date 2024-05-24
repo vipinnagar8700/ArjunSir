@@ -1,0 +1,33 @@
+<?php
+/**
+ * Admin notice that is displayed in a classic editor for posts with a post type that has the "per post" editor mode.
+ *
+ * @var Toolset_Admin_Notice_Interface $this
+ * @since 3.2.2
+ */
+
+use OTGS\Toolset\Types\Page\Extension\EditPost\PerPostEditorMode;
+
+$link_to_switch_editor = remove_query_arg(
+    PerPostEditorMode::SWITCH_TO_CLASSIC_EDITOR_ARG,
+    add_query_arg(
+        array_merge( $_GET, array( PerPostEditorMode::SWITCH_TO_BLOCK_EDITOR_ARG => 1 ) ),
+        admin_url( 'post.php' )
+    )
+);
+
+?>
+<div class="toolset-notice-wp notice notice-info types-editor-switch-notice">
+	<p>
+	  <?php
+	  // Translators: Link in an admin notice displayed when editing a post in the classic editor.
+	  _e( 'You can switch to the Block Editor. In case you encounter any issues, you will be able to switch back to the Classic one and return to the current state of this post.', 'wpcf' );
+	  ?>
+	</p>
+	<a class="button button-default types-editor-switch-notice__button" href="<?php echo esc_url_raw( $link_to_switch_editor ) ?>">
+	  <?php
+	  // Translators: Link in an admin notice displayed when editing a post in the classic editor.
+	  _e( 'Switch to the Block Editor', 'wpcf' )
+	  ?>
+	</a>
+</div>

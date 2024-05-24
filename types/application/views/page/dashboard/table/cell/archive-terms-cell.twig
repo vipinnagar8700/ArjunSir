@@ -1,0 +1,8 @@
+{% if archives|length > 0 %}
+	<h4 class="toolset-table-list-heading"><span class="icon-views-logo"></span> {{ __( 'Term Archives', 'wpcf' )|e('html') }}</h4>
+	<ul class="toolset-table-list">
+		{% for archive_link in archives %}
+			<li><a href="{{ archive_link.link }}&ref=dashboard">{{ archive_link.title|e('html') }}</a></li>
+		{% endfor %}
+	</ul>
+{% endif %}

@@ -1,0 +1,59 @@
+<?php
+/**
+ * This file is include by Types_Field_Group_Repeatable_View_Backend_Post
+ *
+ * @var Types_Field_Group_Repeatable_View_Backend_Post $this
+ */
+if( ! $this instanceof Types_Field_Group_Repeatable_View_Backend_Post ) {
+    // this template file does not work outside of Types_Field_Group_Repeatable_View_Backend_Post
+    return;
+}
+
+$selected_view = $this->get_user_view_choice();
+
+$class_y = $selected_view == self::KEY_VERTICAL_VIEW
+	? 'button types-toogle-button c-rg__btn--active disabled js-rfg-view-switch-disabled'
+	: 'button types-toogle-button js-rfg-view-switch';
+
+$class_x = $selected_view == self::KEY_HORIZONTAL_VIEW
+	? 'button types-toogle-button c-rg__btn--active disabled js-rfg-view-switch-disabled'
+	: 'button types-toogle-button js-rfg-view-switch';
+
+$tag_x = $selected_view == self::KEY_VERTICAL_VIEW
+	? 'span'
+	: 'a';
+
+$tag_y = $selected_view == self::KEY_HORIZONTAL_VIEW
+	? 'span'
+	: 'a';
+
+do_action( 'types_rendering_repeatable_field_group_metabox' );
+?>
+    <div class="c-rg">
+        <div class="c-rg__control--view types-toogle-buttons-container">
+            <?php /* Buttons for switching between vertical & horizontal view */ ?>
+            <<?php echo $tag_x; ?> data-tooltip="<?php _e( 'You need to save your changes, before you can change the view.', 'wpcf' ); ?>"
+               href="<?php echo add_query_arg( array( self::KEY_GET_VIEW_SETTING => self::KEY_VERTICAL_VIEW ) ) ?>"
+			   data-view-setting="<?php esc_attr_e( self::KEY_VERTICAL_VIEW ); ?>"
+               class="<?php echo $class_y; ?>"><i class="fa fa-bars fa-rotate-90"></i>
+            </<?php echo $tag_x; ?>><<?php echo $tag_y; ?> data-tooltip="<?php _e( 'You need to save your changes, before you can change the view.', 'wpcf' ); ?>"
+               href="<?php echo add_query_arg( array( self::KEY_GET_VIEW_SETTING => self::KEY_HORIZONTAL_VIEW ) ) ?>"
+			   data-view-setting="<?php esc_attr_e( self::KEY_HORIZONTAL_VIEW ); ?>"
+               class="<?php echo $class_x; ?>"><i class="fa fa-bars"></i></<?php echo $tag_y; ?>>
+        </div>
+
+        <?php /* Container for repeatable group. Data is loaded via ajax after initial page load. */ ?>
+        <div data-types-repeatable-group="<?php echo $repeatable_group->get_id() ?>">
+            <p class="c-rgx__title"><?php echo $repeatable_group->get_display_name() ?></p>
+            <div class="c-rgx">
+                <div class="c-rgx__body">
+                    <div class="c-rgx__empty--container">
+                        <p class="c-rgx__loading js-rgx__notice_loading"><?php _e( 'Loading', 'wpcf' ) ?></p>
+                        <?php // translators: post type name. ?>
+                        <p class="js-rgx__notice_save_post_first" style="display:none;"><?php echo sprintf( __( 'You need to save the %s before you can use repeatable fields.', 'wpcf' ), $this->get_singular_post_type_label() ); ?> <span class="c-rgx__button--container"><input name="wpcf-save" id="wpcf-save-post" value="<?php echo esc_html_x( 'Save', 'repeatable field groups', 'wpcf' ); ?>" class="button" type="submit"> <span class="spinner"></span></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php
