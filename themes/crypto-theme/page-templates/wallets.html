@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>cryptoadventure</title>
+      <!-- css  -->
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <!-- slick css -->
+      <link rel="stylesheet" href="css/slick-theme.css">
+      <link rel="stylesheet" href="css/slick.css">
+      <link rel="stylesheet" href="css/menu.css">
+      <!-- css end -->
+      <!-- fonts  -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+      <!-- fonts end -->
+      <!-- canvas  -->
+      <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+      <!-- canvas  -->
+   </head>
+   <body>
+      <!-- main header  -->
+      <header class="header">
+         <div class="container">
+            <div class="wrapper">
+               <div class="header-item-left">
+                  <a class="navbar-brand" href="#">
+                  <img src="images/footer-logo.svg" class="img-fluid " alt="">
+                  </a>
+               </div>
+               <!-- Section: Navbar Menu -->
+               <div class="header-item-center">
+                  <div class="overlay"></div>
+                  <nav class="menu">
+                     <div class="menu-mobile-header">
+                        <button type="button" class="menu-mobile-arrow"><i class="bi bi-arrow-left"></i></button>
+                        <div class="menu-mobile-title"></div>
+                        <button type="button" class="menu-mobile-close"><i class="bi bi-x"></i></button>
+                     </div>
+                     <ul class="menu-section">
+                        <li class="menu-item-has-children">
+                           <a href="#">Discover <i class="fa fa-angle-down"></i></a>
+                           <div class="menu-subs menu-mega menu-column-4">
+                              <div class="container">
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <h5 class="white fw-600">Live Price</h5>
+                                       <div class="prices_grid">
+                                          <a href="" class="live_price d-flex align-items-center gap-2">
+                                             <div><img src="images/bitcoin.webp" class="img-fluid live_price_logo " alt=""></div>
+                                             <div>
+                                                <p class="mb-0 ">Bitcoin BTC</p>
+                                                <p><span class="fw-500">$61.546</span> <span class="red">2.1772%</span></p>
+                                             </div>
+                                          </a>
+                                          <a href="" class="live_price d-flex align-items-center gap-2">
+                                             <div><img src="images/bitcoin.webp" class="img-fluid live_price_logo " alt=""></div>
+                                             <div>
+                                                <p class="mb-0 ">Bitcoin BTC</p>
+                                                <p><span class="fw-500">$61.546</span> <span class="red">2.1772%</span></p>
+                                             </div>
+                                          </a>
+                                          <a href="" class="live_price d-flex align-items-center gap-2">
+                                             <div><img src="images/bitcoin.webp" class="img-fluid live_price_logo " alt=""></div>
+                                             <div>
+                                                <p class="mb-0 ">Bitcoin BTC</p>
+                                                <p><span class="fw-500">$61.546</span> <span class="red">2.1772%</span></p>
+                                             </div>
+                                          </a>
+                                          <a href="" class="live_price d-flex align-items-center gap-2">
+                                             <div><img src="images/bitcoin.webp" class="img-fluid live_price_logo " alt=""></div>
+                                             <div>
+                                                <p class="mb-0 ">Bitcoin BTC</p>
+                                                <p><span class="fw-500">$61.546</span> <span class="red">2.1772%</span></p>
+                                             </div>
+                                          </a>
+                                          <div class="live_price d-flex align-items-center gap-2">
+                                             <div>
+                                                <a href="" class="yellow fw-bold fs-14"><span>DISCOVER ALL CRYPTOCURRENCIES</span><i class="bi bi-arrow-right ps-1"></i></a>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <ul class="mega_menu_listing">
+                                          <li>
+                                             <a href="" class="yellow fw-bold mb-2 d-inline-block"><span>All press releases</span><i class="bi bi-arrow-right ps-1"></i></a>
+                                             <p>Hunting for a reliable crypto wallet? We’ve filtered out a list of top digital wallets in terms of security, user experience, and cost.
+                                             </p>
+                                          </li>
+                                          <li>
+                                             <a href="" class="yellow fw-bold mb-2 d-inline-block"><span>All press releases</span><i class="bi bi-arrow-right ps-1"></i></a>
+                                             <p>Hunting for a reliable crypto wallet? We’ve filtered out a list of top digital wallets in terms of security, user experience, and cost.
+                                             </p>
+                                          </li>
+                                          <li>
+                                             <a href="" class="yellow fw-bold mb-2 d-inline-block"><span>All press releases</span><i class="bi bi-arrow-right ps-1"></i></a>
+                                             <p>Hunting for a reliable crypto wallet? We’ve filtered out a list of top digital wallets in terms of security, user experience, and cost.
+                                             </p>
+                                          </li>
+                                          <li>
+                                             <a href="" class="yellow fw-bold mb-2 d-inline-block"><span>All press releases</span><i class="bi bi-arrow-right ps-1"></i></a>
+                                             <p>Hunting for a reliable crypto wallet? We’ve filtered out a list of top digital wallets in terms of security, user experience, and cost.
+                                             </p>
+                                          </li>
+                                          <li>
+                                             <a href="" class="yellow fw-bold mb-2 d-inline-block"><span>All press releases</span><i class="bi bi-arrow-right ps-1"></i></a>
+                                             <p>Hunting for a reliable crypto wallet? We’ve filtered out a list of top digital wallets in terms of security, user experience, and cost.
+                                             </p>
+                                          </li>
+                                          <li>
+                                             <a href="" class="yellow fw-bold mb-2 d-inline-block"><span>All press releases</span><i class="bi bi-arrow-right ps-1"></i></a>
+                                             <p>Hunting for a reliable crypto wallet? We’ve filtered out a list of top digital wallets in terms of security, user experience, and cost.
+                                             </p>
+                                          </li>
+                                          <li>
+                                             <a href="" class="yellow fw-bold mb-2 d-inline-block"><span>All press releases</span><i class="bi bi-arrow-right ps-1"></i></a>
+                                             <p>Hunting for a reliable crypto wallet? We’ve filtered out a list of top digital wallets in terms of security, user experience, and cost.
+                                             </p>
+                                          </li>
+                                          <li>
+                                             <a href="" class="yellow fw-bold mb-2 d-inline-block"><span>All press releases</span><i class="bi bi-arrow-right ps-1"></i></a>
+                                             <p>Hunting for a reliable crypto wallet? We’ve filtered out a list of top digital wallets in terms of security, user experience, and cost.
+                                             </p>
+                                          </li>
+                                          <li>
+                                             <a href="" class="yellow fw-bold mb-2 d-inline-block"><span>All press releases</span><i class="bi bi-arrow-right ps-1"></i></a>
+                                             <p>Hunting for a reliable crypto wallet? We’ve filtered out a list of top digital wallets in terms of security, user experience, and cost.
+                                             </p>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </li>
+                        <li class="menu-item-has-children">
+                           <a href="#">Topics  <i class="fa fa-angle-down"></i></a>
+                           <div class="menu-subs menu-mega menu-column-4">
+                              <div class="container">
+                                 <div class="row topics_row">
+                                    <div class="col-md-4 w_100">
+                                       <a href="" class="mega_menu_title">Guides</a>
+                                       <ul class="mega_inner_menu two_col">
+                                          <li><a href="">Guides</a></li>
+                                          <li><a href="">Altcoins</a></li>
+                                          <li><a href="">Bitcoin</a></li>
+                                          <li><a href="">Blockchain</a></li>
+                                          <li><a href="">DeFi</a></li>
+                                          <li><a href="">Exchanges</a></li>
+                                          <li><a href="">Handy Tips</a></li>
+                                          <li><a href="">Mining</a></li>
+                                          <li><a href="">NFT</a></li>
+                                          <li><a href="">Trading</a></li>
+                                          <li><a href="">Wallets</a></li>
+                                       </ul>
+                                    </div>
+                                    <div class="col-md-2 w_100">
+                                       <a href="" class="mega_menu_title">Reviews</a>
+                                       <ul class="mega_inner_menu">
+                                          <li><a href="">Reviews</a></li>
+                                          <li><a href="">Exchanges</a></li>
+                                          <li><a href="">Projects</a></li>
+                                          <li><a href="">Staking Pools</a></li>
+                                          <li><a href="">Trading Bots</a></li>
+                                          <li><a href="">Wallets</a></li>
+                                       </ul>
+                                    </div>
+                                    <div class="col-md-3 w_100">
+                                       <a href="" class="mega_menu_title">Press Release</a>
+                                       <ul class="press_post">
+                                          <li><a href="">Baked Beans Launches First Gamified Passive Income Miner on Solana, Sets April 20 Token Presale on Pinksale</a></li>
+                                          <li><a href="">Baked Beans Launches First Gamified Passive Income Miner on Solana, Sets April 20 Token Presale on Pinksale</a></li>
+                                          <li><a href="">Baked Beans Launches First Gamified Passive Income Miner on Solana, Sets April 20 Token Presale on Pinksale</a></li>
+                                       </ul>
+                                    </div>
+                                    <div class="col-md-3 w_100">
+                                       <div class="mb-3">
+                                          <a href="" class="mega_menu_title">Research</a>
+                                          <p>Gain insight into the latest trends in the world of crypto. Explore in-depth analyses.</p>
+                                       </div>
+                                       <div class="mb-3">
+                                          <a href="" class="mega_menu_title">Glossary</a>
+                                          <p>Gain insight into the latest trends in the world of crypto. Explore in-depth analyses.</p>
+                                       </div>
+                                       <div class="mb-3">
+                                          <a href="" class="mega_menu_title">People</a>
+                                          <p>Gain insight into the latest trends in the world of crypto. Explore in-depth analyses.</p>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </li>
+                        <li class="menu-item-has-children">
+                           <a href="#">News <i class="fa fa-angle-down"></i></a>
+                           <div class="menu-subs menu-column-1">
+                              <ul>
+                                 <li><a href="#">Article One</a></li>
+                                 <li><a href="#">Article Two</a></li>
+                              </ul>
+                           </div>
+                        </li>
+                        <li><a href="#">Data</a></li>
+                        <li><a href="#">Community</a></li>
+                     </ul>
+                  </nav>
+               </div>
+               <div class="header-item-right">
+                  <a href="" class="advertise_btn me-2 hide_on_mobile ">Advertise</a>
+                  <a href="" class="publish_btn me-2 hide_on_mobile">Publish</a>
+                  <a href="#" class="menu-icon"><i class="bi bi-search"></i></a>
+                  <button type="button" class="menu-mobile-trigger">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  </button>
+               </div>
+            </div>
+         </div>
+      </header>
+      <!-- main header end -->
+      <!-- hype loot section  -->
+      <section class="hype_loot text-center ">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="d-inline-block d-md-flex text-center  justify-content-center align-items-center gap-2 ">
+                     <div><img src="images/hypeloot-full.png" class="img-fluid hype_loots " alt=""></div>
+                     <div>
+                        <p class="m-0 "> Join the First-Ever AI Powered Casino and Get Profits Daily! 💰</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+  
+ 
+      
+
+
+      <!-- mini banner section  -->
+      <section class="mini_banner">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-8">
+                  <h2 class="global_heading"><span class="yellow">Wallets</span></h2>
+                  <p class="fw-bold fs-18">Keeping one’s portfolio safe is the main priority for any crypto trader or investor. Billions of dollars get stolen daily due to digital funds not being stored securely.</p>
+                  <p class="fw-bold fs-18">Use our handpicked wallet selection to keep your assets safe.
+                  </p>
+                  
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- mini banner section end -->
+
+
+
+
+
+      <!-- wallet listing section  -->
+      <section class="wallet_">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="wallet_grid">
+                     <div class="wallet_group d-flex flex-wrap flex-sm-nowrap gap-2   align-items-center justify-content-between mb-4 ">
+                           <div class="wallet_image_group d-flex align-items-center gap-2  ">
+                              <div><img src="images/Ellipal.svg" class="img-fluid wallet_logo" alt=""></div>
+                              <div><h3 class="mb-0 fw-bold ">Ellipal</h3></div>
+                           </div>
+
+                           <div class="wallet_rating">
+                              <ul>
+                                 <li class="d-inline-block list-unstyled"><span class="fa fa-star yellow"></span></li>
+                                 <li class="d-inline-block list-unstyled"><span class="fa fa-star yellow"></span></li>
+                                 <li class="d-inline-block list-unstyled"><span class="fa fa-star yellow"></span></li>
+                                 <li class="d-inline-block list-unstyled"><span class="fa fa-star yellow"></span></li>
+                                 <li class="d-inline-block list-unstyled"><span class="fa fa-star yellow"></span></li>
+                              </ul>
+                           </div>
+                     </div>
+
+                     <p class="mb-4">
+                        Ellipal
+                        top tickEllipal Hardware wallet is the first cryptocurrency wallet that enables its users to make a complete offline transaction without connecting to any network in Bluetooth, WIFI, Mobile Network, etc.</p>
+
+
+
+
+                  <div class="wallet_btn_group flex-wrap flex-md-nowrap d-flex   gap-2   align-items-center justify-content-between ">
+                       <ul class="dcard-tags">
+                        <li class="dcard-stag d-inline-block list-unstyled ">Hardware</li>
+                        <li class="dcard-stag d-inline-block list-unstyled "> Decentralized</li>
+                        <li class="dcard-stag d-inline-block list-unstyled "> Bitcoin</li>
+                        <li class="dcard-stag d-inline-block list-unstyled "> Altcoins</li>
+                        <li class="dcard-stag d-inline-block list-unstyled "> DeFi</li>
+                     </ul>
+
+                     <div>
+                        <ul>
+                           <li class="d-inline-block list-unstyled m-1 "><a href="" class="btn btn-primary ">Visit site</a></li>
+                           <li class="d-inline-block list-unstyled m-1 "><a href="" class="btn btn-secondary ">Full review</a></li>
+                        </ul>
+                     </div>
+                  </div>
+                  </div>
+                  <div class="wallet_grid">
+                     <div class="wallet_group d-flex flex-wrap flex-sm-nowrap gap-2   align-items-center justify-content-between mb-4 ">
+                           <div class="wallet_image_group d-flex align-items-center gap-2  ">
+                              <div><img src="images/Ellipal.svg" class="img-fluid wallet_logo" alt=""></div>
+                              <div><h3 class="mb-0 fw-bold ">Ellipal</h3></div>
+                           </div>
+
+                           <div class="wallet_rating">
+                              <ul>
+                                 <li class="d-inline-block list-unstyled"><span class="fa fa-star yellow"></span></li>
+                                 <li class="d-inline-block list-unstyled"><span class="fa fa-star yellow"></span></li>
+                                 <li class="d-inline-block list-unstyled"><span class="fa fa-star yellow"></span></li>
+                                 <li class="d-inline-block list-unstyled"><span class="fa fa-star yellow"></span></li>
+                                 <li class="d-inline-block list-unstyled"><span class="fa fa-star yellow"></span></li>
+                              </ul>
+                           </div>
+                     </div>
+
+                     <p class="mb-4">
+                        Ellipal
+                        top tickEllipal Hardware wallet is the first cryptocurrency wallet that enables its users to make a complete offline transaction without connecting to any network in Bluetooth, WIFI, Mobile Network, etc.</p>
+
+
+
+
+                  <div class="wallet_btn_group flex-wrap flex-md-nowrap d-flex   gap-2   align-items-center justify-content-between ">
+                       <ul class="dcard-tags">
+                        <li class="dcard-stag d-inline-block list-unstyled ">Hardware</li>
+                        <li class="dcard-stag d-inline-block list-unstyled "> Decentralized</li>
+                        <li class="dcard-stag d-inline-block list-unstyled "> Bitcoin</li>
+                        <li class="dcard-stag d-inline-block list-unstyled "> Altcoins</li>
+                        <li class="dcard-stag d-inline-block list-unstyled "> DeFi</li>
+                     </ul>
+
+                     <div>
+                        <ul>
+                           <li class="d-inline-block list-unstyled m-1 "><a href="" class="btn btn-primary ">Visit site</a></li>
+                           <li class="d-inline-block list-unstyled m-1 "><a href="" class="btn btn-secondary ">Full review</a></li>
+                        </ul>
+                     </div>
+                  </div>
+                  </div>
+                  <div class="hype_loot_wallet text-center ">
+                     
+                           <a href=""><div class="d-inline-block d-md-flex text-center  justify-content-center align-items-center gap-2 ">
+                              <div><img src="images/hypeloot-full.png" class="img-fluid hype_loots " alt=""></div>
+                              <div>
+                                 <p class="m-0 white "><span class="fw-bold yellow">Hypeloot</span> The Fastest Growing Crypto Casino! 💰</p>
+                              </div>
+                           </div></a>
+                        
+                  </div>
+                  <div class="wallet_grid">
+                     <div class="wallet_group d-flex flex-wrap flex-sm-nowrap gap-2   align-items-center justify-content-between mb-4 ">
+                           <div class="wallet_image_group d-flex align-items-center gap-2  ">
+                              <div><img src="images/Ellipal.svg" class="img-fluid wallet_logo" alt=""></div>
+                              <div><h3 class="mb-0 fw-bold ">Ellipal</h3></div>
+                           </div>
+
+                           <div class="wallet_rating">
+                              <ul>
+                                 <li class="d-inline-block list-unstyled"><span class="fa fa-star yellow"></span></li>
+                                 <li class="d-inline-block list-unstyled"><span class="fa fa-star yellow"></span></li>
+                                 <li class="d-inline-block list-unstyled"><span class="fa fa-star yellow"></span></li>
+                                 <li class="d-inline-block list-unstyled"><span class="fa fa-star yellow"></span></li>
+                                 <li class="d-inline-block list-unstyled"><span class="fa fa-star yellow"></span></li>
+                              </ul>
+                           </div>
+                     </div>
+
+                     <p class="mb-4">
+                        Ellipal
+                        top tickEllipal Hardware wallet is the first cryptocurrency wallet that enables its users to make a complete offline transaction without connecting to any network in Bluetooth, WIFI, Mobile Network, etc.</p>
+
+
+
+
+                  <div class="wallet_btn_group flex-wrap flex-md-nowrap d-flex   gap-2   align-items-center justify-content-between ">
+                       <ul class="dcard-tags">
+                        <li class="dcard-stag d-inline-block list-unstyled ">Hardware</li>
+                        <li class="dcard-stag d-inline-block list-unstyled "> Decentralized</li>
+                        <li class="dcard-stag d-inline-block list-unstyled "> Bitcoin</li>
+                        <li class="dcard-stag d-inline-block list-unstyled "> Altcoins</li>
+                        <li class="dcard-stag d-inline-block list-unstyled "> DeFi</li>
+                     </ul>
+
+                     <div>
+                        <ul>
+                           <li class="d-inline-block list-unstyled m-1 "><a href="" class="btn btn-primary ">Visit site</a></li>
+                           <li class="d-inline-block list-unstyled m-1 "><a href="" class="btn btn-secondary ">Full review</a></li>
+                        </ul>
+                     </div>
+                  </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- wallet listing section end -->
+
+
+
+
+  
+     
+   
+      <!-- footer start  -->
+      <section class="footer_area">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-3">
+                  <div class="footer_logo mb-3">
+                     <img src="images/footer-logo.svg" class="img-fluid " alt="">
+                  </div>
+                  <p class="mb-3">None of the information you read on Crypto Adventure should be taken as investment advice. Our writers’ and journalists’ opinions are solely their own.</p>
+                  <div class="mb-3"> <a href="" class="read_more yellow"><span>Learn More</span><i class="bi bi-arrow-right ps-1"></i></a></div>
+                  <ul class="social_media mb-3 ms-0 p-0">
+                     <li class="d-inline list-unstyled  pe-2"><a class="white fs-20" href=""><i class="bi bi-reddit"></i></a></li>
+                     <li class="d-inline list-unstyled  pe-2"><a class="white fs-20" href=""><i class="bi bi-facebook"></i></a></li>
+                     <li class="d-inline list-unstyled  pe-2"><a class="white fs-20" href=""><i class="bi bi-telegram"></i></a></li>
+                     <li class="d-inline list-unstyled  pe-2"><a class="white fs-20" href=""><i class="bi bi-twitter"></i></a></li>
+                     <li class="d-inline list-unstyled  pe-2"><a class="white fs-20" href=""><i class="bi bi-instagram"></i></a></li>
+                  </ul>
+                  <h5 class="white">Join our Crypto Adventure!</h5>
+               </div>
+               <div class="col-md-3">
+                  <h4 class="footer_title">
+                     Advertise with us
+                  </h4>
+                  <p>Good company in a journey makes the way seem shorter!</p>
+                  <ul class="footer_menus p-0 ms-0 mb-1">
+                     <li><a href="">Project awareness</a></li>
+                     <li><a href="">Research</a></li>
+                     <li><a href="">Press Release</a></li>
+                     <li><a href="">Community management</a></li>
+                     <li><a href="">Viral Marketing</a></li>
+                     <li><a href="">Additional services</a></li>
+                     <li><a href="">Additional services</a></li>
+                  </ul>
+                  <div class="mb-3"> <a href="" class="read_more yellow"><span>Learn More</span><i class="bi bi-arrow-right ps-1"></i></a></div>
+               </div>
+               <div class="col-md-3">
+                  <h4 class="footer_title">
+                     Top picks
+                  </h4>
+                  <ul class="footer_menus p-0 ms-0 mb-1">
+                     <li><a href="">Project awareness</a></li>
+                     <li><a href="">Research</a></li>
+                     <li><a href="">Press Release</a></li>
+                     <li><a href="">Community management</a></li>
+                     <li><a href="">Viral Marketing</a></li>
+                     <li><a href="">Additional services</a></li>
+                     <li><a href="">Additional services</a></li>
+                  </ul>
+                  <div class="mb-3"> <a href="" class="read_more yellow"><span>Learn More</span><i class="bi bi-arrow-right ps-1"></i></a></div>
+               </div>
+               <div class="col-md-3">
+                  <h4 class="footer_title">
+                     Community
+                  </h4>
+                  <p>Post articles and get them viewed, discussed, and shared in one of the most active crypto communities.</p>
+                  <ul class="footer_menus p-0 ms-0 mb-1">
+                     <li><a href="">Start writing</a></li>
+                     <li><a href="">Disclaimer</a></li>
+                     <li><a href="">Article guidelines</a></li>
+                     <li><a href="">Terms & Conditions</a></li>
+                     <li><a href="">My account</a></li>
+                     <li><a href="">Privacy Policy</a></li>
+                     <li><a href="">Media Kit</a></li>
+                  </ul>
+                  <div class="mb-3"> <a href="" class="read_more yellow"><span>Learn More</span><i class="bi bi-arrow-right ps-1"></i></a></div>
+               </div>
+               <div class="col-md-12 text-center pt-4">
+                  <p class="white mb-0 fs-15">@ 2018 - 2024 Crypto Adventure ®</p>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- footer start end -->
+      <!-- js  -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+      <script src="js/slick.js"></script>
+      <script src="js/bootstrap.bundle.min.js"></script>
+      <script src="js/custom.js"></script>
+      <script src="js/menu.js"></script>
+      <!-- js end -->
+   </body>
+</html>

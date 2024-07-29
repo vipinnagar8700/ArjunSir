@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="-214 450 378 126" style="enable-background:new -214 450 378 126;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:url(#XMLID_135_);}
+	.st1{fill:#AE479A;}
+	.st2{fill:url(#XMLID_136_);}
+	.st3{fill:#FFFFFF;}
+</style>
+<g id="XMLID_104_">
+	<g id="XMLID_20_">
+		
+			<linearGradient id="XMLID_135_" gradientUnits="userSpaceOnUse" x1="-231.0193" y1="544.9729" x2="-161.6551" y2="462.3174" gradientTransform="matrix(1 0 0 -1 0 1028)">
+			<stop  offset="0" style="stop-color:#EE4996"/>
+			<stop  offset="1" style="stop-color:#8A5AA5"/>
+		</linearGradient>
+		<polygon id="XMLID_84_" class="st0" points="-108.5,566.1 -108.5,566.2 -214,566.2 -214,459.8 -134.8,539.7 		"/>
+		<polygon id="XMLID_71_" class="st1" points="-108.5,565.9 -108.5,566.1 -134.8,539.7 -131.4,536.2 		"/>
+		
+			<linearGradient id="XMLID_136_" gradientUnits="userSpaceOnUse" x1="-121.8168" y1="470.8209" x2="-104.3719" y2="528.5552" gradientTransform="matrix(1 0 0 -1 0 1028)">
+			<stop  offset="0" style="stop-color:#EE4996"/>
+			<stop  offset="1" style="stop-color:#8A5AA5"/>
+		</linearGradient>
+		<polygon id="XMLID_47_" class="st2" points="-108.5,513.1 -108.5,565.9 -131.4,536.2 		"/>
+	</g>
+	<g id="XMLID_6_">
+		<polygon id="XMLID_19_" class="st3" points="-29.9,498 -43,498 -62.8,515.7 -62.8,479.8 -71.9,479.8 -71.9,547.9 -62.8,547.9 
+			-62.8,528.5 -42,547.9 -29.1,547.9 -56.9,522 		"/>
+		<rect id="XMLID_17_" x="-28.2" y="477.1" class="st3" width="9.1" height="70.7"/>
+		<path id="XMLID_10_" class="st3" d="M13,497c-14.9,0-25.7,10.9-25.7,25.9s11,25.9,26.1,25.9c9.3,0,17.5-4.2,21.7-11.3l1.2-1.9
+			l-8-4.7l-1.1,2c-2.4,4.4-7.6,7.1-13.6,7.1c-8.5,0-14.6-4.7-16.6-12.4h40.5v-2.3c0-0.3,0-0.6,0-0.9c0-0.4,0-0.8,0-1.2
+			C37.6,510.4,29.1,497,13,497z M13,505.9c6.4,0,13.2,3.9,15,12.6H-3C-1.4,510.8,4.8,505.9,13,505.9z"/>
+		<polygon id="XMLID_8_" class="st3" points="75.9,498 60.4,535 44.8,498 34.9,498 56.1,547.9 64.6,547.9 85.7,498 		"/>
+		<path id="XMLID_4_" class="st3" d="M109,497c-14.9,0-25.7,10.9-25.7,25.9s11,25.9,26.1,25.9c9.3,0,17.5-4.2,21.7-11.3l1.2-1.9
+			l-8-4.7l-1.1,2c-2.4,4.4-7.6,7.1-13.6,7.1c-8.5,0-14.6-4.7-16.6-12.4h40.6v-2.3c0-0.3,0-0.6,0-0.9c0-0.4,0-0.8,0-1.2
+			C133.7,510.4,125.1,497,109,497z M109,505.9c6.4,0,13.2,3.9,15,12.6H93C94.7,510.8,100.8,505.9,109,505.9z"/>
+		<path id="XMLID_3_" class="st3" d="M161.7,497.3c-5.3,0-9.6,1.5-12.8,4.5V498h-9.1v49.9h9.1v-27.6c0-13.1,9.8-14.1,12.8-14.1h2.3
+			v-8.9H161.7z"/>
+	</g>
+</g>
+</svg>
